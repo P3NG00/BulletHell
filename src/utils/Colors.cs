@@ -5,7 +5,7 @@ namespace BulletHell.Utils
     public static class Colors
     {
         public static Color Default => new Color(255, 255, 255);
-        public static Color Background => new Color(96, 96, 96);
+        public static Color Background => new Color(39, 33, 40);
         public static Color TextBackground => new Color(0, 0, 0, 128);
         public static Color TextShadow => new Color(0, 0, 0, 64);
         public static Color UI_Title => new Color(32, 192, 255);

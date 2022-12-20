@@ -1,6 +1,5 @@
 using System;
 using BulletHell.Utils;
-using Microsoft.Xna.Framework;
 
 namespace BulletHell.Scenes
 {
@@ -13,12 +12,12 @@ namespace BulletHell.Scenes
 
         public MainMenuScene()
         {
-            var buttonStart = new Button(new Vector2(0.5f, 0.6f), new Point(250, 50), "create world", Colors.ThemeBlue, StartNewGame);
-            var buttonExit = new Button(new Vector2(0.5f, 0.8f), new Point(125, 50), "exit", Colors.ThemeExit, BulletHell.Instance.Exit);
+            var buttonStart = new Button(new(0.5f, 0.6f), new(250, 50), "create world", Colors.ThemeBlue, StartNewGame);
+            var buttonExit = new Button(new(0.5f, 0.8f), new(125, 50), "exit", Colors.ThemeExit, BulletHell.Instance.Exit);
             // TODO
             // Button buttonWorldContinue = null;
             // if (Data.SaveExists)
-            //     buttonWorldContinue = new Button(new Vector2(0.5f, 0.7f), new Point(250, 50), "continue world", Colors.ThemeBlue, LoadSavedGame);
+            //     buttonWorldContinue = new Button(new(0.5f, 0.7f), new(250, 50), "continue world", Colors.ThemeBlue, LoadSavedGame);
             // set scene objects
             SetSceneObjects(buttonStart, buttonExit /* , buttonWorldContinue */ );
         }
@@ -27,7 +26,7 @@ namespace BulletHell.Scenes
         {
             // draw title
             var rotation = MathF.Sin(BulletHell.Ticks * TITLE_ROT_FREQ) * TITLE_ROT_AMP;
-            Display.DrawCenteredString(FontType.alagard, new Vector2(0.5f, 0.35f), BulletHell.TITLE, Colors.UI_Title, new(6), rotation, Display.DrawStringWithShadow);
+            Display.DrawCenteredString(FontType.alagard, new(0.5f, 0.35f), BulletHell.TITLE, Colors.UI_Title, new(6), rotation, Display.DrawStringWithShadow);
             // base call
             base.Draw();
         }

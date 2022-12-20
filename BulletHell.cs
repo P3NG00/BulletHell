@@ -85,7 +85,7 @@ namespace BulletHell
             // update scene
             _scene.Update();
             // tick scene
-            while (GameTick())
+            while (CanTick())
                 _scene.Tick();
             // base call
             base.Update(gameTime);
@@ -95,19 +95,19 @@ namespace BulletHell
         {
             // fill background
             GraphicsDevice.Clear(_scene.BackgroundColor);
+            // update frames per second
+            UpdateFramesPerSecond(gameTime.ElapsedGameTime.TotalMilliseconds);
             // begin drawing
             Display.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             // draw scene
             _scene.Draw();
             // end drawing
             Display.SpriteBatch.End();
-            // update frames per second
-            UpdateFramesPerSecond(gameTime.ElapsedGameTime.TotalMilliseconds);
             // base call
             base.Draw(gameTime);
         }
 
-        private bool GameTick()
+        private bool CanTick()
         {
             if (_tickDelta < TICK_STEP)
                 return false;

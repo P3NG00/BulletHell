@@ -12,6 +12,8 @@ namespace BulletHell.Scenes
 
         private void BackToMainMenu() => BulletHell.SetScene(new MainMenuScene());
 
+        // TODO add controllable player that can move around
+
         public sealed override void Draw()
         {
             // print work in progress text
