@@ -1,0 +1,8 @@
+*.aup3
+.config/
+.git/
+.vscode/*/
+obj/
+bin/
+IDEAS.txt
+BulletHell.sln
