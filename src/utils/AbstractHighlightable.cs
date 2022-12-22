@@ -13,15 +13,7 @@ namespace BulletHell.Utils
 
         protected bool Clicked => Keybinds.MouseLeft.ReleasedThisFrame && Highlighted;
 
-        protected virtual Point Size
-        {
-            get
-            {
-                if (!_size.HasValue)
-                    throw new System.Exception("If size is not specified, override Size property.");
-                return _size.Value;
-            }
-        }
+        protected virtual Point Size => _size ?? throw new System.Exception("If size is not specified, override Size property.");
 
         private readonly Point? _size;
 
