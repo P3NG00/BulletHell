@@ -19,9 +19,6 @@ namespace BulletHell
 
         private static BulletHell _instance;
 
-        private AbstractScene _scene;
-        private AbstractScene _nextScene = null;
-
         // tick & frame handling variables
         public static ulong Ticks => _ticks[0];
         public static double AverageFramesPerSecond => _lastFps.Average();
@@ -35,7 +32,7 @@ namespace BulletHell
         {
             this.SingletonCheck(ref _instance);
             // initialize scene after instance is set
-            _scene = new MainMenuScene();
+            SceneManager.SetScene(new MainMenuScene());
             Display.CreateGraphicsManager(this);
             Content.RootDirectory = "Content";
             IsFixedTimeStep = true;
@@ -70,12 +67,6 @@ namespace BulletHell
 
         protected sealed override void Update(GameTime gameTime)
         {
-            // update scene if set
-            if (_nextScene != null)
-            {
-                _scene = _nextScene;
-                _nextScene = null;
-            }
             // update input
             InputManager.Update();
             // togglable fullscreen
@@ -84,10 +75,7 @@ namespace BulletHell
             // update ticks
             UpdateTicks(gameTime.ElapsedGameTime.TotalSeconds * Debug.TimeScale);
             // update scene
-            _scene.Update();
-            // tick scene
-            while (CanTick())
-                _scene.Tick();
+            SceneManager.Update();
             // base call
             base.Update(gameTime);
         }
@@ -95,29 +83,17 @@ namespace BulletHell
         protected sealed override void Draw(GameTime gameTime)
         {
             // fill background
-            GraphicsDevice.Clear(_scene.BackgroundColor);
+            GraphicsDevice.Clear(SceneManager.Scene.BackgroundColor);
             // update frames per second
             UpdateFramesPerSecond(gameTime.ElapsedGameTime.TotalMilliseconds);
             // begin drawing
             Display.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             // draw scene
-            _scene.Draw();
+            SceneManager.Draw();
             // end drawing
             Display.SpriteBatch.End();
             // base call
             base.Draw(gameTime);
-        }
-
-        private bool CanTick()
-        {
-            if (_tickDelta < TICK_STEP)
-                return false;
-            // decrement delta time by tick step
-            _tickDelta -= TICK_STEP;
-            // increment tick counter
-            _ticks[0]++;
-            // return success
-            return true;
         }
 
         private void UpdateTicks(double timeThisUpdate) => _tickDelta += timeThisUpdate;
@@ -138,8 +114,18 @@ namespace BulletHell
             _ticks[1] = _ticks[0];
         }
 
-        public static void AddTick() => _tickDelta += TICK_STEP;
+        public static bool WillTick()
+        {
+            if (_tickDelta < TICK_STEP)
+                return false;
+            // decrement delta time by tick step
+            _tickDelta -= TICK_STEP;
+            // increment tick counter
+            _ticks[0]++;
+            // return success
+            return true;
+        }
 
-        public static void SetScene(AbstractScene scene) => Instance._nextScene = scene;
+        public static void AddTick() => _tickDelta += TICK_STEP;
     }
 }

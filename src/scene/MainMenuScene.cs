@@ -27,6 +27,6 @@ namespace BulletHell.Scenes
             base.Draw();
         }
 
-        private void StartNewGame() => BulletHell.SetScene(new GameScene());
+        private void StartNewGame() => SceneManager.SetScene(new GameScene());
     }
 }

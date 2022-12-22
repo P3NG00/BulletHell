@@ -72,7 +72,7 @@ namespace BulletHell.Scenes
             }
         }
 
-        private static void BackToMainMenu() => BulletHell.SetScene(new MainMenuScene());
+        private static void BackToMainMenu() => SceneManager.SetScene(new MainMenuScene());
 
         private class Player
         {
