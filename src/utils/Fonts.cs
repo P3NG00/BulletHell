@@ -13,12 +13,9 @@ namespace BulletHell.Utils
         {
             // load font
             s_typeWriterFont = ImmutableArray.Create(
-                // TODO
-                // Load("acknowtt"),
                 Load("alagard"),
-                // Load("ArcadeAlternate"),
-                // Load("MotorolaScreentype"),
-                Load("VeniceClassic"));
+                Load("VeniceClassic"),
+                Load("type_writer"));
 
             // local func
             SpriteFont Load(string name) => content.Load<SpriteFont>(name);

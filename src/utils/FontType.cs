@@ -2,7 +2,8 @@ namespace BulletHell.Utils
 {
     public enum FontType
     {
-        alagard,
-        VeniceClassic,
+        alagard,        // title font
+        VeniceClassic,  // general text font
+        type_writer,    // debug font
     }
 }

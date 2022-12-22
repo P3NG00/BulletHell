@@ -11,6 +11,7 @@ namespace BulletHell
     public sealed class BulletHell : Game
     {
         public const string TITLE = "Bullet Hell";
+        public const int FRAMES_PER_SECOND = 60;
         public const int TICKS_PER_SECOND = 60;
         public const float TICK_STEP = 1f / TICKS_PER_SECOND;
 
@@ -27,7 +28,7 @@ namespace BulletHell
         public static double AverageTicksPerFrame => _lastTickDifferences.Average();
         private static ulong[] _ticks = new ulong[] {0, 0};
         private static ulong[] _lastTickDifferences = new ulong[TICKS_PER_SECOND];
-        private static double[] _lastFps = new double[Display.FRAMES_PER_SECOND];
+        private static double[] _lastFps = new double[FRAMES_PER_SECOND];
         private static double _tickDelta = 0f;
 
         public BulletHell()
@@ -38,7 +39,7 @@ namespace BulletHell
             Display.CreateGraphicsManager(this);
             Content.RootDirectory = "Content";
             IsFixedTimeStep = true;
-            TargetElapsedTime = TimeSpan.FromMilliseconds(1000f / Display.FRAMES_PER_SECOND);
+            TargetElapsedTime = TimeSpan.FromMilliseconds(1000f / FRAMES_PER_SECOND);
             IsMouseVisible = true;
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += new EventHandler<EventArgs>((sender, eventArgs) => Display.UpdateSize(Window.ClientBounds.Width, Window.ClientBounds.Height));

@@ -41,6 +41,13 @@
 /processorParam:TextureFormat=Compressed
 /build:MotorolaScreentype.spritefont
 
+#begin type_writer.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:type_writer.spritefont
+
 #begin VeniceClassic.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

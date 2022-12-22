@@ -5,15 +5,10 @@ namespace BulletHell.Utils
 {
     public static class Display
     {
-        public const int FRAMES_PER_SECOND = 60;
-        public const int BLOCK_SCALE_MIN = Textures.SIZE;
-        public const int BLOCK_SCALE_MAX = Textures.SIZE * 5;
-
         public static SpriteBatch SpriteBatch { get; private set; }
         public static Point WindowSize => new(_graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight);
 
         public static Vector2 CameraOffset;
-        public static int BlockScale = Textures.SIZE * 2;
 
         private static GraphicsDeviceManager _graphics;
         private static Point _lastWindowSize;
@@ -28,9 +23,8 @@ namespace BulletHell.Utils
         public static void UpdateCameraOffset(Vector2 position)
         {
             var centeredScreen = -(WindowSize.ToVector2() / 2f);
-            var relativePosition = position * BlockScale;
-            CameraOffset = new Vector2(centeredScreen.X + relativePosition.X,
-                                       centeredScreen.Y - relativePosition.Y);
+            CameraOffset = new Vector2(centeredScreen.X + position.X,
+                                       centeredScreen.Y - position.Y);
         }
 
         public static void ToggleFullscreen()
@@ -58,28 +52,29 @@ namespace BulletHell.Utils
             _graphics.PreferredBackBufferHeight = height;
         }
 
-        public static void Draw(Vector2 position, Vector2 size, DrawData drawData, Vector2? scale = null, float rotation = 0f)
+        public static void Draw(Vector2 position, Vector2 size, DrawData drawData, float rotation = 0f)
         {
-            FixScale(ref scale);
             var textureSize = drawData.Texture.Bounds.Size.ToVector2();
-            var textureScale = (size / textureSize) * scale.Value;
+            var textureScale = (size / textureSize);
             var origin = textureSize / 2f;
             var drawOffset = position + (size / 2f);
             SpriteBatch.Draw(drawData.Texture, drawOffset, null, drawData.Color, rotation, origin, textureScale, SpriteEffects.None, 0f);
         }
 
-        public static void DrawCentered(Vector2 relativeScreenPosition, Vector2 size, DrawData drawData, Vector2? scale = null, float rotation = 0f)
+        public static void DrawOffset(Vector2 position, Vector2 size, DrawData drawData, float rotation = 0f)
         {
-            var screenPosition = relativeScreenPosition * WindowSize.ToVector2();
-            var drawPos = screenPosition - (size / 2f);
-            Draw(drawPos, size, drawData, scale, rotation);
+            var drawPos = position - CameraOffset - (size / 2f);
+            Draw(drawPos, size, drawData, rotation);
         }
 
-        public static void DrawOffset(Vector2 position, Vector2 size, DrawData drawData, Vector2? scale = null, float rotation = 0f)
+        public static void DrawScreenRelative(Vector2 screenPosition, Vector2 size, DrawData drawData, float rotation = 0f)
         {
-            var drawPos = position - CameraOffset;
-            Draw(drawPos, size, drawData, scale, rotation);
+            var drawPos = (screenPosition * WindowSize.ToVector2()) - (size / 2f);
+            Draw(drawPos, size, drawData, rotation);
         }
+
+        // draws faded overlay over entire window
+        public static void DrawFadedOverlay() => Display.Draw(Vector2.Zero, WindowSize.ToVector2(), new(color: Colors.Overlay));
 
         public static void DrawString(FontType fontSize, Vector2 position, string text, Color color, Vector2? scale = null, float rotation = 0f)
         {
@@ -90,10 +85,11 @@ namespace BulletHell.Utils
 
         public static void DrawStringWithBackground(FontType fontSize, Vector2 position, string text, Color color, Vector2? scale = null, float rotation = 0f)
         {
+            FixScale(ref scale);
             // draw text background
             var textSize = fontSize.MeasureString(text);
             var uiSpacerVec = new Vector2(Util.UI_SPACER);
-            Draw(position - (uiSpacerVec / 2f), textSize + uiSpacerVec, new(color: Colors.TextBackground), scale, rotation);
+            Draw(position - (uiSpacerVec / 2f), (textSize + uiSpacerVec) * scale.Value, new(color: Colors.TextBackground), rotation);
             // draw text
             DrawString(fontSize, position, text, color, scale, rotation);
         }

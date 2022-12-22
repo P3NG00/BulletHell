@@ -19,6 +19,8 @@ namespace BulletHell.Input
         public static readonly KeyInput Fullscreen = new(Keys.F11);
         public static readonly KeyInput MoveLeft = new(Keys.A);
         public static readonly KeyInput MoveRight = new(Keys.D);
+        public static readonly KeyInput MoveUp = new(Keys.W);
+        public static readonly KeyInput MoveDown = new(Keys.S);
         public static readonly KeyInput Jump = new(Keys.Space);
         public static readonly KeyInput Shift = new(Keys.LeftShift);
         public static readonly KeyInput SpawnProjectile = new(Keys.Z);

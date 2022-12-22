@@ -12,8 +12,8 @@ namespace BulletHell.Scenes
 
         public MainMenuScene()
         {
-            var buttonStart = new Button(new(0.5f, 0.6f), new(250, 50), "create world", Colors.ThemeBlue, StartNewGame);
-            var buttonExit = new Button(new(0.5f, 0.8f), new(125, 50), "exit", Colors.ThemeExit, BulletHell.Instance.Exit);
+            var buttonStart = new Button(new(0.5f, 0.6f), new(250, 100), "start", Colors.ThemeGreen, StartNewGame, 3);
+            var buttonExit = CreateExitButton(BulletHell.Instance.Exit);
             // TODO
             // Button buttonWorldContinue = null;
             // if (Data.SaveExists)
