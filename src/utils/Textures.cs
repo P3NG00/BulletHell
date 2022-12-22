@@ -11,7 +11,7 @@ namespace BulletHell.Utils
         public static Texture2D Blank { get; private set; }
         public static Texture2D Shaded { get; private set; }
 
-        public static void Initialize()
+        public static void LoadContent()
         {
             Blank = CreateTexture(FilledTexture);
             Shaded = CreateTexture(ShadedTexture);

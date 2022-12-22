@@ -9,7 +9,7 @@ namespace BulletHell.Utils
     {
         private static ImmutableArray<SpriteFont> s_typeWriterFont;
 
-        public static void Initialize(ContentManager content)
+        public static void LoadContent(ContentManager content)
         {
             // load font
             s_typeWriterFont = ImmutableArray.Create(

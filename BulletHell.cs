@@ -20,13 +20,13 @@ namespace BulletHell
         private static BulletHell _instance;
 
         // tick & frame handling variables
-        public static ulong Ticks => _ticks[0];
-        public static double AverageFramesPerSecond => _lastFps.Average();
-        public static double AverageTicksPerFrame => _lastTickDifferences.Average();
-        private static ulong[] _ticks = new ulong[] {0, 0};
-        private static ulong[] _lastTickDifferences = new ulong[TICKS_PER_SECOND];
-        private static double[] _lastFps = new double[FRAMES_PER_SECOND];
-        private static double _tickDelta = 0f;
+        public static ulong Ticks => s_ticks[0];
+        public static double AverageFramesPerSecond => s_lastFps.Average();
+        public static double AverageTicksPerFrame => s_lastTickDifferences.Average();
+        private static ulong[] s_ticks = new ulong[] {0, 0};
+        private static ulong[] s_lastTickDifferences = new ulong[TICKS_PER_SECOND];
+        private static double[] s_lastFps = new double[FRAMES_PER_SECOND];
+        private static double s_tickDelta = 0f;
 
         public BulletHell()
         {
@@ -44,11 +44,8 @@ namespace BulletHell
 
         protected sealed override void Initialize()
         {
-            // set window title
             Window.Title = TITLE;
-            // set window properties
             Window.AllowAltF4 = false;
-            // initialize display
             Display.Initialize();
             // base call
             base.Initialize();
@@ -56,11 +53,10 @@ namespace BulletHell
 
         protected sealed override void LoadContent()
         {
-            Textures.Initialize();
-            Fonts.Initialize(Content);
+            Textures.LoadContent();
+            Fonts.LoadContent(Content);
             Display.LoadContent();
-            // initialize items after textures
-            // TODO new Items().Initialize();
+            // TODO initialize items after textures
             // base call
             base.LoadContent();
         }
@@ -96,36 +92,36 @@ namespace BulletHell
             base.Draw(gameTime);
         }
 
-        private void UpdateTicks(double timeThisUpdate) => _tickDelta += timeThisUpdate;
+        private static void UpdateTicks(double timeThisUpdate) => s_tickDelta += timeThisUpdate;
 
-        private void UpdateFramesPerSecond(double timeThisFrame)
+        private static void UpdateFramesPerSecond(double timeThisFrame)
         {
             // move values down
-            for (int i = _lastFps.Length - 2; i >= 0; i--)
-                _lastFps[i + 1] = _lastFps[i];
+            for (int i = s_lastFps.Length - 2; i >= 0; i--)
+                s_lastFps[i + 1] = s_lastFps[i];
             // store fps value
-            _lastFps[0] = 1000f / timeThisFrame;
+            s_lastFps[0] = 1000f / timeThisFrame;
             // move last tick count down
-            for (int i = _lastTickDifferences.Length - 2; i >= 0; i--)
-                _lastTickDifferences[i + 1] = _lastTickDifferences[i];
+            for (int i = s_lastTickDifferences.Length - 2; i >= 0; i--)
+                s_lastTickDifferences[i + 1] = s_lastTickDifferences[i];
             // set last tick difference
-            _lastTickDifferences[0] = _ticks[0] - _ticks[1];
+            s_lastTickDifferences[0] = s_ticks[0] - s_ticks[1];
             // update last tick count
-            _ticks[1] = _ticks[0];
+            s_ticks[1] = s_ticks[0];
         }
 
         public static bool WillTick()
         {
-            if (_tickDelta < TICK_STEP)
+            if (s_tickDelta < TICK_STEP)
                 return false;
             // decrement delta time by tick step
-            _tickDelta -= TICK_STEP;
+            s_tickDelta -= TICK_STEP;
             // increment tick counter
-            _ticks[0]++;
+            s_ticks[0]++;
             // return success
             return true;
         }
 
-        public static void AddTick() => _tickDelta += TICK_STEP;
+        public static void AddTick() => s_tickDelta += TICK_STEP;
     }
 }
