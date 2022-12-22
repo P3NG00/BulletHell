@@ -14,12 +14,8 @@ namespace BulletHell.Scenes
         {
             var buttonStart = new Button(new(0.5f, 0.6f), new(250, 100), "start", Colors.ThemeGreen, StartNewGame, 3);
             var buttonExit = CreateExitButton(BulletHell.Instance.Exit);
-            // TODO
-            // Button buttonWorldContinue = null;
-            // if (Data.SaveExists)
-            //     buttonWorldContinue = new Button(new(0.5f, 0.7f), new(250, 50), "continue world", Colors.ThemeBlue, LoadSavedGame);
             // set scene objects
-            SetSceneObjects(buttonStart, buttonExit /* , buttonWorldContinue */ );
+            SetSceneObjects(buttonStart, buttonExit);
         }
 
         public sealed override void Draw()
@@ -32,12 +28,5 @@ namespace BulletHell.Scenes
         }
 
         private void StartNewGame() => BulletHell.SetScene(new GameScene());
-
-        // TODO
-        // private void LoadSavedGame()
-        // {
-        //     Data.Load();
-        //     BulletHell.SetScene(new GameScene());
-        // }
     }
 }
