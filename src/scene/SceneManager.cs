@@ -1,3 +1,5 @@
+using BulletHell.Utils;
+
 namespace BulletHell.Scenes
 {
     public static class SceneManager
@@ -16,7 +18,7 @@ namespace BulletHell.Scenes
             // update scene
             Scene.Update();
             // tick scene
-            while (BulletHell.WillTick())
+            while (GameManager.WillTick())
                 Scene.Tick();
         }
 
