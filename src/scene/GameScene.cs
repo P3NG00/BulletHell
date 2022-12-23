@@ -13,7 +13,12 @@ namespace BulletHell.Scenes
 
         private static bool s_paused;
 
-        public sealed override string[] ExtraDebugInfo => new[] {$"paused: {s_paused}", $"x: {_player.Position.X:0.000}", $"y: {_player.Position.Y:0.000}"};
+        public sealed override string[] ExtraDebugInfo => new[] {
+            $"paused: {s_paused}",
+            $"velocity_x: {_player.Velocity.X:0.000}",
+            $"velocity_y: {_player.Velocity.Y:0.000}",
+            $"x: {_player.Position.X:0.000}",
+            $"y: {_player.Position.Y:0.000}"};
 
         public GameScene()
         {
