@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Entities
 {
-    public class Player
+    public sealed class Player
     {
         public Vector2 Position => _position;
 
