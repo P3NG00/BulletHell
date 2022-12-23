@@ -13,6 +13,8 @@ namespace BulletHell.Scenes
 
         private static bool s_paused;
 
+        public sealed override string[] ExtraDebugInfo => new[] {$"paused: {s_paused}", $"x: {_player.Position.X:0.000}", $"y: {_player.Position.Y:0.000}"};
+
         public GameScene()
         {
             s_paused = false;
@@ -21,9 +23,6 @@ namespace BulletHell.Scenes
 
         public sealed override void Update()
         {
-            // toggle debug
-            if (Keybinds.Debug.PressedThisFrame)
-                Util.Toggle(ref Debug.Enabled);
             // toggle pause
             if (Keybinds.Pause.PressedThisFrame)
                 Util.Toggle(ref s_paused);
@@ -55,30 +54,6 @@ namespace BulletHell.Scenes
                 // draw buttons
                 _buttonResume.Draw();
                 _buttonExit.Draw();
-            }
-            // draw debug
-            if (Debug.Enabled)
-            {
-                // draw center point
-                Display.DrawScreenRelative(new Vector2(0.5f), new Vector2(6), new(color: new(0, 255, 0)));
-                // draw ui info
-                var drawPos = new Vector2(Util.UI_SPACER);
-                foreach (var debugInfo in new[] {
-                    $"window_size: {Display.WindowSize.X}x{Display.WindowSize.Y}",
-                    $"paused: {s_paused}",
-                    $"time_scale: {Debug.TimeScale:0.00}",
-                    $"time: {(GameManager.Ticks / (float)GameManager.TICKS_PER_SECOND):0.000}",
-                    $"ticks: {GameManager.Ticks} ({GameManager.TICKS_PER_SECOND} tps)",
-                    $"frames_per_second: {GameManager.AverageFramesPerSecond:0.000}",
-                    $"ticks_per_frame: {GameManager.AverageTicksPerFrame:0.000}",
-                    $"camera_offset_x: {Display.CameraOffset.X:0.000}",
-                    $"camera_offset_y: {Display.CameraOffset.Y:0.000}",
-                    $"x: {_player.Position.X:0.000}",
-                    $"y: {_player.Position.Y:0.000}"})
-                {
-                    Display.DrawStringWithBackground(FontType.type_writer, drawPos, debugInfo, Colors.UI_Text);
-                    drawPos.Y += Util.UI_SPACER + FontType.type_writer.GetFont().LineSpacing;
-                }
             }
         }
 

@@ -31,6 +31,8 @@ namespace BulletHell.Utils
 
         public static int Floor(this float f) => (int)Math.Floor((double)f);
 
+        public static bool IsEmpty<T>(this T[] array) => array.Length == 0;
+
         public static T GetRandom<T>(this T[] t) => t[Random.Next(t.Length)];
 
         public static bool TestChance(this float chance)

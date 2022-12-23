@@ -57,6 +57,9 @@ namespace BulletHell
                 Display.ToggleFullscreen();
             // update ticks
             GameManager.UpdateTicks(gameTime.ElapsedGameTime.TotalSeconds * Debug.TimeScale);
+            // toggle debug
+            if (Keybinds.Debug.PressedThisFrame)
+                Util.Toggle(ref Debug.Enabled);
             // update scene
             SceneManager.Update();
             // base call
@@ -73,6 +76,8 @@ namespace BulletHell
             Display.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             // draw scene
             SceneManager.Draw();
+            // draw debug
+            Debug.Draw(SceneManager.Scene.ExtraDebugInfo);
             // end drawing
             Display.SpriteBatch.End();
             // base call
