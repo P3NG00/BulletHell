@@ -22,8 +22,6 @@ namespace BulletHell.Scenes
                 Scene.Tick();
         }
 
-        public static void Draw() => Scene.Draw();
-
         public static void SetScene(AbstractScene scene) => _nextScene = scene;
     }
 }

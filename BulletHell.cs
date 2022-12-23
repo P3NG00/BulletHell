@@ -52,14 +52,13 @@ namespace BulletHell
         {
             // update input
             InputManager.Update();
-            // togglable fullscreen
+            // check fullscreen
             if (Keybinds.Fullscreen.PressedThisFrame)
                 Display.ToggleFullscreen();
             // update ticks
-            GameManager.UpdateTicks(gameTime.ElapsedGameTime.TotalSeconds * Debug.TimeScale);
-            // toggle debug
-            if (Keybinds.Debug.PressedThisFrame)
-                Util.Toggle(ref Debug.Enabled);
+            GameManager.UpdateTicks(gameTime.ElapsedGameTime.TotalSeconds * GameManager.TimeScale);
+            // update debug
+            Debug.Update();
             // update scene
             SceneManager.Update();
             // base call
@@ -75,7 +74,7 @@ namespace BulletHell
             // begin drawing
             Display.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             // draw scene
-            SceneManager.Draw();
+            SceneManager.Scene.Draw();
             // draw debug
             Debug.Draw(SceneManager.Scene.ExtraDebugInfo);
             // end drawing

@@ -1,4 +1,6 @@
+using System;
 using System.Linq;
+using BulletHell.Input;
 
 namespace BulletHell.Utils
 {
@@ -8,14 +10,30 @@ namespace BulletHell.Utils
         public const int TICKS_PER_SECOND = 60;
         public const float TICK_STEP = 1f / TICKS_PER_SECOND;
 
+        private const double TIME_SCALE_MIN = 0;
+        private const double TIME_SCALE_MAX = 5;
+        private const double TIME_SCALE_STEP = 0.1f;
+
         public static ulong Ticks => s_ticks[0];
+        public static double TimeScale => s_timeScale;
         public static double AverageFramesPerSecond => s_lastFps.Average();
         public static double AverageTicksPerFrame => s_lastTickDifferences.Average();
 
+        private static double s_timeScale = 1f;
         private static ulong[] s_ticks = new ulong[] {0, 0};
         private static ulong[] s_lastTickDifferences = new ulong[TICKS_PER_SECOND];
         private static double[] s_lastFps = new double[FRAMES_PER_SECOND];
         private static double s_tickDelta = 0f;
+
+        public static void Update()
+        {
+            if (Keybinds.TimeScaleDecrement.PressedThisFrame)
+                s_timeScale = Math.Max(TIME_SCALE_MIN, s_timeScale - TIME_SCALE_STEP);
+            if (Keybinds.TimeScaleIncrement.PressedThisFrame)
+                s_timeScale = Math.Min(TIME_SCALE_MAX, s_timeScale + TIME_SCALE_STEP);
+            if (Keybinds.TimeTickStep.PressedThisFrame)
+                s_tickDelta += TICK_STEP;
+        }
 
         public static void UpdateTicks(double timeThisUpdate) => s_tickDelta += timeThisUpdate;
 
@@ -46,7 +64,5 @@ namespace BulletHell.Utils
             // return success
             return true;
         }
-
-        public static void AddTick() => s_tickDelta += TICK_STEP;
     }
 }

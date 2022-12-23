@@ -10,8 +10,6 @@ namespace BulletHell.Input
         public static readonly MouseInput MouseRight = new(Mouse.Right);
 
         // debug
-        public static readonly KeyInput DebugCheckUpdates = new(Keys.F9);
-        public static readonly KeyInput DebugToggleGiveMode = new(Keys.F10);
         public static readonly KeyInput Debug = new(Keys.F12);
 
         // game

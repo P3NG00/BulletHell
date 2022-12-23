@@ -1,23 +1,20 @@
-using System;
+using BulletHell.Input;
 using Microsoft.Xna.Framework;
 
 namespace BulletHell.Utils
 {
     public static class Debug
     {
-        private const double TIME_SCALE_MIN = 0;
-        private const double TIME_SCALE_MAX = 5;
-        private const double TIME_SCALE_STEP = 0.1f;
+        public static bool _enabled = false;
 
-        public static bool Enabled = false;
+        public static bool Enabled => _enabled;
 
-        private static double _timeScale = 1f;
-
-        public static double TimeScale => _timeScale;
-
-        public static void IncreaseTimeScale() => _timeScale = Math.Min(TIME_SCALE_MAX, _timeScale + TIME_SCALE_STEP);
-
-        public static void DecreaseTimeScale() => _timeScale = Math.Max(TIME_SCALE_MIN, _timeScale - TIME_SCALE_STEP);
+        public static void Update()
+        {
+            // toggle debug
+            if (Keybinds.Debug.PressedThisFrame)
+                Util.Toggle(ref _enabled);
+        }
 
         public static void Draw(params string[] extraInfo)
         {
@@ -30,7 +27,7 @@ namespace BulletHell.Utils
             var spacer = Util.UI_SPACER + FontType.type_writer.GetFont().LineSpacing;
             var debugInfo = new[] {
                 $"window_size: {Display.WindowSize.X}x{Display.WindowSize.Y}",
-                $"time_scale: {Debug.TimeScale:0.00}",
+                $"time_scale: {GameManager.TimeScale:0.00}",
                 $"time: {(GameManager.Ticks / (float)GameManager.TICKS_PER_SECOND):0.000}",
                 $"ticks: {GameManager.Ticks} ({GameManager.TICKS_PER_SECOND} tps)",
                 $"frames_per_second: {GameManager.AverageFramesPerSecond:0.000}",
