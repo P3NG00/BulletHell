@@ -19,10 +19,6 @@ namespace BulletHell.Input
         public static readonly KeyInput MoveRight = new(Keys.D);
         public static readonly KeyInput MoveUp = new(Keys.W);
         public static readonly KeyInput MoveDown = new(Keys.S);
-        public static readonly KeyInput Jump = new(Keys.Space);
-        public static readonly KeyInput Shift = new(Keys.LeftShift);
-        public static readonly KeyInput SpawnProjectile = new(Keys.Z);
-        public static readonly KeyInput Inventory = new(Keys.E);
 
         // time
         public static readonly KeyInput TimeScaleDecrement = new(Keys.F1);

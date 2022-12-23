@@ -21,12 +21,12 @@ namespace BulletHell.Utils
             if (!Enabled)
                 return;
             // draw center point
-            Display.DrawScreenRelative(new Vector2(0.5f), new Vector2(6), new(color: new(0, 255, 0)));
+            Display.DrawScreenRelative(new Vector2(0.5f), new Vector2(6), new(color: new(0, 0, 255)));
             // draw ui info
             var drawPos = new Vector2(Util.UI_SPACER);
             var spacer = Util.UI_SPACER + FontType.type_writer.GetFont().LineSpacing;
             var debugInfo = new[] {
-                $"window_size: {Display.WindowSize.X}x{Display.WindowSize.Y}",
+                $"window_size: {Display.WindowSize.X} x {Display.WindowSize.Y}",
                 $"time_scale: {GameManager.TimeScale:0.00}",
                 $"time: {(GameManager.Ticks / (float)GameManager.TICKS_PER_SECOND):0.000}",
                 $"ticks: {GameManager.Ticks} ({GameManager.TICKS_PER_SECOND} tps)",
