@@ -40,12 +40,12 @@ namespace BulletHell.Utils
             if (extraInfo.IsEmpty())
                 return;
             AddSpacer();
-            foreach (var d in extraInfo)
-                DrawDebugInfo(d);
+            foreach (var e in extraInfo)
+                DrawDebugInfo(e);
             // local func
             void DrawDebugInfo(string debugLine)
             {
-                Display.DrawStringWithBackground(FontType.type_writer, drawPos, debugLine, Colors.UI_Text);
+                FontType.type_writer.DrawStringWithBackground(drawPos, debugLine, Colors.UI_Text);
                 AddSpacer();
             }
             void AddSpacer() => drawPos.Y += spacer;

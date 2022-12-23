@@ -50,7 +50,7 @@ namespace BulletHell.Scenes
                 // draw overlay
                 Display.DrawFadedOverlay();
                 // draw paused text
-                Display.DrawCenteredString(FontType.VeniceClassic, new(0.5f, 0.4f), "paused", Colors.UI_Text, new(3), drawStringFunc: Display.DrawStringWithShadow);
+                FontType.VeniceClassic.DrawCenteredString(new(0.5f, 0.4f), "paused", Colors.UI_Text, new(3), drawStringFunc: Fonts.DrawStringWithShadow);
                 // draw buttons
                 _buttonResume.Draw();
                 _buttonExit.Draw();

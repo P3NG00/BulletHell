@@ -22,7 +22,7 @@ namespace BulletHell.Scenes
         {
             // draw title
             var rotation = MathF.Sin(GameManager.Ticks * TITLE_ROT_FREQ) * TITLE_ROT_AMP;
-            Display.DrawCenteredString(FontType.alagard, new(0.5f, 0.35f), BulletHell.TITLE, Colors.UI_Title, new(6), rotation, Display.DrawStringWithShadow);
+            FontType.alagard.DrawCenteredString(new(0.5f, 0.35f), BulletHell.TITLE, Colors.UI_Title, new(6), rotation, Fonts.DrawStringWithShadow);
             // base call
             base.Draw();
         }
