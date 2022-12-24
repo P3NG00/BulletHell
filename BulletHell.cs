@@ -50,13 +50,14 @@ namespace BulletHell
 
         protected sealed override void Update(GameTime gameTime)
         {
+            // TODO input updating needs to be changed to fix missed inputs in lower time scales and multiple inputs in higher time scales
             // update input
             InputManager.Update();
             // check fullscreen
             if (Keybinds.Fullscreen.PressedThisFrame)
                 Display.ToggleFullscreen();
             // update ticks
-            GameManager.UpdateTicks(gameTime.ElapsedGameTime.TotalSeconds * GameManager.TimeScale);
+            GameManager.Update(gameTime.ElapsedGameTime.TotalSeconds);
             // update debug
             Debug.Update();
             // update scene
