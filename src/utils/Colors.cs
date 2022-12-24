@@ -9,7 +9,6 @@ namespace BulletHell.Utils
         public static Color TextBackground => new(0, 0, 0, 128);
         public static Color TextShadow => new(0, 0, 0, 64);
         public static Color Overlay => new(0, 0, 0, 128);
-        public static Color Player => new(255, 0, 0);
         public static Color UI_Title => new(32, 192, 255);
         public static Color UI_Text => new(255, 255, 255);
 

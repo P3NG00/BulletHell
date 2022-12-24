@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using BulletHell.Entities;
 using BulletHell.Input;
 using BulletHell.Utils;
-using Microsoft.Xna.Framework;
 
 namespace BulletHell.Scenes
 {
@@ -17,30 +16,29 @@ namespace BulletHell.Scenes
         private readonly List<AbstractEntity> _entities = new();
         private readonly Player _player = new();
 
-        private static bool s_paused;
+        private bool _paused;
 
         public sealed override string[] ExtraDebugInfo => new[] {
-            $"paused: {s_paused}",
+            $"paused: {_paused}",
             $"entities: {_entities.Count}",
-            $"velocity_x: {_player.Velocity.X:0.000}",
-            $"velocity_y: {_player.Velocity.Y:0.000}",
-            $"x: {_player.Position.X:0.000}",
-            $"y: {_player.Position.Y:0.000}"};
+            $"player_vel_x: {_player.Velocity.X:0.000}",
+            $"player_vel_y: {_player.Velocity.Y:0.000}",
+            $"player_x: {_player.Position.X:0.000}",
+            $"player_y: {_player.Position.Y:0.000}"};
 
         public GameScene()
         {
             this.SingletonCheck(ref _instance);
-            s_paused = false;
-            Display.UpdateCameraOffset(Vector2.Zero);
+            _paused = false;
         }
 
         public sealed override void Update()
         {
             // toggle pause
             if (Keybinds.Pause.PressedThisFrame)
-                Util.Toggle(ref s_paused);
+                Util.Toggle(ref _paused);
             // paused
-            if (s_paused)
+            if (_paused)
             {
                 _buttonResume.Update();
                 _buttonExit.Update();
@@ -49,10 +47,12 @@ namespace BulletHell.Scenes
 
         public sealed override void Tick()
         {
-            if (s_paused)
+            if (_paused)
                 return;
             _player.Tick();
             _entities.ForEach(entity => entity.Tick());
+            // update camera offset
+            Display.UpdateCameraOffset(_player.Position);
         }
 
         public sealed override void Draw()
@@ -62,7 +62,7 @@ namespace BulletHell.Scenes
             // draw entities
             _entities.ForEach(entity => entity.Draw());
             // check pause
-            if (!s_paused)
+            if (!_paused)
                 return;
             // draw overlay
             Display.DrawFadedOverlay();
@@ -80,8 +80,8 @@ namespace BulletHell.Scenes
             _instance = null;
         }
 
-        private static void ResumeGame() => s_paused = false;
+        private static void ResumeGame() => Instance._paused = false;
 
-        public static void AddEntity(AbstractEntity entity) => _instance._entities.Add(entity);
+        public static void AddEntity(AbstractEntity entity) => Instance._entities.Add(entity);
     }
 }

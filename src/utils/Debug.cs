@@ -33,7 +33,9 @@ namespace BulletHell.Utils
                 $"frames_per_second: {GameManager.AverageFramesPerSecond:0.000}",
                 $"ticks_per_frame: {GameManager.AverageTicksPerFrame:0.000}",
                 $"camera_offset_x: {Display.CameraOffset.X:0.000}",
-                $"camera_offset_y: {Display.CameraOffset.Y:0.000}"};
+                $"camera_offset_y: {Display.CameraOffset.Y:0.000}",
+                $"offset_mouse_x: {InputManager.MousePosition.X + Display.CameraOffset.X:0.000}",
+                $"offset_mouse_y: {InputManager.MousePosition.Y + Display.CameraOffset.Y:0.000}"};
             foreach (var d in debugInfo)
                 DrawDebugInfo(d);
             // draw extra info
