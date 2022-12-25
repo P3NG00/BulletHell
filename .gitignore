@@ -1,5 +1,4 @@
 *.aup3
-.config/
 .git/
 .vscode/*/
 obj/
