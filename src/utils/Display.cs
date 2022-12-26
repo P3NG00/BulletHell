@@ -55,7 +55,7 @@ namespace BulletHell.Utils
         public static void Draw(Vector2 position, Vector2 size, DrawData drawData, float rotation = 0f)
         {
             var textureSize = drawData.Texture.Bounds.Size.ToVector2();
-            var textureScale = (size / textureSize);
+            var textureScale = size / textureSize;
             var origin = textureSize / 2f;
             var drawOffset = position + (size / 2f);
             SpriteBatch.Draw(drawData.Texture, drawOffset, null, drawData.Color, rotation, origin, textureScale, SpriteEffects.None, 0f);
@@ -63,11 +63,17 @@ namespace BulletHell.Utils
 
         public static void DrawOffset(Vector2 position, Vector2 size, DrawData drawData, float rotation = 0f)
         {
+            var drawPos = position - CameraOffset;
+            Draw(drawPos, size, drawData, rotation);
+        }
+
+        public static void DrawOffsetCentered(Vector2 position, Vector2 size, DrawData drawData, float rotation = 0f)
+        {
             var drawPos = position - CameraOffset - (size / 2f);
             Draw(drawPos, size, drawData, rotation);
         }
 
-        public static void DrawScreenRelative(Vector2 screenPosition, Vector2 size, DrawData drawData, float rotation = 0f)
+        public static void DrawScreenRelativeCentered(Vector2 screenPosition, Vector2 size, DrawData drawData, float rotation = 0f)
         {
             var drawPos = (screenPosition * WindowSize.ToVector2()) - (size / 2f);
             Draw(drawPos, size, drawData, rotation);

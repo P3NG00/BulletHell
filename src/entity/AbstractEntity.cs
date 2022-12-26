@@ -31,7 +31,7 @@ namespace BulletHell.Entities
             // get relative screen position
             var drawPos = Center * new Vector2(1, -1);
             // draw to surface
-            Display.DrawOffset(drawPos, _dimensions, _drawData);
+            Display.DrawOffsetCentered(drawPos, _dimensions, _drawData);
         }
     }
 }
