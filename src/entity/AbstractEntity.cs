@@ -9,22 +9,30 @@ namespace BulletHell.Entities
         private readonly DrawData _drawData;
         private readonly float _moveSpeed;
 
-        protected Vector2 RawVelocity = Vector2.Zero;
+        protected Vector2 RawVelocity;
 
         public Vector2 Velocity => RawVelocity * _moveSpeed;
         public Vector2 Center => Position + new Vector2(0, _dimensions.Y / 2f);
 
         public Vector2 Position;
 
-        public AbstractEntity(Vector2 position, Vector2 dimensions, float moveSpeed, DrawData drawData)
+        public AbstractEntity(Vector2 position, Vector2 dimensions, float moveSpeed, DrawData drawData, Vector2? velocity = null)
         {
             Position = position;
             _dimensions = dimensions;
             _moveSpeed = moveSpeed;
             _drawData = drawData;
+            RawVelocity = velocity ?? Vector2.Zero;
         }
 
-        public virtual void Tick() => Position += Velocity;
+        public virtual void Tick()
+        {
+            // normalize velocity
+            if (RawVelocity.Length() != 0f)
+                RawVelocity.Normalize();
+            // update position
+            Position += Velocity;
+        }
 
         public void Draw()
         {

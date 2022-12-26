@@ -21,12 +21,9 @@ namespace BulletHell.Entities
                 RawVelocity.Y++;
             if (Keybinds.MoveDown.Held)
                 RawVelocity.Y--;
-            // normalize velocity
-            if (RawVelocity.Length() != 0)
-                RawVelocity.Normalize();
             // check projectile
             if (Keybinds.MouseLeft.PressedThisFrame)
-                GameScene.AddEntity(new Projectile(Position));
+                GameScene.AddEntity(new Projectile(Center));
             // base call
             base.Tick();
         }
