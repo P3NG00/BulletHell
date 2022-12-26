@@ -52,7 +52,7 @@ namespace BulletHell.Scenes
             _player.Tick();
             _entities.ForEach(entity => entity.Tick());
             // update camera offset
-            Display.UpdateCameraOffset(_player.Position);
+            Display.UpdateCameraOffset(_player.Center);
         }
 
         public sealed override void Draw()

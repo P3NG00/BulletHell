@@ -5,20 +5,21 @@ namespace BulletHell.Entities
 {
     public abstract class AbstractEntity
     {
-        private readonly Vector2 _size;
+        private readonly Vector2 _dimensions;
         private readonly DrawData _drawData;
         private readonly float _moveSpeed;
 
         protected Vector2 RawVelocity = Vector2.Zero;
 
         public Vector2 Velocity => RawVelocity * _moveSpeed;
+        public Vector2 Center => Position + new Vector2(0, _dimensions.Y / 2f);
 
         public Vector2 Position;
 
-        public AbstractEntity(Vector2 position, Vector2 size, float moveSpeed, DrawData drawData)
+        public AbstractEntity(Vector2 position, Vector2 dimensions, float moveSpeed, DrawData drawData)
         {
             Position = position;
-            _size = size;
+            _dimensions = dimensions;
             _moveSpeed = moveSpeed;
             _drawData = drawData;
         }
@@ -28,9 +29,9 @@ namespace BulletHell.Entities
         public void Draw()
         {
             // get relative screen position
-            var drawPos = Position * new Vector2(1, -1);
+            var drawPos = Center * new Vector2(1, -1);
             // draw to surface
-            Display.DrawOffset(drawPos, _size, _drawData);
+            Display.DrawOffset(drawPos, _dimensions, _drawData);
         }
     }
 }
