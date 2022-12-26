@@ -47,10 +47,16 @@ namespace BulletHell.Scenes
 
         public sealed override void Tick()
         {
+            // check pause
             if (_paused)
                 return;
+            // tick player
             _player.Tick();
+            // tick entities
             _entities.ForEach(entity => entity.Tick());
+            // check projectile
+            if (Keybinds.MouseLeft.PressedThisFrame)
+                GameScene.AddEntity(new Projectile(_player.Center));
             // update camera offset
             Display.UpdateCameraOffset(_player.Center);
         }

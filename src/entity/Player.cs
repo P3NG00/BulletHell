@@ -1,5 +1,4 @@
 using BulletHell.Input;
-using BulletHell.Scenes;
 using Microsoft.Xna.Framework;
 
 namespace BulletHell.Entities
@@ -21,9 +20,6 @@ namespace BulletHell.Entities
                 RawVelocity.Y++;
             if (Keybinds.MoveDown.Held)
                 RawVelocity.Y--;
-            // check projectile
-            if (Keybinds.MouseLeft.PressedThisFrame)
-                GameScene.AddEntity(new Projectile(Center));
             // base call
             base.Tick();
         }
