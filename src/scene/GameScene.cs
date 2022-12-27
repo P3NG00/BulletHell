@@ -1,3 +1,5 @@
+using System.Numerics;
+using System;
 using System.Collections.Generic;
 using BulletHell.Entities;
 using BulletHell.Input;
@@ -56,7 +58,13 @@ namespace BulletHell.Scenes
             _entities.ForEach(entity => entity.Tick());
             // check projectile
             if (Keybinds.MouseLeft.PressedThisFrame)
-                GameScene.AddEntity(new Projectile(_player.Center));
+            {
+                var direction = InputManager.MousePosition.ToVector2() + Display.CameraOffset;
+                direction.Y *= -1f;
+                direction -= _player.Center;
+                direction.Normalize();
+                GameScene.AddEntity(new Projectile(_player.Center, direction));
+            }
             // update camera offset
             Display.UpdateCameraOffset(_player.Center);
         }
