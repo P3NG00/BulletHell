@@ -13,33 +13,12 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin fonts/acknowtt.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/acknowtt.spritefont
-
 #begin fonts/alagard.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:fonts/alagard.spritefont
-
-#begin fonts/ArcadeAlternate.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/ArcadeAlternate.spritefont
-
-#begin fonts/MotorolaScreentype.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
-/build:fonts/MotorolaScreentype.spritefont
 
 #begin fonts/type_writer.spritefont
 /importer:FontDescriptionImporter
