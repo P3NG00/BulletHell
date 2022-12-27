@@ -5,21 +5,23 @@ namespace BulletHell.Entities
 {
     public abstract class AbstractEntity
     {
+        public Vector2 Velocity => RawVelocity * _moveSpeed;
+        public Vector2 Center => Position + CenterOffset;
+
+        private Vector2 CenterOffset => new Vector2(0, _dimensions.Y / 2f);
+
         private readonly Vector2 _dimensions;
         private readonly DrawData _drawData;
         private readonly float _moveSpeed;
 
         protected Vector2 RawVelocity;
 
-        public Vector2 Velocity => RawVelocity * _moveSpeed;
-        public Vector2 Center => Position + new Vector2(0, _dimensions.Y / 2f);
-
         public Vector2 Position;
 
         public AbstractEntity(Vector2 position, Vector2 dimensions, float moveSpeed, DrawData drawData, Vector2? velocity = null)
         {
-            Position = position;
             _dimensions = dimensions;
+            Position = position - CenterOffset;
             _moveSpeed = moveSpeed;
             _drawData = drawData;
             RawVelocity = velocity ?? Vector2.Zero;

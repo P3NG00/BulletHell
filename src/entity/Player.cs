@@ -1,11 +1,18 @@
 using BulletHell.Input;
+using BulletHell.Utils;
 using Microsoft.Xna.Framework;
 
 namespace BulletHell.Entities
 {
     public sealed class Player : AbstractEntity
     {
-        public Player() : base(Vector2.Zero, new(8), 3.5f, new(color: new(0, 255, 0))) {}
+        private const float PLAYER_SPEED = 3.5f;
+
+        private static DrawData PlayerDrawData => new(color: new(0, 255, 0));
+
+        public static Vector2 PlayerSize => new(8);
+
+        public Player() : base(Vector2.Zero, PlayerSize, PLAYER_SPEED, PlayerDrawData) {}
 
         public sealed override void Tick()
         {

@@ -1,11 +1,16 @@
+using BulletHell.Utils;
 using Microsoft.Xna.Framework;
 
 namespace BulletHell.Entities
 {
     public sealed class Projectile : AbstractEntity
     {
-        private static Vector2 ProjectileSize => new(4);
+        private const float PROJECTILE_SPEED = 5f;
 
-        public Projectile(Vector2 position, Vector2 direction) : base(position - new Vector2(0, ProjectileSize.Y / 2f), ProjectileSize, 5, new(color: new Color(255, 0, 0)), direction) {}
+        private static DrawData ProjectileDrawData => new(color: new Color(255, 0, 0));
+
+        public static Vector2 ProjectileSize => new(4);
+
+        public Projectile(Vector2 position, Vector2 direction) : base(position, ProjectileSize, PROJECTILE_SPEED, ProjectileDrawData, direction) {}
     }
 }
