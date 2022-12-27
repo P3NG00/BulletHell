@@ -11,13 +11,12 @@ namespace BulletHell.Utils
 
         public static void LoadContent(ContentManager content)
         {
-            // load font
+            // create font array
             s_typeWriterFont = ImmutableArray.Create(
                 Load("alagard"),
                 Load("VeniceClassic"),
                 Load("type_writer"));
-
-            // local func
+            // load func
             SpriteFont Load(string name) => content.Load<SpriteFont>($"fonts/{name}");
         }
 
