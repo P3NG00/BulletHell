@@ -9,10 +9,13 @@ namespace BulletHell.Entities
         private const float PLAYER_SPEED = 3.5f;
 
         private static DrawData PlayerDrawData => new(Textures.Circle, new(0, 255, 0));
+        private static Vector2 PlayerSize => new(32);
 
-        public static Vector2 PlayerSize => new(32);
-
-        public Player() : base(Vector2.Zero, PlayerSize, PLAYER_SPEED, PlayerDrawData) {}
+        public Player() :
+            base(Vector2.Zero,
+                 PlayerSize,
+                 PLAYER_SPEED,
+                 PlayerDrawData) {}
 
         public sealed override void Tick()
         {

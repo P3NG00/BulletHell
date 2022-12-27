@@ -1,9 +1,8 @@
-using System.Numerics;
-using System;
 using System.Collections.Generic;
 using BulletHell.Entities;
 using BulletHell.Input;
 using BulletHell.Utils;
+using Microsoft.Xna.Framework;
 
 namespace BulletHell.Scenes
 {
@@ -11,14 +10,14 @@ namespace BulletHell.Scenes
     {
         private static GameScene _instance;
 
-        public static GameScene Instance => _instance;
+        public static Player Player => _instance._player;
 
         private readonly Button _buttonResume = new(new(0.5f, 0.6f), new(250, 100), "resume", Colors.ThemeDefault, ResumeGame, 3);
         private readonly Button _buttonExit = CreateExitButton(BackToMainMenu);
         private readonly List<AbstractEntity> _entities = new();
         private readonly Player _player = new();
 
-        private bool _paused;
+        private bool _paused = false;
 
         public sealed override string[] ExtraDebugInfo => new[] {
             $"paused: {_paused}",
@@ -31,7 +30,12 @@ namespace BulletHell.Scenes
         public GameScene()
         {
             this.SingletonCheck(ref _instance);
-            _paused = false;
+            // TODO remove code below, only here to test enemies movement
+            var startPos = Display.WindowSize.ToVector2() / 2f;
+            AddEntity(new Enemy(startPos * new Vector2(-1)));
+            AddEntity(new Enemy(startPos * new Vector2(-1, 1)));
+            AddEntity(new Enemy(startPos * new Vector2(1, -1)));
+            AddEntity(new Enemy(startPos));
         }
 
         public sealed override void Update()
@@ -62,7 +66,6 @@ namespace BulletHell.Scenes
                 var direction = InputManager.MousePosition.ToVector2() + Display.CameraOffset;
                 direction.Y *= -1f;
                 direction -= _player.Center;
-                direction.Normalize();
                 GameScene.AddEntity(new Projectile(_player.Center, direction));
             }
             // update camera offset
@@ -94,8 +97,8 @@ namespace BulletHell.Scenes
             _instance = null;
         }
 
-        private static void ResumeGame() => Instance._paused = false;
+        private static void ResumeGame() => _instance._paused = false;
 
-        public static void AddEntity(AbstractEntity entity) => Instance._entities.Add(entity);
+        public static void AddEntity(AbstractEntity entity) => _instance._entities.Add(entity);
     }
 }
