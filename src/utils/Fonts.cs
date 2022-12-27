@@ -18,7 +18,7 @@ namespace BulletHell.Utils
                 Load("type_writer"));
 
             // local func
-            SpriteFont Load(string name) => content.Load<SpriteFont>(name);
+            SpriteFont Load(string name) => content.Load<SpriteFont>($"fonts/{name}");
         }
 
         public static SpriteFont GetFont(this FontType fontSize) => s_typeWriterFont[(int)fontSize];

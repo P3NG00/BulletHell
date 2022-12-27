@@ -10,7 +10,7 @@ namespace BulletHell.Entities
 
         private static DrawData PlayerDrawData => new(color: new(0, 255, 0));
 
-        public static Vector2 PlayerSize => new(8);
+        public static Vector2 PlayerSize => new(32);
 
         public Player() : base(Vector2.Zero, PlayerSize, PLAYER_SPEED, PlayerDrawData) {}
 

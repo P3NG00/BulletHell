@@ -13,45 +13,45 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin acknowtt.spritefont
+#begin fonts/acknowtt.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:acknowtt.spritefont
+/build:fonts/acknowtt.spritefont
 
-#begin alagard.spritefont
+#begin fonts/alagard.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:alagard.spritefont
+/build:fonts/alagard.spritefont
 
-#begin ArcadeAlternate.spritefont
+#begin fonts/ArcadeAlternate.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:ArcadeAlternate.spritefont
+/build:fonts/ArcadeAlternate.spritefont
 
-#begin MotorolaScreentype.spritefont
+#begin fonts/MotorolaScreentype.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:MotorolaScreentype.spritefont
+/build:fonts/MotorolaScreentype.spritefont
 
-#begin type_writer.spritefont
+#begin fonts/type_writer.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:type_writer.spritefont
+/build:fonts/type_writer.spritefont
 
-#begin VeniceClassic.spritefont
+#begin fonts/VeniceClassic.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:VeniceClassic.spritefont
+/build:fonts/VeniceClassic.spritefont
 
