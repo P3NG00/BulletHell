@@ -8,7 +8,7 @@ namespace BulletHell.Entities
     {
         private const float PLAYER_SPEED = 3.5f;
 
-        private static DrawData PlayerDrawData => new(color: new(0, 255, 0));
+        private static DrawData PlayerDrawData => new(Textures.Circle, new(0, 255, 0));
 
         public static Vector2 PlayerSize => new(32);
 

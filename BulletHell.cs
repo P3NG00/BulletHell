@@ -40,7 +40,7 @@ namespace BulletHell
 
         protected sealed override void LoadContent()
         {
-            Textures.LoadContent();
+            Textures.LoadContent(Content);
             Fonts.LoadContent(Content);
             Display.LoadContent();
             // TODO initialize items after textures
