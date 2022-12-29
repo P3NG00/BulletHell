@@ -90,17 +90,17 @@ namespace BulletHell.Scenes
         private void DrawBackground()
         {
             const int TILE_SIZE = 64;
-            var drawSize = new Vector2(TILE_SIZE);
             var windowSize = Display.WindowSize.ToVector2();
             var startX = (-Display.CameraOffset.X % TILE_SIZE) - TILE_SIZE;
             var startY = (-Display.CameraOffset.Y % TILE_SIZE) - TILE_SIZE;
             var endX = windowSize.X + TILE_SIZE;
             var endY = windowSize.Y + TILE_SIZE;
             var drawPos = new Vector2(startX, startY);
+            var drawSize = new Vector2(TILE_SIZE);
             var drawData = new DrawData(Textures.SquareShaded, Colors.Background);
-            for (float y = 0; y < endY; y += TILE_SIZE)
+            for (float y = startX; y < endY; y += TILE_SIZE)
             {
-                for (float x = 0; x < endX; x += TILE_SIZE)
+                for (float x = startY; x < endX; x += TILE_SIZE)
                 {
                     Display.Draw(drawPos, drawSize, drawData);
                     drawPos.X += TILE_SIZE;
