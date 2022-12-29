@@ -20,7 +20,7 @@ namespace BulletHell.Entities
         public sealed override void Tick()
         {
             // set velocity towards player
-            var direction = GameScene.Player.Center - Center;
+            var direction = GameScene.Player.Position - Position;
             RawVelocity = Vector2.Normalize(direction);
             // base call
             base.Tick();

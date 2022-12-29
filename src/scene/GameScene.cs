@@ -60,11 +60,11 @@ namespace BulletHell.Scenes
             {
                 var direction = InputManager.MousePosition.ToVector2() + Display.CameraOffset;
                 direction.Y *= -1f;
-                direction -= _player.Center;
-                GameScene.AddEntity(new Projectile(_player.Center, direction));
+                direction -= _player.Position;
+                GameScene.AddEntity(new Projectile(_player.Position, direction));
             }
             // update camera offset
-            Display.UpdateCameraOffset(_player.Center);
+            Display.UpdateCameraOffset(_player.Position);
         }
 
         public sealed override void Draw()
