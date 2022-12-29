@@ -69,22 +69,20 @@ namespace BulletHell.Scenes
 
         public sealed override void Draw()
         {
+            // draw game
+            DrawGame();
+            // draw pause
+            DrawPause();
+        }
+
+        private void DrawGame()
+        {
             // draw background
             DrawBackground();
             // draw player
             _player.Draw();
             // draw entities
             _entities.ForEach(entity => entity.Draw());
-            // check pause
-            if (!_paused)
-                return;
-            // draw overlay
-            Display.DrawFadedOverlay();
-            // draw paused text
-            FontType.VeniceClassic.DrawCenteredString(new(0.5f, 0.4f), "paused", Colors.UI_Text, new(3), drawStringFunc: Fonts.DrawStringWithShadow);
-            // draw buttons
-            _buttonResume.Draw();
-            _buttonExit.Draw();
         }
 
         private void DrawBackground()
@@ -108,6 +106,19 @@ namespace BulletHell.Scenes
                 drawPos.X = startX;
                 drawPos.Y += TILE_SIZE;
             }
+        }
+
+        private void DrawPause()
+        {
+            if (!_paused)
+                return;
+            // draw overlay
+            Display.DrawPauseOverlay();
+            // draw paused text
+            FontType.VeniceClassic.DrawCenteredString(new(0.5f, 0.4f), "paused", Colors.UI_Text, new(3), drawStringFunc: Fonts.DrawStringWithShadow);
+            // draw buttons
+            _buttonResume.Draw();
+            _buttonExit.Draw();
         }
 
         private static void BackToMainMenu()

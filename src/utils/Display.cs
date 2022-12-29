@@ -80,6 +80,6 @@ namespace BulletHell.Utils
         }
 
         // draws faded overlay over entire window
-        public static void DrawFadedOverlay() => Display.Draw(Vector2.Zero, WindowSize.ToVector2(), new(color: Colors.Overlay));
+        public static void DrawPauseOverlay() => Display.Draw(Vector2.Zero, WindowSize.ToVector2(), new(color: Colors.Overlay));
     }
 }
