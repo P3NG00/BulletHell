@@ -7,12 +7,12 @@ namespace BulletHell.Utils
 {
     public static class Fonts
     {
-        private static ImmutableArray<SpriteFont> s_typeWriterFont;
+        private static ImmutableArray<SpriteFont> s_fonts;
 
         public static void LoadContent(ContentManager content)
         {
             // create font array
-            s_typeWriterFont = ImmutableArray.Create(
+            s_fonts = ImmutableArray.Create(
                 Load("alagard"),
                 Load("VeniceClassic"),
                 Load("type_writer"));
@@ -20,7 +20,7 @@ namespace BulletHell.Utils
             SpriteFont Load(string name) => content.Load<SpriteFont>($"fonts/{name}");
         }
 
-        public static SpriteFont GetFont(this FontType fontSize) => s_typeWriterFont[(int)fontSize];
+        public static SpriteFont GetFont(this FontType fontSize) => s_fonts[(int)fontSize];
 
         public static Vector2 MeasureString(this FontType fontSize, string text) => GetFont(fontSize).MeasureString(text);
 
