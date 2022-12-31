@@ -15,6 +15,6 @@ namespace BulletHell.Entities
                  ProjectileSize,
                  PROJECTILE_SPEED,
                  ProjectileDrawData,
-                 Vector2.Normalize(direction)) {}
+                 direction) {}
     }
 }
