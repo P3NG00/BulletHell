@@ -27,7 +27,7 @@ namespace BulletHell.Weapon
         {
             NextShotTicks = NEXT_SHOT_TICKS;
             var playerPos = GameScene.Player.Position;
-            var direction = InputManager.MousePosition.ToVector2() + Display.CameraOffset;
+            var direction = InputManager.MousePositionOffset;
             direction.Y *= -1f;
             direction -= playerPos;
             GameScene.AddEntity(new Projectile(playerPos, direction));

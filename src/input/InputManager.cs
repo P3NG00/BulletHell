@@ -1,3 +1,4 @@
+using BulletHell.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
@@ -49,6 +50,8 @@ namespace BulletHell.Input
         };
 
         public static Point MousePosition => _mouseStates[0].Position;
+
+        public static Vector2 MousePositionOffset => MousePosition.ToVector2() + Display.CameraOffset;
 
         public static int ScrollWheelDelta
         {
