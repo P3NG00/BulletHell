@@ -1,4 +1,5 @@
 using BulletHell.Input;
+using BulletHell.Scenes;
 using Microsoft.Xna.Framework;
 
 namespace BulletHell.Utils
@@ -16,7 +17,7 @@ namespace BulletHell.Utils
                 Util.Toggle(ref _enabled);
         }
 
-        public static void Draw(params string[] extraInfo)
+        public static void Draw()
         {
             if (!Enabled)
                 return;
@@ -39,7 +40,8 @@ namespace BulletHell.Utils
             foreach (var d in debugInfo)
                 DrawDebugInfo(d);
             // draw extra info
-            if (extraInfo.IsEmpty())
+            var extraInfo = SceneManager.Scene.ExtraDebugInfo;
+            if (extraInfo == null)
                 return;
             AddSpacer();
             foreach (var e in extraInfo)

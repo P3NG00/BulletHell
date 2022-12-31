@@ -77,7 +77,7 @@ namespace BulletHell
             // draw scene
             SceneManager.Scene.Draw();
             // draw debug
-            Debug.Draw(SceneManager.Scene.ExtraDebugInfo);
+            Debug.Draw();
             // end drawing
             Display.SpriteBatch.End();
             // base call
