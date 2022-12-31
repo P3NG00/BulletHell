@@ -57,7 +57,11 @@ namespace BulletHell.Scenes
             // tick player
             _player.Tick();
             // tick entities
-            _entities.ForEach(entity => entity.Tick());
+            _entities.RemoveAll(entity =>
+            {
+                entity.Tick();
+                return !entity.Alive;
+            });
             // tick weapon
             WeaponManager.Tick();
             // update camera offset

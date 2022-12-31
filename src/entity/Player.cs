@@ -6,6 +6,7 @@ namespace BulletHell.Entities
 {
     public sealed class Player : AbstractEntity
     {
+        private const float PLAYER_LIFE = 50f;
         private const float PLAYER_SPEED = 3.5f;
 
         private static DrawData PlayerDrawData => new(Textures.Circle, new(0, 255, 0));
@@ -15,6 +16,7 @@ namespace BulletHell.Entities
             base(Vector2.Zero,
                  PlayerSize,
                  PLAYER_SPEED,
+                 PLAYER_LIFE,
                  PlayerDrawData) {}
 
         public sealed override void Tick()
