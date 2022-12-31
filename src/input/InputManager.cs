@@ -45,7 +45,7 @@ namespace BulletHell.Input
             Mouse.Left => (_mouseStates[1].LeftButton, _mouseStates[0].LeftButton),
             Mouse.Middle => (_mouseStates[1].MiddleButton, _mouseStates[0].MiddleButton),
             Mouse.Right => (_mouseStates[1].RightButton, _mouseStates[0].RightButton),
-            _ => throw new System.NotImplementedException($"{nameof(GetMouseButtonStates)} not implemented for {mouse}")
+            _ => throw new System.NotImplementedException($"Invalid mouse state.")
         };
 
         public static Point MousePosition => _mouseStates[0].Position;
