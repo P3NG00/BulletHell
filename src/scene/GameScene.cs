@@ -61,7 +61,7 @@ namespace BulletHell.Scenes
                 var direction = InputManager.MousePosition.ToVector2() + Display.CameraOffset;
                 direction.Y *= -1f;
                 direction -= _player.Position;
-                GameScene.AddEntity(new Projectile(_player.Position, direction));
+                AddEntity(new Projectile(_player.Position, direction));
             }
             // update camera offset
             Display.UpdateCameraOffset(_player.Position);
