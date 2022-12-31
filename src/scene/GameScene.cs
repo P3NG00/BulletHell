@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using BulletHell.Entities;
 using BulletHell.Input;
 using BulletHell.Utils;
+using BulletHell.Weapon;
 using Microsoft.Xna.Framework;
 
 namespace BulletHell.Scenes
@@ -22,6 +23,7 @@ namespace BulletHell.Scenes
         public sealed override string[] ExtraDebugInfo => new[] {
             $"paused: {_paused}",
             $"entities: {_entities.Count}",
+            $"next_shot_ticks: {WeaponManager.NextShotTicks}",
             $"player_vel_x: {_player.Velocity.X:0.000}",
             $"player_vel_y: {_player.Velocity.Y:0.000}",
             $"player_x: {_player.Position.X:0.000}",
@@ -30,6 +32,7 @@ namespace BulletHell.Scenes
         public GameScene()
         {
             this.SingletonCheck(ref _instance);
+            WeaponManager.Reset();
             // TODO add method to spawn Enemies at random positions around player
         }
 
@@ -55,14 +58,8 @@ namespace BulletHell.Scenes
             _player.Tick();
             // tick entities
             _entities.ForEach(entity => entity.Tick());
-            // check projectile
-            if (Keybinds.MouseLeft.PressedThisFrame)
-            {
-                var direction = InputManager.MousePosition.ToVector2() + Display.CameraOffset;
-                direction.Y *= -1f;
-                direction -= _player.Position;
-                AddEntity(new Projectile(_player.Position, direction));
-            }
+            // tick weapon
+            WeaponManager.Tick();
             // update camera offset
             Display.UpdateCameraOffset(_player.Position);
         }
