@@ -34,7 +34,7 @@ namespace BulletHell.Utils
         public void Draw()
         {
             // draw box
-            Display.Draw(LastRectangle.Location.ToVector2(), Size.ToVector2(), new(color: Highlighted ? _colorTheme.MainHighlight : _colorTheme.Main));
+            Display.Draw(LastRectangle.Location.ToVector2(), Size.ToVector2(), new(Highlighted ? _colorTheme.MainHighlight : _colorTheme.Main));
             // draw text centered in box
             var color = Highlighted ? _colorTheme.TextHighlight : _colorTheme.Text;
             FontType.VeniceClassic.DrawCenteredString(RelativeCenter, _text, color, _textScale, drawStringFunc: Fonts.DrawStringWithShadow);

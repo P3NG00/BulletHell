@@ -37,7 +37,7 @@ namespace BulletHell.Utils
             // draw text background
             var textSize = fontSize.MeasureString(text);
             var uiSpacerVec = new Vector2(Util.UI_SPACER);
-            Display.Draw(position - (uiSpacerVec / 2f), (textSize + uiSpacerVec) * scale.Value, new(color: Colors.TextBackground), rotation);
+            Display.Draw(position - (uiSpacerVec / 2f), (textSize + uiSpacerVec) * scale.Value, new(Colors.TextBackground), rotation);
             // draw text
             DrawString(fontSize, position, text, color, scale, rotation);
         }

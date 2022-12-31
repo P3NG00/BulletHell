@@ -13,5 +13,7 @@ namespace BulletHell.Utils
             Texture = texture ?? Textures.Square;
             Color = color ?? Colors.Default;
         }
+
+        public DrawData(Color color) : this(null, color) {}
     }
 }
