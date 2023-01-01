@@ -19,9 +19,11 @@ namespace BulletHell.Scenes
         private readonly Player _player = new();
 
         private bool _paused = false;
+        private int _lastTilesDrawn;
 
         public sealed override string[] ExtraDebugInfo => new[] {
             $"paused: {_paused}",
+            $"last_tiles_drawn: {_lastTilesDrawn}",
             $"entities: {_entities.Count}",
             $"next_shot_ticks: {WeaponManager.NextShotTicks}",
             $"player_vel_x: {_player.Velocity.X:0.000}",
@@ -84,19 +86,21 @@ namespace BulletHell.Scenes
         private void DrawBackground()
         {
             const int TILE_SIZE = 64;
-            var windowSize = Display.WindowSize.ToVector2();
+            // TODO needs a little further fine tuning
             var startX = (-Display.CameraOffset.X % TILE_SIZE) - TILE_SIZE;
             var startY = (-Display.CameraOffset.Y % TILE_SIZE) - TILE_SIZE;
-            var endX = windowSize.X + TILE_SIZE;
-            var endY = windowSize.Y + TILE_SIZE;
+            var endX = Display.WindowSize.X + TILE_SIZE;
+            var endY = Display.WindowSize.Y + TILE_SIZE;
             var drawPos = new Vector2(startX, startY);
             var drawSize = new Vector2(TILE_SIZE);
             var drawData = new DrawData(Textures.SquareShaded, Colors.Background);
+            _lastTilesDrawn = 0;
             for (float y = startX; y < endY; y += TILE_SIZE)
             {
                 for (float x = startY; x < endX; x += TILE_SIZE)
                 {
                     Display.Draw(drawPos, drawSize, drawData);
+                    _lastTilesDrawn++;
                     drawPos.X += TILE_SIZE;
                 }
                 drawPos.X = startX;
