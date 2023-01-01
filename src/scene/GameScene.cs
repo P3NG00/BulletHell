@@ -57,11 +57,7 @@ namespace BulletHell.Scenes
             // tick player
             _player.Tick();
             // tick entities
-            _entities.RemoveAll(entity =>
-            {
-                entity.Tick();
-                return !entity.Alive;
-            });
+            _entities.RemoveAll(TickEntityAndCheckAlive);
             // tick weapon
             WeaponManager.Tick();
             // update camera offset
@@ -120,6 +116,12 @@ namespace BulletHell.Scenes
             // draw buttons
             _buttonResume.Draw();
             _buttonExit.Draw();
+        }
+
+        private bool TickEntityAndCheckAlive(AbstractEntity entity)
+        {
+            entity.Tick();
+            return !entity.Alive;
         }
 
         private static void BackToMainMenu()
