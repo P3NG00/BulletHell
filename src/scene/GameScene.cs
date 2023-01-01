@@ -42,11 +42,10 @@ namespace BulletHell.Scenes
             if (Keybinds.Pause.PressedThisFrame)
                 Util.Toggle(ref _paused);
             // paused
-            if (_paused)
-            {
-                _buttonResume.Update();
-                _buttonExit.Update();
-            }
+            if (!_paused)
+                return;
+            _buttonResume.Update();
+            _buttonExit.Update();
         }
 
         public sealed override void Tick()

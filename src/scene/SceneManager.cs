@@ -5,6 +5,7 @@ namespace BulletHell.Scenes
     public static class SceneManager
     {
         public static AbstractScene Scene { get; private set; } = null;
+
         private static AbstractScene _nextScene = null;
 
         public static void Update()
