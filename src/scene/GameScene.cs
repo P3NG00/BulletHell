@@ -29,7 +29,8 @@ namespace BulletHell.Scenes
             $"player_vel_x: {_player.Velocity.X:0.000}",
             $"player_vel_y: {_player.Velocity.Y:0.000}",
             $"player_x: {_player.Position.X:0.000}",
-            $"player_y: {_player.Position.Y:0.000}"};
+            $"player_y: {_player.Position.Y:0.000}",
+            $"player_life: {_player.Life:0.000}"};
 
         public GameScene()
         {
@@ -61,6 +62,9 @@ namespace BulletHell.Scenes
             _entities.RemoveAll(TickEntityAndCheckAlive);
             // tick weapon
             WeaponManager.Tick();
+            // spawn enemy with right click // TODO remove, only for testing
+            if (Keybinds.MouseRight.PressedThisFrame)
+                _entities.Add(new Enemy(_player.Position + new Vector2(0, 100)));
             // update camera offset
             Display.UpdateCameraOffset(_player.Position);
         }

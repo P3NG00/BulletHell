@@ -4,6 +4,13 @@ namespace BulletHell.Scenes
 {
     public static class SceneManager
     {
+        // TODO
+        // public static AbstractScene Scene
+        // {
+        //     get => _scene;
+        //     set => _nextScene = value;
+        // }
+
         public static AbstractScene Scene { get; private set; } = null;
 
         private static AbstractScene _nextScene = null;
