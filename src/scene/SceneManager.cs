@@ -4,32 +4,28 @@ namespace BulletHell.Scenes
 {
     public static class SceneManager
     {
-        // TODO
-        // public static AbstractScene Scene
-        // {
-        //     get => _scene;
-        //     set => _nextScene = value;
-        // }
-
-        public static AbstractScene Scene { get; private set; } = null;
+        public static AbstractScene Scene
+        {
+            get => _scene;
+            set => _nextScene = value;
+        }
 
         private static AbstractScene _nextScene = null;
+        private static AbstractScene _scene;
 
         public static void Update()
         {
             // check next scene
             if (_nextScene != null)
             {
-                Scene = _nextScene;
+                _scene = _nextScene;
                 _nextScene = null;
             }
             // update scene
-            Scene.Update();
+            _scene.Update();
             // tick scene
             while (GameManager.WillTick())
-                Scene.Tick();
+                _scene.Tick();
         }
-
-        public static void SetScene(AbstractScene scene) => _nextScene = scene;
     }
 }

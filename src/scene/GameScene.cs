@@ -133,7 +133,7 @@ namespace BulletHell.Scenes
 
         private static void BackToMainMenu()
         {
-            SceneManager.SetScene(new MainMenuScene());
+            SceneManager.Scene = new MainMenuScene();
             // nullify singleton
             _instance = null;
         }

@@ -19,7 +19,7 @@ namespace BulletHell
         {
             this.SingletonCheck(ref _instance);
             // initialize scene after instance is set
-            SceneManager.SetScene(new MainMenuScene());
+            SceneManager.Scene = new MainMenuScene();
             Display.CreateGraphicsManager(this);
             Content.RootDirectory = "Content";
             IsFixedTimeStep = true;
