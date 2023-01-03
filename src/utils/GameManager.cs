@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using BulletHell.Input;
+using BulletHell.Scenes;
 
 namespace BulletHell.Utils
 {
@@ -52,16 +53,17 @@ namespace BulletHell.Utils
             s_ticks[1] = s_ticks[0];
         }
 
-        public static bool WillTick()
+        public static void UpdateTicks()
         {
-            if (s_tickDelta < TICK_STEP)
-                return false;
-            // decrement delta time by tick step
-            s_tickDelta -= TICK_STEP;
-            // increment tick counter
-            s_ticks[0]++;
-            // return success
-            return true;
+            while (s_tickDelta >= TICK_STEP)
+            {
+                // decrement delta time by tick step
+                s_tickDelta -= TICK_STEP;
+                // increment tick counter
+                s_ticks[0]++;
+                // update scene tick
+                SceneManager.Scene.Tick();
+            }
         }
     }
 }

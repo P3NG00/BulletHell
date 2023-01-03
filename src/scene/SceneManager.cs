@@ -23,9 +23,8 @@ namespace BulletHell.Scenes
             }
             // update scene
             _scene.Update();
-            // tick scene
-            while (GameManager.WillTick())
-                _scene.Tick();
+            // update ticks
+            GameManager.UpdateTicks();
         }
     }
 }
