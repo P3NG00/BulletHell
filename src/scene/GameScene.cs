@@ -7,13 +7,13 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Scenes
 {
-    public sealed class GameScene : AbstractSimpleScene
+    public sealed class GameScene : AbstractScene
     {
         private static GameScene _instance;
 
         public static Player Player => _instance._player;
 
-        private readonly Button _buttonResume = new(new(0.5f, 0.6f), new(250, 100), "resume", Colors.ThemeDefault, ResumeGame, 3);
+        private readonly Button _buttonResume = CreateMainButton("resume", Colors.ThemeDefault, ResumeGame);
         private readonly Button _buttonExit = CreateExitButton(BackToMainMenu);
         private readonly List<AbstractEntity> _entities = new();
         private readonly Player _player = new();
