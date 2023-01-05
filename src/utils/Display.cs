@@ -15,7 +15,7 @@ namespace BulletHell.Utils
 
         public static void CreateGraphicsManager(Microsoft.Xna.Framework.Game game) => _graphics = new GraphicsDeviceManager(game);
 
-        public static void LoadContent() => SpriteBatch = new SpriteBatch(BulletHell.Instance.GraphicsDevice);
+        public static void LoadContent(GraphicsDevice graphicsDevice) => SpriteBatch = new SpriteBatch(graphicsDevice);
 
         public static void Initialize() => SetSize(1280, 720, false);
 

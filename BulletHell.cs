@@ -11,8 +11,6 @@ namespace BulletHell
     {
         public const string TITLE = "Bullet Hell";
 
-        public static BulletHell Instance => _instance;
-
         private static BulletHell _instance;
 
         public BulletHell()
@@ -42,7 +40,7 @@ namespace BulletHell
         {
             Textures.LoadContent(Content);
             Fonts.LoadContent(Content);
-            Display.LoadContent();
+            Display.LoadContent(GraphicsDevice);
             // TODO initialize items after textures
             // base call
             base.LoadContent();
@@ -83,5 +81,7 @@ namespace BulletHell
             // base call
             base.Draw(gameTime);
         }
+
+        public static void ExitGame() => _instance.Exit();
     }
 }
