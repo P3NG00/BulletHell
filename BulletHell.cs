@@ -46,9 +46,9 @@ namespace BulletHell
             base.LoadContent();
         }
 
+        // ensure all "InputThisFrame" inputs are polled in Update to avoid missed inputs in Tick
         protected sealed override void Update(GameTime gameTime)
         {
-            // TODO input updating needs to be changed to fix missed inputs in lower time scales and multiple inputs in higher time scales
             // update input
             InputManager.Update();
             // check fullscreen

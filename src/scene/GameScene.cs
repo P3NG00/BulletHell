@@ -45,10 +45,15 @@ namespace BulletHell.Scenes
             if (Keybinds.Pause.PressedThisFrame)
                 Util.Toggle(ref _paused);
             // paused
-            if (!_paused)
+            if (_paused)
+            {
+                _buttonResume.Update();
+                _buttonExit.Update();
                 return;
-            _buttonResume.Update();
-            _buttonExit.Update();
+            }
+            // spawn enemy with right click // TODO remove, only for testing
+            if (Keybinds.MouseRight.PressedThisFrame)
+                _entities.Add(new Enemy(_player.Position + new Vector2(0, 100)));
         }
 
         public sealed override void Tick()
@@ -62,9 +67,6 @@ namespace BulletHell.Scenes
             _entities.RemoveAll(TickEntityAndCheckAlive);
             // tick weapon
             WeaponManager.Tick();
-            // spawn enemy with right click // TODO remove, only for testing
-            if (Keybinds.MouseRight.PressedThisFrame)
-                _entities.Add(new Enemy(_player.Position + new Vector2(0, 100)));
             // update camera offset
             Display.UpdateCameraOffset(_player.Position);
         }
