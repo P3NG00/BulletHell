@@ -46,7 +46,7 @@ namespace BulletHell
             base.LoadContent();
         }
 
-        // ensure all "InputThisFrame" inputs are polled in Update to avoid missed inputs in Tick
+        // ensure all "<Input>ThisFrame" inputs are checked in Update to avoid missed inputs in Tick
         protected sealed override void Update(GameTime gameTime)
         {
             // update input

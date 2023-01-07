@@ -65,5 +65,7 @@ namespace BulletHell.Utils
                 SceneManager.Scene.Tick();
             }
         }
+
+        public static int TicksFromSeconds(float seconds) => (int)(TICKS_PER_SECOND * seconds);
     }
 }

@@ -1,17 +1,16 @@
 using BulletHell.Entities;
 using BulletHell.Input;
 using BulletHell.Scenes;
-using BulletHell.Utils;
 
 namespace BulletHell.Weapon
 {
     public static class WeaponManager
     {
-        private const int NEXT_SHOT_TICKS = (int)(GameManager.TICKS_PER_SECOND * 0.5f);
-
         public static int NextShotTicks { get; private set; } = 0;
 
         private static bool CanFireWeapon => NextShotTicks == 0;
+
+        public static Weapon Weapon = Weapons.Pistol; // TODO change from default weapon
 
         public static void Tick()
         {
@@ -25,7 +24,7 @@ namespace BulletHell.Weapon
 
         private static void FireWeapon()
         {
-            NextShotTicks = NEXT_SHOT_TICKS;
+            NextShotTicks = Weapon.ShotTicks;
             var playerPos = GameScene.Player.Position;
             var direction = InputManager.MousePositionOffset;
             direction.Y *= -1f;

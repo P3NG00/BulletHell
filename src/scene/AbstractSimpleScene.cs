@@ -6,7 +6,7 @@ namespace BulletHell.Scenes
     {
         private ISceneObject[] _sceneObjects;
 
-        public void SetSceneObjects(params ISceneObject[] sceneObjects) => _sceneObjects = sceneObjects;
+        protected void SetSceneObjects(params ISceneObject[] sceneObjects) => _sceneObjects = sceneObjects;
 
         public override void Update() => _sceneObjects.ForEach(sceneObject => sceneObject?.Update());
 
