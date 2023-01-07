@@ -1,6 +1,7 @@
 using BulletHell.Entities;
 using BulletHell.Input;
 using BulletHell.Scenes;
+using Microsoft.Xna.Framework.Input;
 
 namespace BulletHell.Weapon
 {
@@ -13,13 +14,20 @@ namespace BulletHell.Weapon
             set
             {
                 s_weapon = value;
-                Reset();
+                Reset(); // TODO don't reset if weapon is the same
             }
         }
 
         private static bool CanFireWeapon => NextShotTicks == 0;
 
         private static Weapon s_weapon = Weapons.Pistol;
+
+        public static void Update()
+        {
+            for (int i = 0; i < Weapons.Amount; i++)
+                if (InputManager.KeyPressedThisFrame(Keys.D1 + i))
+                    WeaponManager.Weapon = Weapons.FromID(i);
+        }
 
         public static void Tick()
         {

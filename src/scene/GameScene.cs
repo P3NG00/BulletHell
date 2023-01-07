@@ -4,7 +4,6 @@ using BulletHell.Input;
 using BulletHell.Utils;
 using BulletHell.Weapon;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 
 namespace BulletHell.Scenes
 {
@@ -46,10 +45,8 @@ namespace BulletHell.Scenes
             // toggle pause
             if (Keybinds.Pause.PressedThisFrame)
                 Util.Toggle(ref _paused);
-            // check weapon
-            for (int i = 0; i < Weapons.Amount; i++)
-                if (InputManager.KeyPressedThisFrame(Keys.D1 + i))
-                    WeaponManager.Weapon = Weapons.FromID(i);
+            // update weapon
+            WeaponManager.Update();
             // paused
             if (_paused)
             {
