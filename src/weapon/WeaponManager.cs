@@ -7,10 +7,19 @@ namespace BulletHell.Weapon
     public static class WeaponManager
     {
         public static int NextShotTicks { get; private set; } = 0;
+        public static Weapon Weapon
+        {
+            get => s_weapon;
+            set
+            {
+                s_weapon = value;
+                Reset();
+            }
+        }
 
         private static bool CanFireWeapon => NextShotTicks == 0;
 
-        public static Weapon Weapon = Weapons.Pistol; // TODO change from default weapon
+        private static Weapon s_weapon = Weapons.Pistol;
 
         public static void Tick()
         {

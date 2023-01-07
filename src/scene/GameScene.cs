@@ -4,6 +4,7 @@ using BulletHell.Input;
 using BulletHell.Utils;
 using BulletHell.Weapon;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace BulletHell.Scenes
 {
@@ -25,6 +26,7 @@ namespace BulletHell.Scenes
             $"paused: {_paused}",
             $"last_tiles_drawn: {_lastTilesDrawn}",
             $"entities: {_entities.Count}",
+            $"weapon: {WeaponManager.Weapon.Name}",
             $"next_shot_ticks: {WeaponManager.NextShotTicks}",
             $"player_vel_x: {_player.Velocity.X:0.000}",
             $"player_vel_y: {_player.Velocity.Y:0.000}",
@@ -44,6 +46,10 @@ namespace BulletHell.Scenes
             // toggle pause
             if (Keybinds.Pause.PressedThisFrame)
                 Util.Toggle(ref _paused);
+            // check weapon
+            for (int i = 0; i < Weapons.Amount; i++)
+                if (InputManager.KeyPressedThisFrame(Keys.D1 + i))
+                    WeaponManager.Weapon = Weapons.FromID(i);
             // paused
             if (_paused)
             {
