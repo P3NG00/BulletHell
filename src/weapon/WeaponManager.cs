@@ -13,8 +13,10 @@ namespace BulletHell.Weapon
             get => s_weapon;
             set
             {
+                if (s_weapon == value)
+                    return;
                 s_weapon = value;
-                Reset(); // TODO don't reset if weapon is the same
+                Reset();
             }
         }
 

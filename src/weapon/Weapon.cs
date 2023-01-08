@@ -2,7 +2,7 @@ using BulletHell.Utils;
 
 namespace BulletHell.Weapon
 {
-    public struct Weapon
+    public sealed class Weapon
     {
         public readonly string Name;
         public readonly int ShotTicks;
