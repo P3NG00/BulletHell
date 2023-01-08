@@ -14,12 +14,12 @@ namespace BulletHell.Utils
 
         // (0f, 0f) = top-left of window.
         // (1f, 1f) = bottom-right of window.
-        public Button(Vector2 relativeCenter, Point size, string text, ColorTheme colorTheme, Action action, int? textScale = null) : base(relativeCenter, size)
+        public Button(Vector2 relativeCenter, Point size, string text, ColorTheme colorTheme, Action action, int textScale = 1) : base(relativeCenter, size)
         {
             _text = text;
             _colorTheme = colorTheme;
             _action = action;
-            _textScale = new(textScale ?? 1);
+            _textScale = new(textScale);
         }
 
         public sealed override void Update()
