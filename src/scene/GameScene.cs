@@ -15,7 +15,8 @@ namespace BulletHell.Scenes
 
         private readonly Button _buttonResume = CreateMainButton("resume", Colors.ThemeDefault, ResumeGame);
         private readonly Button _buttonExit = CreateExitButton(BackToMainMenu);
-        private readonly List<AbstractEntity> _entities = new();
+        private readonly List<Projectile> _projectiles = new();
+        private readonly List<Enemy> _enemies = new();
         private readonly Player _player = new();
 
         private bool _paused = false;
@@ -24,7 +25,8 @@ namespace BulletHell.Scenes
         public sealed override string[] ExtraDebugInfo => new[] {
             $"paused: {_paused}",
             $"last_tiles_drawn: {_lastTilesDrawn}",
-            $"entities: {_entities.Count}",
+            $"projectiles: {_projectiles.Count}",
+            $"enemies: {_enemies.Count}",
             $"weapon: {WeaponManager.Weapon.Name}",
             $"next_shot_ticks: {WeaponManager.NextShotTicks}",
             $"player_vel_x: {_player.Velocity.X:0.000}",
@@ -56,7 +58,7 @@ namespace BulletHell.Scenes
             }
             // spawn enemy with right click // TODO remove, only for testing
             if (Keybinds.MouseRight.PressedThisFrame)
-                _entities.Add(new Enemy(_player.Position + new Vector2(0, 100)));
+                _enemies.Add(new Enemy(InputManager.MousePositionOffset));
         }
 
         public sealed override void Tick()
@@ -66,10 +68,11 @@ namespace BulletHell.Scenes
                 return;
             // tick player
             _player.Tick();
-            // tick entities
-            _entities.RemoveAll(TickEntityAndCheckAlive);
             // tick weapon
             WeaponManager.Tick();
+            // tick entities
+            _enemies.RemoveAll(TickEntityAndCheckAlive);
+            _projectiles.RemoveAll(TickEntityAndCheckAlive);
             // update camera offset
             Display.UpdateCameraOffset(_player.Position);
         }
@@ -89,7 +92,8 @@ namespace BulletHell.Scenes
             // draw player
             _player.Draw();
             // draw entities
-            _entities.ForEach(entity => entity.Draw());
+            _enemies.ForEach(enemy => enemy.Draw());
+            _projectiles.ForEach(projectile => projectile.Draw());
         }
 
         private void DrawBackground()
@@ -145,6 +149,8 @@ namespace BulletHell.Scenes
 
         private static void ResumeGame() => _instance._paused = false;
 
-        public static void AddEntity(AbstractEntity entity) => _instance._entities.Add(entity);
+        public static void AddEnemy(Enemy enemy) => _instance._enemies.Add(enemy);
+
+        public static void AddProjectile(Projectile projectile) => _instance._projectiles.Add(projectile);
     }
 }

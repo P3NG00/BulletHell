@@ -45,7 +45,7 @@ namespace BulletHell.Weapon
             var playerPos = GameScene.Player.Position;
             var direction = InputManager.MousePositionOffset;
             direction -= playerPos;
-            GameScene.AddEntity(new Projectile(playerPos, direction));
+            GameScene.AddProjectile(new Projectile(playerPos, direction));
         }
     }
 }
