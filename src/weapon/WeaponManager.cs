@@ -8,6 +8,8 @@ namespace BulletHell.Weapon
     public static class WeaponManager
     {
         public static int NextShotTicks { get; private set; } = 0;
+        public static int ClipAmount { get; private set; } = 0; // TODO utilize
+
         public static Weapon Weapon
         {
             get => s_weapon;
@@ -21,8 +23,13 @@ namespace BulletHell.Weapon
         }
 
         private static bool CanFireWeapon => NextShotTicks == 0;
+        private static bool Empty => ClipAmount == 0;
 
-        private static Weapon s_weapon = Weapons.Pistol;
+        private static Weapon s_weapon;
+
+        static WeaponManager() => Weapon = Weapons.Pistol;
+
+        // TODO implement reload time
 
         public static void Update()
         {
@@ -35,15 +42,20 @@ namespace BulletHell.Weapon
         {
             if (!CanFireWeapon)
                 NextShotTicks--;
-            else if (Keybinds.MouseLeft.Held)
+            else if (Keybinds.MouseLeft.Held && !Empty)
                 FireWeapon();
         }
 
-        public static void Reset() => NextShotTicks = 0;
+        public static void Reset()
+        {
+            NextShotTicks = 0;
+            ClipAmount = Weapon.ClipSize;
+        }
 
         private static void FireWeapon()
         {
             NextShotTicks = Weapon.ShotTicks;
+            ClipAmount--;
             var playerPos = GameScene.Player.Position;
             var direction = InputManager.MousePositionOffset;
             direction -= playerPos;

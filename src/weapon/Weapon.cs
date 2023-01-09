@@ -6,15 +6,17 @@ namespace BulletHell.Weapon
     {
         public readonly string Name;
         public readonly int ShotTicks;
+        public readonly int ClipSize;
+        public readonly int ReloadTicks;
 
-        // TODO max clip amount
-        // TODO reload time
         // TODO different projectile types
 
-        public Weapon(string name, float fireRateSeconds)
+        public Weapon(string name, int clipSize, float fireRateSeconds, float reloadSeconds)
         {
             Name = name;
+            ClipSize = clipSize;
             ShotTicks = GameManager.TicksFromSeconds(fireRateSeconds);
+            ReloadTicks = GameManager.TicksFromSeconds(reloadSeconds);
         }
     }
 }
