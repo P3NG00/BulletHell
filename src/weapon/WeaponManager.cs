@@ -25,9 +25,7 @@ namespace BulletHell.Weapon
         private static bool CanFireWeapon => NextShotTicks == 0;
         private static bool Empty => ClipAmount == 0;
 
-        private static Weapon s_weapon;
-
-        static WeaponManager() => Weapon = Weapons.Pistol;
+        private static Weapon s_weapon = Weapons.Pistol;
 
         // TODO implement reload time
 
