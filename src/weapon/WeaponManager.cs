@@ -8,7 +8,7 @@ namespace BulletHell.Weapon
     public static class WeaponManager
     {
         public static int NextShotTicks { get; private set; } = 0;
-        public static int ClipAmount { get; private set; } = 0; // TODO utilize
+        public static int ClipAmount { get; private set; } = 0;
 
         public static Weapon Weapon
         {
@@ -18,14 +18,15 @@ namespace BulletHell.Weapon
                 if (s_weapon == value)
                     return;
                 s_weapon = value;
-                Reset();
+                ClipAmount = value.ClipSize;
+                NextShotTicks = 0;
             }
         }
 
         private static bool CanFireWeapon => NextShotTicks == 0;
         private static bool Empty => ClipAmount == 0;
 
-        private static Weapon s_weapon = Weapons.Pistol;
+        private static Weapon s_weapon;
 
         // TODO implement reload time
 
@@ -44,11 +45,7 @@ namespace BulletHell.Weapon
                 FireWeapon();
         }
 
-        public static void Reset()
-        {
-            NextShotTicks = 0;
-            ClipAmount = Weapon.ClipSize;
-        }
+        public static void Reset() => Weapon = Weapons.Pistol;
 
         private static void FireWeapon()
         {
