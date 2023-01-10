@@ -16,7 +16,7 @@ namespace BulletHell.Weapon
             get => s_weapon;
             private set
             {
-                if (s_weapon == value)
+                if (s_weapon == value || Reloading)
                     return;
                 s_weapon = value;
                 NextShotTicks = 0;
@@ -31,7 +31,7 @@ namespace BulletHell.Weapon
 
         private static Weapon s_weapon;
 
-        // TODO disable weapon switching while reloading
+        // TODO disable clip refilling when switching weapons
 
         public static void Update()
         {
