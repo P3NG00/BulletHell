@@ -14,6 +14,14 @@ namespace BulletHell.Weapon
             Pistol,
             MachineGun);
 
+        static Weapons()
+        {
+            // check id's
+            for (int i = 0; i < s_weapons.Length; i++)
+                if (s_weapons[i].ID != i)
+                    throw new System.Exception($"Weapon '{s_weapons[i].Name}' has wrong ID");
+        }
+
         public static Weapon FromID(int id) => s_weapons[id];
     }
 }
