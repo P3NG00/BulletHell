@@ -46,23 +46,16 @@ namespace BulletHell.Weapon
         public static void Tick()
         {
             if (IsSwitching)
-            {
                 SwitchTicks--;
-                return;
-            }
-            if (IsReloading)
+            else if (IsReloading)
             {
                 ReloadTicks--;
-                if (IsReloading)
-                    return;
-                AmmoAmount = Weapon.ClipSize;
+                if (!IsReloading)
+                    AmmoAmount = Weapon.ClipSize;
             }
-            if (IsFiring)
-            {
+            else if (IsFiring)
                 NextShotTicks--;
-                return;
-            }
-            if (Keybinds.MouseLeft.Held && !IsEmpty)
+            else if (Keybinds.MouseLeft.Held && !IsEmpty)
                 FireWeapon();
         }
 
