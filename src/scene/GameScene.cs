@@ -30,7 +30,7 @@ namespace BulletHell.Scenes
             $"weapon: {WeaponManager.Weapon.Name}",
             $"next_shot_ticks: {WeaponManager.NextShotTicks}",
             $"reload_ticks: {WeaponManager.ReloadTicks}",
-            $"clip_amount: {WeaponManager.ClipAmount}",
+            $"clip_amount: {WeaponManager.AmmoAmount}",
             $"player_vel_x: {_player.Velocity.X:0.000}",
             $"player_vel_y: {_player.Velocity.Y:0.000}",
             $"player_x: {_player.Position.X:0.000}",

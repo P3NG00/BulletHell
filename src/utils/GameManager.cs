@@ -66,6 +66,6 @@ namespace BulletHell.Utils
             }
         }
 
-        public static int TicksFromSeconds(float seconds) => (int)(TICKS_PER_SECOND * seconds);
+        public static int SecondsToTicks(float seconds) => (int)(TICKS_PER_SECOND * seconds);
     }
 }

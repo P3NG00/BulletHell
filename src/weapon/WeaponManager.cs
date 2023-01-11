@@ -1,6 +1,8 @@
+using System;
 using BulletHell.Entities;
 using BulletHell.Input;
 using BulletHell.Scenes;
+using BulletHell.Utils;
 using Microsoft.Xna.Framework.Input;
 
 namespace BulletHell.Weapon
@@ -9,29 +11,32 @@ namespace BulletHell.Weapon
     {
         public static int NextShotTicks { get; private set; } = 0;
         public static int ReloadTicks { get; private set; } = 0;
-        public static int ClipAmount { get; private set; } = 0;
 
         public static Weapon Weapon
         {
             get => s_weapon;
             private set
             {
-                if (s_weapon == value || Reloading)
+                if (s_weapon == value || IsReloading)
                     return;
                 s_weapon = value;
-                NextShotTicks = 0;
-                ReloadTicks = 0;
-                ClipAmount = value.ClipSize;
+                // TODO implement -> int Weapon.SwitchTicks; // to allow for seperate 'switching time' ticks for weapons
+                // pistols take less time to switch to
+                // machine gun takes medium time to switch to
+                // minigun takes long time to switch to
+                ReloadTicks = Weapon.ReloadTicks / 4;
             }
         }
 
-        private static bool CanFireWeapon => NextShotTicks == 0;
-        private static bool Reloading => ReloadTicks > 0;
-        private static bool Empty => ClipAmount == 0;
+        public static ref int AmmoAmount => ref s_clipAmounts[s_weapon.ID];
+        public static bool CanFireWeapon => NextShotTicks == 0;
+        public static bool IsReloading => ReloadTicks > 0;
+        public static bool IsEmpty => AmmoAmount <= 0;
 
+        public static readonly int MaxClipSize = GameManager.SecondsToTicks(1f);
+
+        private static int[] s_clipAmounts;
         private static Weapon s_weapon;
-
-        // TODO disable clip refilling when switching weapons
 
         public static void Update()
         {
@@ -42,26 +47,24 @@ namespace BulletHell.Weapon
 
         public static void Tick()
         {
-            if (Reloading)
-            {
+            if (IsReloading)
                 ReloadTicks--;
-                if (Reloading)
-                    return;
-                else
-                    ClipAmount = Weapon.ClipSize;
-            }
-            if (!CanFireWeapon)
+            else if (!CanFireWeapon)
                 NextShotTicks--;
-            else if (Keybinds.MouseLeft.Held && !Empty)
+            else if (Keybinds.MouseLeft.Held && !IsEmpty)
                 FireWeapon();
         }
 
-        public static void Reset() => Weapon = Weapons.Pistol;
+        public static void Reset()
+        {
+            Weapon = Weapons.Pistol;
+            s_clipAmounts = Util.Populate<int>(Weapons.Amount, id => Weapons.FromID(id).ClipSize);
+        }
 
         private static void FireWeapon()
         {
-            ClipAmount--;
-            if (Empty)
+            AmmoAmount--;
+            if (IsEmpty)
                 ReloadTicks = Weapon.ReloadTicks;
             else
                 NextShotTicks = Weapon.ShotTicks;
