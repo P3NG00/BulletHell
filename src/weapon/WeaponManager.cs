@@ -9,24 +9,26 @@ namespace BulletHell.Weapon
 {
     public static class WeaponManager
     {
-        public static int NextShotTicks { get; private set; } = 0;
+        public static int SwitchTicks { get; private set; } = 0;
         public static int ReloadTicks { get; private set; } = 0;
+        public static int NextShotTicks { get; private set; } = 0;
 
         public static Weapon Weapon
         {
             get => s_weapon;
             private set
             {
-                if (s_weapon == value || IsReloading)
+                if (s_weapon == value || IsReloading || IsSwitching)
                     return;
                 s_weapon = value;
-                ReloadTicks = Weapon.SwitchToTicks;
+                SwitchTicks = value.SwitchTicks;
             }
         }
 
         public static ref int AmmoAmount => ref s_clipAmounts[s_weapon.ID];
-        public static bool CanFireWeapon => NextShotTicks == 0;
+        public static bool IsSwitching => SwitchTicks > 0;
         public static bool IsReloading => ReloadTicks > 0;
+        public static bool IsFiring => NextShotTicks > 0;
         public static bool IsEmpty => AmmoAmount <= 0;
 
         public static readonly int MaxClipSize = GameManager.SecondsToTicks(1f);
@@ -43,6 +45,11 @@ namespace BulletHell.Weapon
 
         public static void Tick()
         {
+            if (IsSwitching)
+            {
+                SwitchTicks--;
+                return;
+            }
             if (IsReloading)
             {
                 ReloadTicks--;
@@ -50,9 +57,12 @@ namespace BulletHell.Weapon
                     return;
                 AmmoAmount = Weapon.ClipSize;
             }
-            if (!CanFireWeapon)
+            if (IsFiring)
+            {
                 NextShotTicks--;
-            else if (Keybinds.MouseLeft.Held && !IsEmpty)
+                return;
+            }
+            if (Keybinds.MouseLeft.Held && !IsEmpty)
                 FireWeapon();
         }
 
