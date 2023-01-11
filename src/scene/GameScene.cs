@@ -90,10 +90,7 @@ namespace BulletHell.Scenes
             _projectiles.ForEach(projectile => projectile.Tick());
             // tick cleanup
             if (--_cleanupTicks <= 0)
-            {
-                _cleanupTicks = CleanupInterval;
                 Cleanup();
-            }
             // update camera offset
             Display.UpdateCameraOffset(_player.Position);
         }
@@ -157,6 +154,7 @@ namespace BulletHell.Scenes
 
         private void Cleanup()
         {
+            _cleanupTicks = CleanupInterval;
             _enemies.RemoveAll(enemy => !enemy.Alive);
             _projectiles.RemoveAll(projectile => !projectile.Alive);
         }
