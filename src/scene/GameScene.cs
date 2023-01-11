@@ -92,7 +92,7 @@ namespace BulletHell.Scenes
             if (--_cleanupTicks <= 0)
                 Cleanup();
             // update camera offset
-            Display.UpdateCameraOffset(_player.Position);
+            Display.UpdateCameraOffset(_player.Position); // TODO add camera smoothing to focus in direction player is moving
         }
 
         public sealed override void Draw()

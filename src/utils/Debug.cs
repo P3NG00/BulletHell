@@ -29,8 +29,10 @@ namespace BulletHell.Utils
             var debugInfo = new[] {
                 $"window_size: {Display.WindowSize.X} x {Display.WindowSize.Y}",
                 $"time_scale: {GameManager.TimeScale:0.00}",
-                $"time: {(GameManager.Ticks / (float)GameManager.TICKS_PER_SECOND):0.000}",
-                $"ticks: {GameManager.Ticks} ({GameManager.TICKS_PER_SECOND} tps)",
+                $"seconds: {(GameManager.Ticks / (float)GameManager.TICKS_PER_SECOND):0.000}",
+                $"ticks: {GameManager.Ticks}",
+                $"tps: {GameManager.TICKS_PER_SECOND}",
+                $"tps_scaled: {GameManager.TICKS_PER_SECOND * GameManager.TimeScale:0.000}",
                 $"frames_per_second: {GameManager.AverageFramesPerSecond:0.000}",
                 $"ticks_per_frame: {GameManager.AverageTicksPerFrame:0.000}",
                 $"camera_offset_x: {Display.CameraOffset.X:0.000}",
