@@ -57,7 +57,11 @@ namespace BulletHell.Weapon
 
         public static void Reset()
         {
+            // reset reload ticks to allow weapon switching
+            ReloadTicks = 0;
+            // switch to pistol
             Weapon = Weapons.Pistol;
+            // reset clip amounts
             s_clipAmounts = Util.Populate<int>(Weapons.Amount, id => Weapons.FromID(id).ClipSize);
         }
 
