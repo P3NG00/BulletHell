@@ -13,19 +13,22 @@ namespace BulletHell.Weapon
         public static int ReloadTicks { get; private set; } = 0;
         public static int NextShotTicks { get; private set; } = 0;
 
+        private static ref int CurrentAmmo => ref s_clipAmounts[s_weapon.ID];
+
         public static Weapon Weapon
         {
             get => s_weapon;
             private set
             {
-                if (s_weapon == value || IsReloading || IsSwitching)
+                if (s_weapon == value || IsSwitching)
                     return;
                 s_weapon = value;
                 SwitchTicks = value.SwitchTicks;
+                ReloadTicks = s_clipAmounts[value.ID] <= 0 ? value.ReloadTicks : 0;
             }
         }
 
-        public static ref int AmmoAmount => ref s_clipAmounts[s_weapon.ID];
+        public static int AmmoAmount => CurrentAmmo;
         public static bool IsSwitching => SwitchTicks > 0;
         public static bool IsReloading => ReloadTicks > 0;
         public static bool IsFiring => NextShotTicks > 0;
@@ -51,7 +54,7 @@ namespace BulletHell.Weapon
             {
                 ReloadTicks--;
                 if (!IsReloading)
-                    AmmoAmount = Weapon.ClipSize;
+                    CurrentAmmo = Weapon.ClipSize;
             }
             else if (IsFiring)
                 NextShotTicks--;
@@ -61,18 +64,17 @@ namespace BulletHell.Weapon
 
         public static void Reset()
         {
-            // reset value to allow weapon switching
-            s_weapon = null;
-            ReloadTicks = 0;
-            // switch to pistol
-            Weapon = Weapons.Pistol;
             // reset clip amounts
             s_clipAmounts = Util.Populate<int>(Weapons.Amount, id => Weapons.FromID(id).ClipSize);
+            // reset value to allow weapon switching
+            s_weapon = null;
+            // switch to pistol
+            Weapon = Weapons.Pistol;
         }
 
         private static void FireWeapon()
         {
-            AmmoAmount--;
+            CurrentAmmo--;
             if (IsEmpty)
                 ReloadTicks = Weapon.ReloadTicks;
             else
