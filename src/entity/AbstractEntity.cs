@@ -32,6 +32,8 @@ namespace BulletHell.Entities
 
         public virtual void Tick()
         {
+            if (!Alive)
+                return;
             // normalize velocity
             if (RawVelocity.Length() != 0f)
                 RawVelocity.Normalize();
@@ -41,6 +43,8 @@ namespace BulletHell.Entities
 
         public void Draw()
         {
+            if (!Alive)
+                return;
             // get relative screen position
             var drawPos = Position * new Vector2(1, -1);
             // draw to surface

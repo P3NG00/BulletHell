@@ -9,6 +9,7 @@ namespace BulletHell.Scenes
 {
     public sealed class GameScene : AbstractScene
     {
+        private static readonly int CleanupInterval = GameManager.SecondsToTicks(5f);
         private static GameScene _instance;
 
         public static Player Player => _instance._player;
@@ -20,11 +21,13 @@ namespace BulletHell.Scenes
         private readonly Player _player = new();
 
         private bool _paused = false;
+        private int _cleanupTicks = CleanupInterval;
         private int _lastTilesDrawn;
 
         public sealed override string[] ExtraDebugInfo => new[] {
             $"paused: {_paused}",
             $"last_tiles_drawn: {_lastTilesDrawn}",
+            $"cleanup_ticks: {_cleanupTicks}",
             $"projectiles: {_projectiles.Count}",
             $"enemies: {_enemies.Count}",
             $"weapon: {WeaponManager.Weapon.Name}",
@@ -73,8 +76,15 @@ namespace BulletHell.Scenes
             // tick weapon
             WeaponManager.Tick();
             // tick entities
-            _enemies.RemoveAll(TickEntityAndCheckAlive);
-            _projectiles.RemoveAll(TickEntityAndCheckAlive);
+            _enemies.ForEach(enemy => enemy.Tick());
+            _projectiles.ForEach(projectile => projectile.Tick());
+            // tick cleanup
+            if (--_cleanupTicks <= 0)
+            {
+                _cleanupTicks = CleanupInterval;
+                _enemies.RemoveAll(enemy => !enemy.Alive);
+                _projectiles.RemoveAll(projectile => !projectile.Alive);
+            }
             // update camera offset
             Display.UpdateCameraOffset(_player.Position);
         }
@@ -134,12 +144,6 @@ namespace BulletHell.Scenes
             // draw buttons
             _buttonResume.Draw();
             _buttonExit.Draw();
-        }
-
-        private bool TickEntityAndCheckAlive(AbstractEntity entity)
-        {
-            entity.Tick();
-            return !entity.Alive;
         }
 
         private static void BackToMainMenu()
