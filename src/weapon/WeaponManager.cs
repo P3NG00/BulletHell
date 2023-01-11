@@ -44,8 +44,13 @@ namespace BulletHell.Weapon
         public static void Tick()
         {
             if (IsReloading)
+            {
                 ReloadTicks--;
-            else if (!CanFireWeapon)
+                if (IsReloading)
+                    return;
+                AmmoAmount = Weapon.ClipSize;
+            }
+            if (!CanFireWeapon)
                 NextShotTicks--;
             else if (Keybinds.MouseLeft.Held && !IsEmpty)
                 FireWeapon();
@@ -53,7 +58,8 @@ namespace BulletHell.Weapon
 
         public static void Reset()
         {
-            // reset reload ticks to allow weapon switching
+            // reset value to allow weapon switching
+            s_weapon = null;
             ReloadTicks = 0;
             // switch to pistol
             Weapon = Weapons.Pistol;
