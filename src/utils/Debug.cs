@@ -39,8 +39,7 @@ namespace BulletHell.Utils
                 $"camera_offset_y: {Display.CameraOffset.Y:0.000}",
                 $"offset_mouse_x: {InputManager.MousePositionOffset.X:0.000}",
                 $"offset_mouse_y: {InputManager.MousePositionOffset.Y:0.000}"};
-            foreach (var d in debugInfo)
-                DrawDebugInfo(d);
+            debugInfo.ForEach(DrawDebugInfo);
             // draw extra info
             var extraInfo = SceneManager.Scene.ExtraDebugInfo;
             if (extraInfo == null)
@@ -49,7 +48,7 @@ namespace BulletHell.Utils
             {
                 AddSpacer();
                 DrawDebugInfo($"category_{e.Title}");
-                e.Lines.ForEach(line => DrawDebugInfo(line));
+                e.Lines.ForEach(DrawDebugInfo);
             }
             // local func
             void DrawDebugInfo(string debugLine)
