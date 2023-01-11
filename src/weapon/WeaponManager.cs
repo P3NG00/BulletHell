@@ -1,4 +1,3 @@
-using System;
 using BulletHell.Entities;
 using BulletHell.Input;
 using BulletHell.Scenes;

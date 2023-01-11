@@ -10,13 +10,10 @@ namespace BulletHell.Scenes
         // amplitude of title rotation
         private const float TITLE_ROT_AMP = 0.1f;
 
-        public MainMenuScene()
-        {
-            var buttonStart = CreateMainButton("start", Colors.ThemeGreen, StartNewGame);
-            var buttonExit = CreateExitButton(BulletHell.ExitGame);
-            // set scene objects
-            SetSceneObjects(buttonStart, buttonExit);
-        }
+        public MainMenuScene() : base(
+            CreateMainButton("start", Colors.ThemeGreen, StartNewGame),
+            CreateExitButton(BulletHell.ExitGame)
+        ) {}
 
         public sealed override void Draw()
         {
@@ -27,6 +24,6 @@ namespace BulletHell.Scenes
             base.Draw();
         }
 
-        private void StartNewGame() => SceneManager.Scene = new GameScene();
+        private static void StartNewGame() => SceneManager.Scene = new GameScene();
     }
 }

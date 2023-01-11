@@ -4,9 +4,9 @@ namespace BulletHell.Scenes
 {
     public abstract class AbstractSimpleScene : AbstractScene
     {
-        private ISceneObject[] _sceneObjects;
+        private readonly ISceneObject[] _sceneObjects;
 
-        protected void SetSceneObjects(params ISceneObject[] sceneObjects) => _sceneObjects = sceneObjects;
+        public AbstractSimpleScene(params ISceneObject[] sceneObjects) => _sceneObjects = sceneObjects;
 
         public override void Update() => _sceneObjects.ForEach(sceneObject => sceneObject?.Update());
 
