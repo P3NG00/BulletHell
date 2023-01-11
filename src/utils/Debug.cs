@@ -41,10 +41,7 @@ namespace BulletHell.Utils
                 $"offset_mouse_y: {InputManager.MousePositionOffset.Y:0.000}"};
             debugInfo.ForEach(DrawDebugInfo);
             // draw extra info
-            var extraInfo = SceneManager.Scene.ExtraDebugInfo;
-            if (extraInfo == null)
-                return;
-            foreach (var e in extraInfo)
+            foreach (var e in SceneManager.Scene.ExtraDebugInfo)
             {
                 AddSpacer();
                 DrawDebugInfo($"category_{e.Title}");

@@ -8,7 +8,7 @@ namespace BulletHell
     {
         public readonly Color BackgroundColor;
 
-        public virtual (string Title, string[] Lines)[] ExtraDebugInfo => null;
+        public virtual (string Title, string[] Lines)[] ExtraDebugInfo => new (string, string[])[0];
 
         public AbstractScene(Color? backgroundColor = null) => BackgroundColor = backgroundColor ?? Colors.Background;
 
