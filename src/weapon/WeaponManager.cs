@@ -20,11 +20,7 @@ namespace BulletHell.Weapon
                 if (s_weapon == value || IsReloading)
                     return;
                 s_weapon = value;
-                // TODO implement -> int Weapon.SwitchTicks; // to allow for seperate 'switching time' ticks for weapons
-                // pistols take less time to switch to
-                // machine gun takes medium time to switch to
-                // minigun takes long time to switch to
-                ReloadTicks = Weapon.ReloadTicks / 4;
+                ReloadTicks = Weapon.SwitchToTicks;
             }
         }
 
