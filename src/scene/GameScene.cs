@@ -82,8 +82,7 @@ namespace BulletHell.Scenes
             if (--_cleanupTicks <= 0)
             {
                 _cleanupTicks = CleanupInterval;
-                _enemies.RemoveAll(enemy => !enemy.Alive);
-                _projectiles.RemoveAll(projectile => !projectile.Alive);
+                Cleanup();
             }
             // update camera offset
             Display.UpdateCameraOffset(_player.Position);
@@ -102,7 +101,7 @@ namespace BulletHell.Scenes
             // draw background
             DrawBackground();
             // draw player
-            _player.Draw();
+            _player.Draw(); // TODO draw line to show where player is aiming
             // draw entities
             _enemies.ForEach(enemy => enemy.Draw());
             _projectiles.ForEach(projectile => projectile.Draw());
@@ -144,6 +143,12 @@ namespace BulletHell.Scenes
             // draw buttons
             _buttonResume.Draw();
             _buttonExit.Draw();
+        }
+
+        private void Cleanup()
+        {
+            _enemies.RemoveAll(enemy => !enemy.Alive);
+            _projectiles.RemoveAll(projectile => !projectile.Alive);
         }
 
         private static void BackToMainMenu()
