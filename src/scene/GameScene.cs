@@ -24,21 +24,31 @@ namespace BulletHell.Scenes
         private int _cleanupTicks = CleanupInterval;
         private int _lastTilesDrawn;
 
-        public sealed override string[] ExtraDebugInfo => new[] {
-            $"paused: {_paused}",
-            $"last_tiles_drawn: {_lastTilesDrawn}",
-            $"cleanup_ticks: {_cleanupTicks}",
-            $"projectiles: {_projectiles.Count}",
-            $"enemies: {_enemies.Count}",
-            $"weapon: {WeaponManager.Weapon.Name}",
-            $"next_shot_ticks: {WeaponManager.NextShotTicks}",
-            $"reload_ticks: {WeaponManager.ReloadTicks}",
-            $"clip_amount: {WeaponManager.AmmoAmount}",
-            $"player_vel_x: {_player.Velocity.X:0.000}",
-            $"player_vel_y: {_player.Velocity.Y:0.000}",
-            $"player_x: {_player.Position.X:0.000}",
-            $"player_y: {_player.Position.Y:0.000}",
-            $"player_life: {_player.Life:0.000}"};
+        public sealed override (string, string[])[] ExtraDebugInfo => new[] {
+            ("game",
+            new[] {
+                $"paused: {_paused}",
+                $"last_tiles_drawn: {_lastTilesDrawn}",
+                $"cleanup_ticks: {_cleanupTicks}",
+                $"projectiles: {_projectiles.Count}",
+                $"enemies: {_enemies.Count}",
+            }),
+            ("weapon",
+            new[] {
+                $"weapon: {WeaponManager.Weapon.Name}",
+                $"next_shot_ticks: {WeaponManager.NextShotTicks}",
+                $"reload_ticks: {WeaponManager.ReloadTicks}",
+                $"clip_amount: {WeaponManager.AmmoAmount}",
+            }),
+            ("player",
+            new[] {
+                $"player_vel_x: {_player.Velocity.X:0.000}",
+                $"player_vel_y: {_player.Velocity.Y:0.000}",
+                $"player_x: {_player.Position.X:0.000}",
+                $"player_y: {_player.Position.Y:0.000}",
+                $"player_life: {_player.Life:0.000}",
+            }),
+        };
 
         public GameScene()
         {

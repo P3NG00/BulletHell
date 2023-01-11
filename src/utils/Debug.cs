@@ -43,9 +43,12 @@ namespace BulletHell.Utils
             var extraInfo = SceneManager.Scene.ExtraDebugInfo;
             if (extraInfo == null)
                 return;
-            AddSpacer();
             foreach (var e in extraInfo)
-                DrawDebugInfo(e);
+            {
+                AddSpacer();
+                DrawDebugInfo($"category_{e.Title}");
+                e.Lines.ForEach(line => DrawDebugInfo(line));
+            }
             // local func
             void DrawDebugInfo(string debugLine)
             {
