@@ -114,7 +114,11 @@ namespace BulletHell.Scenes
             if (--_cleanupTicks <= 0)
                 Cleanup();
             // update camera offset
-            Display.UpdateCameraOffset(_player.Position); // TODO add camera smoothing to focus in direction of mouse from player
+            const float MAX_MOUSE_OFFSET = 50f;
+            var mouseOffset = InputManager.MousePositionOffset - _player.Position;
+            if (mouseOffset.Length() > MAX_MOUSE_OFFSET)
+                mouseOffset = Vector2.Normalize(mouseOffset) * MAX_MOUSE_OFFSET;
+            Display.UpdateCameraOffset(_player.Position + mouseOffset);
         }
 
         public sealed override void Draw()
