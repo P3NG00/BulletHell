@@ -1,4 +1,6 @@
 ﻿using System;
+using BulletHell.Game.Waves;
+using BulletHell.Game.Weapon;
 using BulletHell.Input;
 using BulletHell.Scenes;
 using BulletHell.Utils;
@@ -41,7 +43,9 @@ namespace BulletHell
             Textures.LoadContent(Content);
             Fonts.LoadContent(Content);
             Display.LoadContent(GraphicsDevice);
-            // TODO initialize items after textures
+            // initialize items after textures when items use textures
+            new Weapons().Initialize();
+            new Waves().Initialize();
             // base call
             base.LoadContent();
         }
