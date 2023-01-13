@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Utils
 {
-    public abstract class AbstractHighlightable
+    public abstract class AbstractHighlightable // TODO combine with button
     {
         protected Rectangle LastRectangle { get; private set; }
         protected Vector2 RelativeCenter { get; private set; }
@@ -26,6 +26,7 @@ namespace BulletHell.Utils
         public virtual void Update()
         {
             LastRectangle = GetRectangle;
+            // TODO make only highlightable while not holding left mouse
             Highlighted = LastRectangle.Contains(InputManager.MousePosition);
         }
     }

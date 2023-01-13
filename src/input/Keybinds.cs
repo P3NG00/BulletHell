@@ -15,6 +15,7 @@ namespace BulletHell.Input
         // game
         public static readonly KeyInput Pause = new(Keys.Escape);
         public static readonly KeyInput Fullscreen = new(Keys.F11);
+        // TODO add keybind for reloading
         public static readonly KeyInput MoveLeft = new(Keys.A);
         public static readonly KeyInput MoveRight = new(Keys.D);
         public static readonly KeyInput MoveUp = new(Keys.W);
@@ -24,5 +25,8 @@ namespace BulletHell.Input
         public static readonly KeyInput TimeScaleDecrement = new(Keys.F1);
         public static readonly KeyInput TimeScaleIncrement = new(Keys.F2);
         public static readonly KeyInput TimeTickStep = new(Keys.F3);
+
+        // wave
+        // TODO add keybinds to adjust current wave
     }
 }

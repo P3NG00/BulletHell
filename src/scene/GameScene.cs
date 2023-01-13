@@ -15,6 +15,8 @@ namespace BulletHell.Scenes
 
         public static Player Player => _instance._player;
 
+        public static int Score { get; private set; }
+
         private readonly Button _buttonResume = CreateMainButton("resume", Colors.ThemeDefault, ResumeGame);
         private readonly Button _buttonExit = CreateExitButton(BackToMainMenu);
         private readonly List<Projectile> _projectiles = new();
@@ -29,6 +31,7 @@ namespace BulletHell.Scenes
             ("game",
             new[] {
                 $"paused: {_paused}",
+                $"score: {Score}",
                 $"last_tiles_drawn: {_lastTilesDrawn}",
                 $"cleanup_ticks: {_cleanupTicks}",
                 $"projectiles: {_projectiles.Count}",
@@ -65,6 +68,7 @@ namespace BulletHell.Scenes
             this.SingletonCheck(ref _instance);
             WeaponManager.Reset();
             WaveManager.Reset();
+            Score = 0;
         }
 
         public sealed override void Update()
@@ -181,6 +185,8 @@ namespace BulletHell.Scenes
                     {
                         enemy.Damage(); // TODO pass damage amount from weapon type
                         projectile.Kill();
+                        Score++;
+                        break;
                     }
                 }
             }
@@ -223,11 +229,12 @@ namespace BulletHell.Scenes
         private static void BackToMainMenu()
         {
             SceneManager.Scene = new MainMenuScene();
-            // nullify singleton
-            _instance = null;
+            NullifySingleton();
         }
 
         private static void ResumeGame() => _instance._paused = false;
+
+        public static void NullifySingleton() => _instance = null;
 
         public static void AddEnemy(Enemy enemy) => _instance._enemies.Add(enemy);
 

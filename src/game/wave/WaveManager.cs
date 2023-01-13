@@ -24,11 +24,18 @@ namespace BulletHell.Game.Waves
                 NextSpawnTicks = s_wave.SpawnRateTicks;
                 SpawnEnemy();
             }
+            // TODO move above ticking next spawn
             CurrentWaveTicks--;
             if (CurrentWaveTicks <= 0)
             {
-                s_wave = Waves.FromID(s_wave.ID + 1); // TODO fix throwing out of bound when end of game
-                CurrentWaveTicks = s_wave.WaveLengthTicks;
+                if (s_wave.ID < Waves.Amount - 1)
+                {
+                    s_wave = Waves.FromID(s_wave.ID + 1);
+                    CurrentWaveTicks = s_wave.WaveLengthTicks;
+                    return;
+                }
+                SceneManager.Scene = new GameEndScene(GameScene.Score);
+                GameScene.NullifySingleton();
             }
         }
 
