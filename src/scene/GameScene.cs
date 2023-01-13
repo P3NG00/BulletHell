@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BulletHell.Game.Entities;
+using BulletHell.Game.Waves;
 using BulletHell.Game.Weapon;
 using BulletHell.Input;
 using BulletHell.Utils;
@@ -49,13 +50,19 @@ namespace BulletHell.Scenes
                 $"player_y: {_player.Position.Y:0.000}",
                 $"player_life: {_player.Life:0.000}",
             }),
+            ("wave",
+            new[] {
+                $"wave: {WaveManager.CurrentWave}",
+                $"wave_ticks: {WaveManager.CurrentWaveTicks}",
+                $"spawn_ticks: {WaveManager.NextSpawnTicks}",
+            }),
         };
 
         public GameScene()
         {
             this.SingletonCheck(ref _instance);
             WeaponManager.Reset();
-            // TODO add method to spawn Enemies at random positions around player
+            WaveManager.Reset();
         }
 
         public sealed override void Update()
@@ -89,6 +96,8 @@ namespace BulletHell.Scenes
             // tick entities
             _enemies.ForEach(enemy => enemy.Tick());
             _projectiles.ForEach(projectile => projectile.Tick());
+            // tick wave
+            WaveManager.Tick();
             // check collisions
             HandleCollisions();
             // tick cleanup

@@ -17,21 +17,21 @@
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processorParam:TextureFormat=Color
 /build:fonts/alagard.spritefont
 
 #begin fonts/type_writer.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processorParam:TextureFormat=Color
 /build:fonts/type_writer.spritefont
 
 #begin fonts/VeniceClassic.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
-/processorParam:TextureFormat=Compressed
+/processorParam:TextureFormat=Color
 /build:fonts/VeniceClassic.spritefont
 
 #begin textures/circle.png
@@ -46,18 +46,6 @@
 /processorParam:TextureFormat=Color
 /build:textures/circle.png
 
-#begin textures/square_shaded.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=False
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:textures/square_shaded.png
-
 #begin textures/square.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -69,4 +57,16 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:textures/square.png
+
+#begin textures/square_shaded.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=False
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:textures/square_shaded.png
 
