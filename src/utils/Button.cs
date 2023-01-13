@@ -14,9 +14,10 @@ namespace BulletHell.Utils
         private readonly Vector2 _textScale;
 
         private Rectangle _lastRectangle;
-        private bool _highlighted;
+        private bool _highlighted = false;
+        private bool _mouseLock = true;
 
-        private bool Clicked => Keybinds.MouseLeft.ReleasedThisFrame && _highlighted;
+        private bool Clicked => !_mouseLock && _highlighted && Keybinds.MouseLeft.ReleasedThisFrame;
 
         // (0f, 0f) = top-left of window.
         // (1f, 1f) = bottom-right of window.
@@ -32,9 +33,17 @@ namespace BulletHell.Utils
 
         public void Update()
         {
-            _lastRectangle = new Rectangle(((Display.WindowSize.ToVector2() * _relativeCenter) - (_size.ToVector2() / 2f)).ToPoint(), _size);
-            // TODO make only highlightable while not holding left mouse
-            _highlighted = _lastRectangle.Contains(InputManager.MousePosition);
+            // update relative rectangle position
+            var topLeftPos = ((Display.WindowSize.ToVector2() * _relativeCenter) - (_size.ToVector2() / 2f)).ToPoint();
+            _lastRectangle = new Rectangle(topLeftPos, _size);
+            // update highlighted
+            _highlighted = !_mouseLock && _lastRectangle.Contains(InputManager.MousePosition);
+            // update mouse lock
+            if (_mouseLock && !Keybinds.MouseLeft.Held)
+            {
+                _mouseLock = false;
+                return;
+            }
             // check if mouse was released over button
             if (Clicked)
                 _action();
@@ -48,5 +57,7 @@ namespace BulletHell.Utils
             var color = _highlighted ? _colorTheme.TextHighlight : _colorTheme.Text;
             FontType.VeniceClassic.DrawCenteredString(_relativeCenter, _text, color, _textScale, drawStringFunc: Fonts.DrawStringWithShadow);
         }
+
+        public void ResetMouseLock() => _mouseLock = true;
     }
 }

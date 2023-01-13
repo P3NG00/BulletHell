@@ -75,8 +75,15 @@ namespace BulletHell.Scenes
         {
             // toggle pause
             if (Keybinds.Pause.PressedThisFrame)
+            {
                 Util.Toggle(ref _paused);
-            // update weapon
+                if (_paused)
+                {
+                    _buttonResume.ResetMouseLock();
+                    _buttonExit.ResetMouseLock();
+                }
+            }
+            // update weapon // TODO move after pause check
             WeaponManager.Update();
             // paused
             if (_paused)
