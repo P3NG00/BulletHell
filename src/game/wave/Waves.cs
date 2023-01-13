@@ -5,9 +5,9 @@ namespace BulletHell.Game.Waves
         private static ObjectManager<Wave> s_instance;
 
         protected sealed override Wave[] ObjectArray => new Wave[] {
-            new(25f, 0.5f, 0),
-            new(25f, 0.75f, 1),
-            new(50f, 1.25f, 2),
+            new(25f, 0.5f, 2f, 0),
+            new(25f, 0.75f, 3f, 1),
+            new(50f, 1.25f, 5f, 2),
         };
 
         public Waves() : base(ref s_instance) {}

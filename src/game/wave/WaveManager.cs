@@ -5,11 +5,11 @@ namespace BulletHell.Game.Waves
 {
     public static class WaveManager
     {
-        private const float SPAWN_DISTANCE = 1000f; // TODO adjust to ensure spawning offscreen
-
         public static int CurrentWaveTicks { get; private set; }
         public static int NextSpawnTicks { get; private set; }
 
+        public static float SpawnDistance => Display.WindowSize.ToVector2().Length() * 1.05f;
+        public static float EnemyHealth => s_wave.EnemyHealth;
         public static int CurrentWave => s_wave.ID;
 
         private static bool CanSpawn => NextSpawnTicks <= 0;
@@ -27,7 +27,7 @@ namespace BulletHell.Game.Waves
             CurrentWaveTicks--;
             if (CurrentWaveTicks <= 0)
             {
-                s_wave = Waves.FromID(s_wave.ID + 1);
+                s_wave = Waves.FromID(s_wave.ID + 1); // TODO fix throwing out of bound when end of game
                 CurrentWaveTicks = s_wave.WaveLengthTicks;
             }
         }
@@ -41,9 +41,9 @@ namespace BulletHell.Game.Waves
 
         private static void SpawnEnemy()
         {
-            var direction = SPAWN_DISTANCE * Util.Random.NextUnitVector();
+            var direction = SpawnDistance * Util.Random.NextUnitVector();
             var position = GameScene.Player.Position + direction;
-            GameScene.AddEnemy(new(position));
+            GameScene.AddEnemy(new(position, EnemyHealth));
         }
     }
 }

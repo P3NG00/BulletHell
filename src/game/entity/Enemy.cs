@@ -6,17 +6,16 @@ namespace BulletHell.Game.Entities
 {
     public sealed class Enemy : AbstractEntity
     {
-        private const float ENEMY_LIFE = 2f;
         private const float ENEMY_SPEED = 2f;
         private const float ENEMY_RADIUS = 16f;
 
         private static DrawData EnemyDrawData => new(Textures.Circle, new(255, 0, 0));
 
-        public Enemy(Vector2 position) :
+        public Enemy(Vector2 position, float enemyLife) :
             base(position,
                  ENEMY_RADIUS,
                  ENEMY_SPEED,
-                 ENEMY_LIFE,
+                 enemyLife,
                  EnemyDrawData) {}
 
         public sealed override void Tick()

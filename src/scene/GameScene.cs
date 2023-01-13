@@ -53,8 +53,10 @@ namespace BulletHell.Scenes
             ("wave",
             new[] {
                 $"wave: {WaveManager.CurrentWave}",
+                $"enemy_health: {WaveManager.EnemyHealth}",
                 $"wave_ticks: {WaveManager.CurrentWaveTicks}",
                 $"spawn_ticks: {WaveManager.NextSpawnTicks}",
+                $"spawn_distance: {WaveManager.SpawnDistance:0.000}",
             }),
         };
 
@@ -79,9 +81,6 @@ namespace BulletHell.Scenes
                 _buttonExit.Update();
                 return;
             }
-            // spawn enemy with right click // TODO remove, only for testing
-            if (Keybinds.MouseRight.PressedThisFrame)
-                _enemies.Add(new Enemy(InputManager.MousePositionOffset));
         }
 
         public sealed override void Tick()
@@ -104,7 +103,7 @@ namespace BulletHell.Scenes
             if (--_cleanupTicks <= 0)
                 Cleanup();
             // update camera offset
-            Display.UpdateCameraOffset(_player.Position); // TODO add camera smoothing to focus in direction player is moving
+            Display.UpdateCameraOffset(_player.Position); // TODO add camera smoothing to focus in direction of mouse from player
         }
 
         public sealed override void Draw()
