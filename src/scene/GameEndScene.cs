@@ -18,8 +18,9 @@ namespace BulletHell.Scenes
 
         public sealed override void Draw()
         {
-            FontType.VeniceClassic.DrawCenteredString(new(0.5f, 0.4f), $"score: {_score}", Colors.UI_Text, new(4f), drawStringFunc: Fonts.DrawStringWithShadow);
-            // TODO draw score on screen
+            // draw score
+            FontType.VeniceClassic.DrawCenteredString(new(0.5f, 0.4f), $"score: {_score}", Colors.UI_Text, new(4), drawStringFunc: Fonts.DrawStringWithShadow);
+            // draw buttons
             _restartButton.Draw();
             _mainMenuButton.Draw();
         }
