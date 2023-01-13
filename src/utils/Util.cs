@@ -21,7 +21,7 @@ namespace BulletHell.Utils
 
         public static void Toggle(ref bool b) => b = !b;
 
-        public static T[] Populate<T>(int length, Func<int, T> func)
+        public static T[] PopulateArray<T>(int length, Func<int, T> func)
         {
             T[] array = new T[length];
             for (int i = 0; i < length; i++)

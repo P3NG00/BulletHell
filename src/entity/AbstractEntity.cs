@@ -6,19 +6,26 @@ namespace BulletHell.Entities
 {
     public abstract class AbstractEntity
     {
-        public bool Alive => Life > 0f;
+        public bool Alive => _life > 0f;
         public Vector2 Velocity => RawVelocity * _moveSpeed;
 
         private Vector2 DrawSize => new Vector2(Radius * 2f);
 
+        public float Radius { get; private set; }
+        public float Life
+        {
+            get => _life;
+            private set => _life = Math.Max(0f, value);
+        }
+
+        public Vector2 Position;
+
         private readonly DrawData _drawData;
         private readonly float _moveSpeed;
 
-        protected Vector2 RawVelocity;
+        private float _life;
 
-        public float Radius { get; private set; }
-        public float Life { get; private set; }
-        public Vector2 Position;
+        protected Vector2 RawVelocity;
 
         public AbstractEntity(Vector2 position, float radius, float moveSpeed, float maxLife, DrawData drawData, Vector2? velocity = null)
         {
@@ -51,7 +58,9 @@ namespace BulletHell.Entities
             Display.DrawOffsetCentered(drawPos, DrawSize, _drawData);
         }
 
-        public void Damage(float amount = 1f) => Life = Math.Max(0f, Life - amount);
+        public bool CollidesWith(AbstractEntity other) => Vector2.Distance(Position, other.Position) < Radius + other.Radius;
+
+        public void Damage(float amount = 1f) => Life -= amount;
 
         public void Kill() => Life = 0f;
     }

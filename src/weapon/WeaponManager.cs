@@ -65,7 +65,7 @@ namespace BulletHell.Weapon
         public static void Reset()
         {
             // reset clip amounts
-            s_clipAmounts = Util.Populate<int>(Weapons.Amount, id => Weapons.FromID(id).ClipSize);
+            s_clipAmounts = Util.PopulateArray<int>(Weapons.Amount, id => Weapons.FromID(id).ClipSize);
             // reset value to allow weapon switching
             s_weapon = null;
             // switch to pistol
@@ -80,8 +80,7 @@ namespace BulletHell.Weapon
             else
                 NextShotTicks = Weapon.ShotTicks;
             var playerPos = GameScene.Player.Position;
-            var direction = InputManager.MousePositionOffset;
-            direction -= playerPos;
+            var direction = InputManager.MousePositionOffset - playerPos;
             if (direction.Length() == 0)
                 direction = Vector2.UnitX;
             else

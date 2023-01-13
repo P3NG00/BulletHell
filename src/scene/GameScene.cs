@@ -89,6 +89,8 @@ namespace BulletHell.Scenes
             // tick entities
             _enemies.ForEach(enemy => enemy.Tick());
             _projectiles.ForEach(projectile => projectile.Tick());
+            // check collisions
+            HandleCollisions();
             // tick cleanup
             if (--_cleanupTicks <= 0)
                 Cleanup();
@@ -151,6 +153,56 @@ namespace BulletHell.Scenes
             // draw buttons
             _buttonResume.Draw();
             _buttonExit.Draw();
+        }
+
+        // TODO optimize collision checking
+        private void HandleCollisions()
+        {
+            // handle projectiles
+            for (int i = 0; i < _projectiles.Count; i++)
+            {
+                var projectile = _projectiles[i];
+                if (!projectile.Alive)
+                    continue;
+                for (int j = 0; j < _enemies.Count; j++)
+                {
+                    var enemy = _enemies[j];
+                    if (!enemy.Alive)
+                        continue;
+                    if (projectile.CollidesWith(enemy))
+                    {
+                        enemy.Damage(); // TODO pass damage amount from weapon type
+                        projectile.Kill();
+                    }
+                }
+            }
+            // handle entity collisions
+            for (int i = 0; i < _enemies.Count; i++)
+            {
+                var enemy = _enemies[i];
+                if (!enemy.Alive)
+                    continue;
+                // check against other enemies
+                for (int j = i + 1; j < _enemies.Count; j++)
+                {
+                    var enemy0 = _enemies[j];
+                    if (!enemy0.Alive)
+                        continue;
+                    if (enemy.CollidesWith(enemy0))
+                    {
+                        var direction = Vector2.Normalize(enemy0.Position - enemy.Position);
+                        var newPos = enemy.Position + (direction * (enemy.Radius + enemy0.Radius));
+                        enemy0.Position = newPos;
+                    }
+                }
+                // check against player
+                if (enemy.CollidesWith(_player))
+                {
+                    var direction = Vector2.Normalize(enemy.Position - _player.Position);
+                    var newPos = _player.Position + (direction * (enemy.Radius + _player.Radius));
+                    enemy.Position = newPos;
+                }
+            }
         }
 
         private void Cleanup()

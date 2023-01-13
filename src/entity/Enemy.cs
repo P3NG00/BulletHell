@@ -6,7 +6,7 @@ namespace BulletHell.Entities
 {
     public sealed class Enemy : AbstractEntity
     {
-        private const float ENEMY_LIFE = 1f;
+        private const float ENEMY_LIFE = 2f;
         private const float ENEMY_SPEED = 2f;
         private const float ENEMY_RADIUS = 16f;
 
@@ -26,5 +26,7 @@ namespace BulletHell.Entities
             // base call
             base.Tick();
         }
+
+        // TODO draw health bar horizontally across enemy body
     }
 }
