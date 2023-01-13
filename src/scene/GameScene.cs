@@ -23,6 +23,7 @@ namespace BulletHell.Scenes
         private readonly List<Enemy> _enemies = new();
         private readonly Player _player = new();
 
+        private Vector2 _mouseOffset = Vector2.Zero;
         private bool _paused = false;
         private int _cleanupTicks = CleanupInterval;
         private int _lastTilesDrawn;
@@ -118,13 +119,15 @@ namespace BulletHell.Scenes
             var mouseOffset = InputManager.MousePositionOffset - _player.Position;
             if (mouseOffset.Length() > MAX_MOUSE_OFFSET)
                 mouseOffset = Vector2.Normalize(mouseOffset) * MAX_MOUSE_OFFSET;
-            Display.UpdateCameraOffset(_player.Position + mouseOffset);
+            _mouseOffset = Vector2.Lerp(_mouseOffset, mouseOffset, 0.1f);
+            Display.UpdateCameraOffset(_player.Position + _mouseOffset);
         }
 
         public sealed override void Draw()
         {
             // draw game
             DrawGame();
+            // TODO DrawUI();
             // draw pause
             DrawPause();
         }
