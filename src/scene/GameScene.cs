@@ -83,8 +83,6 @@ namespace BulletHell.Scenes
                     _buttonExit.ResetMouseLock();
                 }
             }
-            // update weapon // TODO move after pause check
-            WeaponManager.Update();
             // paused
             if (_paused)
             {
@@ -92,6 +90,8 @@ namespace BulletHell.Scenes
                 _buttonExit.Update();
                 return;
             }
+            // update weapon
+            WeaponManager.Update();
         }
 
         public sealed override void Tick()
