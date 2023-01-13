@@ -2,7 +2,7 @@ using System;
 using BulletHell.Utils;
 using Microsoft.Xna.Framework;
 
-namespace BulletHell
+namespace BulletHell.Scenes
 {
     public abstract class AbstractScene
     {
