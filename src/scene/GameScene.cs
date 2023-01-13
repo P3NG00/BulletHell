@@ -1,8 +1,8 @@
 using System.Collections.Generic;
-using BulletHell.Entities;
+using BulletHell.Game.Entities;
+using BulletHell.Game.Weapon;
 using BulletHell.Input;
 using BulletHell.Utils;
-using BulletHell.Weapon;
 using Microsoft.Xna.Framework;
 
 namespace BulletHell.Scenes

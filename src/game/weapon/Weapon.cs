@@ -1,6 +1,6 @@
 using BulletHell.Utils;
 
-namespace BulletHell.Weapon
+namespace BulletHell.Game.Weapon
 {
     public sealed class Weapon
     {

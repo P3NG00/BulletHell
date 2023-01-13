@@ -2,7 +2,7 @@ using BulletHell.Input;
 using BulletHell.Utils;
 using Microsoft.Xna.Framework;
 
-namespace BulletHell.Entities
+namespace BulletHell.Game.Entities
 {
     public sealed class Player : AbstractEntity
     {

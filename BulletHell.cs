@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BulletHell
 {
-    public sealed class BulletHell : Game
+    public sealed class BulletHell : Microsoft.Xna.Framework.Game
     {
         public const string TITLE = "Bullet Hell";
 

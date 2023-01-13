@@ -1,11 +1,11 @@
-using BulletHell.Entities;
+using BulletHell.Game.Entities;
 using BulletHell.Input;
 using BulletHell.Scenes;
 using BulletHell.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace BulletHell.Weapon
+namespace BulletHell.Game.Weapon
 {
     public static class WeaponManager
     {

@@ -1,6 +1,6 @@
 using System.Collections.Immutable;
 
-namespace BulletHell.Weapon
+namespace BulletHell.Game.Weapon
 {
     public static class Weapons
     {
