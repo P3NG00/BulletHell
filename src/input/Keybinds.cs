@@ -27,6 +27,6 @@ namespace BulletHell.Input
         public static readonly KeyInput TimeTickStep = new(Keys.F3);
 
         // wave
-        // TODO add keybinds to adjust current wave
+        public static readonly KeyInput WaveIncrease = new(Keys.F4);
     }
 }

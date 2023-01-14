@@ -93,6 +93,8 @@ namespace BulletHell.Scenes
             }
             // update weapon
             WeaponManager.Update();
+            // update wave manager
+            WaveManager.Update();
         }
 
         public sealed override void Tick()
@@ -127,7 +129,7 @@ namespace BulletHell.Scenes
         {
             // draw game
             DrawGame();
-            // TODO DrawUI();
+            // TODO DrawUI() (draw score, health, weapon, life, etc.)
             // draw pause
             DrawPause();
         }

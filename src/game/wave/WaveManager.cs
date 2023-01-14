@@ -1,3 +1,4 @@
+using BulletHell.Input;
 using BulletHell.Scenes;
 using BulletHell.Utils;
 
@@ -16,26 +17,22 @@ namespace BulletHell.Game.Waves
 
         private static Wave s_wave;
 
+        public static void Update()
+        {
+            if (Keybinds.WaveIncrease.PressedThisFrame)
+                NextWave();
+        }
+
         public static void Tick()
         {
+            CurrentWaveTicks--;
+            if (CurrentWaveTicks <= 0)
+                NextWave();
             NextSpawnTicks--;
             if (CanSpawn)
             {
                 NextSpawnTicks = s_wave.SpawnRateTicks;
                 SpawnEnemy();
-            }
-            // TODO move above ticking next spawn
-            CurrentWaveTicks--;
-            if (CurrentWaveTicks <= 0)
-            {
-                if (s_wave.ID < Waves.Amount - 1)
-                {
-                    s_wave = Waves.FromID(s_wave.ID + 1);
-                    CurrentWaveTicks = s_wave.WaveLengthTicks;
-                    return;
-                }
-                SceneManager.Scene = new GameEndScene(GameScene.Score);
-                GameScene.NullifySingleton();
             }
         }
 
@@ -44,6 +41,18 @@ namespace BulletHell.Game.Waves
             s_wave = Waves.FromID(0);
             CurrentWaveTicks = s_wave.WaveLengthTicks;
             NextSpawnTicks = s_wave.SpawnRateTicks;
+        }
+
+        private static void NextWave()
+        {
+            if (s_wave.ID < Waves.Amount - 1)
+            {
+                s_wave = Waves.FromID(s_wave.ID + 1);
+                CurrentWaveTicks = s_wave.WaveLengthTicks;
+                return;
+            }
+            SceneManager.Scene = new GameEndScene(GameScene.Score);
+            GameScene.NullifySingleton();
         }
 
         private static void SpawnEnemy()
