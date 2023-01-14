@@ -8,8 +8,6 @@ namespace BulletHell.Game.Waves
         public readonly int WaveLengthTicks;
         public readonly int SpawnRateTicks;
 
-        // TODO implement enemy health scaling
-
         public Wave(float waveLengthSeconds, float spawnRatePerSecond, float enemyHealth, int id) : base(id)
         {
             EnemyHealth = enemyHealth;
