@@ -6,7 +6,7 @@ namespace BulletHell.Game.Entities
 {
     public sealed class Enemy : AbstractEntity
     {
-        private const float ENEMY_SPEED = 3.5f;
+        private const float ENEMY_SPEED = 3f;
         private const float ENEMY_RADIUS = 16f;
 
         private static DrawData EnemyDrawData => new(Textures.Circle, new(255, 0, 0));

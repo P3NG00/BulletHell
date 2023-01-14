@@ -8,6 +8,8 @@ namespace BulletHell.Scenes
         private readonly Button _mainMenuButton = CreateExitButton(BackToMainMenu);
         private readonly int _score;
 
+        public sealed override (string, string[])[] ExtraDebugInfo => new[] { ("game_end", new[] {$"score: {_score}",}) };
+
         public GameEndScene(int score) => _score = score;
 
         public sealed override void Update()

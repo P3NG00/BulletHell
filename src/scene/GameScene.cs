@@ -41,10 +41,10 @@ namespace BulletHell.Scenes
             ("weapon",
             new[] {
                 $"weapon: {WeaponManager.Weapon.Name}",
+                $"clip_amount: {WeaponManager.AmmoAmount}",
                 $"switch_ticks: {WeaponManager.SwitchTicks}",
                 $"reload_ticks: {WeaponManager.ReloadTicks}",
                 $"next_shot_ticks: {WeaponManager.NextShotTicks}",
-                $"clip_amount: {WeaponManager.AmmoAmount}",
             }),
             ("player",
             new[] {
