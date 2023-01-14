@@ -15,7 +15,7 @@ namespace BulletHell.Input
         // game
         public static readonly KeyInput Pause = new(Keys.Escape);
         public static readonly KeyInput Fullscreen = new(Keys.F11);
-        // TODO add keybind for reloading
+        public static readonly KeyInput Reload = new(Keys.R);
         public static readonly KeyInput MoveLeft = new(Keys.A);
         public static readonly KeyInput MoveRight = new(Keys.D);
         public static readonly KeyInput MoveUp = new(Keys.W);

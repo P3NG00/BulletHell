@@ -20,7 +20,7 @@ namespace BulletHell.Game.Weapon
             get => s_weapon;
             private set
             {
-                if (s_weapon == value || IsSwitching)
+                if (s_weapon == value || IsSwitching || IsFiring)
                     return;
                 s_weapon = value;
                 SwitchTicks = value.SwitchTicks;
@@ -41,6 +41,8 @@ namespace BulletHell.Game.Weapon
 
         public static void Update()
         {
+            if (Keybinds.Reload.PressedThisFrame && !IsFiring && !IsReloading && AmmoAmount != Weapon.ClipSize)
+                ReloadTicks = Weapon.ReloadTicks;
             for (int i = 0; i < Weapons.Amount; i++)
                 if (InputManager.KeyPressedThisFrame(Keys.D1 + i))
                     WeaponManager.Weapon = Weapons.FromID(i);
