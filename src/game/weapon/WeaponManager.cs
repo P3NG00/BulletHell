@@ -70,6 +70,9 @@ namespace BulletHell.Game.Weapon
             s_clipAmounts = Util.PopulateArray<int>(Weapons.Amount, id => Weapons.FromID(id).ClipSize);
             // reset value to allow weapon switching
             s_weapon = null;
+            SwitchTicks = 0;
+            ReloadTicks = 0;
+            NextShotTicks = 0;
             // switch to pistol
             Weapon = Weapons.Pistol;
         }

@@ -66,7 +66,7 @@ namespace BulletHell.Scenes
 
         public GameScene()
         {
-            this.SingletonCheck(ref _instance);
+            _instance = this;
             WeaponManager.Reset();
             WaveManager.Reset();
             Score = 0;
@@ -242,15 +242,9 @@ namespace BulletHell.Scenes
             _projectiles.RemoveAll(projectile => !projectile.Alive);
         }
 
-        private static void BackToMainMenu()
-        {
-            SceneManager.Scene = new MainMenuScene();
-            NullifySingleton();
-        }
+        private static void BackToMainMenu() => SceneManager.Scene = new MainMenuScene();
 
         private static void ResumeGame() => _instance._paused = false;
-
-        public static void NullifySingleton() => _instance = null;
 
         public static void AddEnemy(Enemy enemy) => _instance._enemies.Add(enemy);
 
