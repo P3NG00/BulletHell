@@ -8,7 +8,8 @@ namespace BulletHell.Game.Entities
     {
         private const float PLAYER_LIFE = 50f;
         private const float PLAYER_SPEED = 5f;
-        private const float PLAYER_RADIUS = 16f;
+
+        public const float PLAYER_RADIUS = 16f;
 
         private static DrawData PlayerDrawData => new(Textures.Circle, new(0, 255, 0));
 

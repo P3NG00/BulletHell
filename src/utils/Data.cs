@@ -4,7 +4,7 @@ namespace BulletHell.Utils
 {
     public static class Data
     {
-        public const string SAVE_FILE = "save";
+        private const string SAVE_FILE = "save";
 
         public static bool SaveExists => File.Exists(SAVE_FILE);
 
