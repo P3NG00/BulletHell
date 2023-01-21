@@ -7,7 +7,8 @@ namespace BulletHell.Game.Entities
     {
         private const float PROJECTILE_LIFE = GameManager.TICKS_PER_SECOND;
         private const float PROJECTILE_SPEED = 5f;
-        private const float PROJECTILE_RADIUS = 8f;
+
+        public const float PROJECTILE_RADIUS = 8f;
 
         private static DrawData ProjectileDrawData => new(Textures.Circle, new Color(255, 0, 0));
 

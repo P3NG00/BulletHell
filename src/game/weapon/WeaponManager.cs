@@ -9,11 +9,11 @@ namespace BulletHell.Game.Weapon
 {
     public static class WeaponManager
     {
+        private const float SPAWN_DISTANCE = Player.PLAYER_RADIUS + Projectile.PROJECTILE_RADIUS;
+
         public static int SwitchTicks { get; private set; } = 0;
         public static int ReloadTicks { get; private set; } = 0;
         public static int NextShotTicks { get; private set; } = 0;
-
-        private static ref int CurrentAmmo => ref s_clipAmounts[s_weapon.ID];
 
         public static Weapon Weapon
         {
@@ -34,7 +34,7 @@ namespace BulletHell.Game.Weapon
         public static bool IsFiring => NextShotTicks > 0;
         public static bool IsEmpty => AmmoAmount <= 0;
 
-        public static readonly int MaxClipSize = GameManager.SecondsToTicks(1f);
+        private static ref int CurrentAmmo => ref s_clipAmounts[s_weapon.ID];
 
         private static int[] s_clipAmounts;
         private static Weapon s_weapon;
@@ -90,7 +90,6 @@ namespace BulletHell.Game.Weapon
                 direction = Vector2.UnitX;
             else
                 direction.Normalize();
-            const float SPAWN_DISTANCE = Player.PLAYER_RADIUS * 1.25f;
             var spawnPos = playerPos + (direction * (SPAWN_DISTANCE));
             GameScene.AddProjectile(new Projectile(spawnPos, direction));
         }
