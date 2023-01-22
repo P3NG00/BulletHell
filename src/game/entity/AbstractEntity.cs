@@ -58,7 +58,12 @@ namespace BulletHell.Game.Entities
             Display.DrawOffsetCentered(drawPos, DrawSize, _drawData);
         }
 
-        public bool CollidesWith(AbstractEntity other) => Vector2.Distance(Position, other.Position) < Radius + other.Radius;
+        public bool CollidesWith(AbstractEntity other)
+        {
+            var distance = Vector2.Distance(Position, other.Position);
+            var radiusSum = Radius + other.Radius;
+            return distance < radiusSum;
+        }
 
         public void Damage(float amount = 1f) => Life -= amount;
 

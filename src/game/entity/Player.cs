@@ -36,5 +36,7 @@ namespace BulletHell.Game.Entities
             // base call
             base.Tick();
         }
+
+        // TODO add iframes when getting damaged
     }
 }
