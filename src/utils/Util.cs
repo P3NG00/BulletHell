@@ -31,12 +31,6 @@ namespace BulletHell.Utils
 
         public static void ForEach<T>(this T[] array, Action<T> action) => Array.ForEach(array, action);
 
-        public static void ForEach<T>(this T[,] array, Action<T> action)
-        {
-            foreach (T t in array)
-                action(t);
-        }
-
         public static bool IsInteger(this float f) => f % 1f == 0f;
 
         public static int Floor(this float f) => (int)Math.Floor((double)f);

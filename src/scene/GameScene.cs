@@ -10,6 +10,9 @@ namespace BulletHell.Scenes
 {
     public sealed class GameScene : AbstractScene
     {
+        private const float MAX_MOUSE_OFFSET = 50f;
+        private const int TILE_SIZE = 64;
+
         private static readonly int CleanupInterval = GameManager.SecondsToTicks(5f);
         private static GameScene _instance;
 
@@ -66,7 +69,7 @@ namespace BulletHell.Scenes
 
         public GameScene()
         {
-            _instance = this;
+            this.SingletonCheck(ref _instance);
             WeaponManager.Reset();
             WaveManager.Reset();
             Score = 0;
@@ -100,7 +103,7 @@ namespace BulletHell.Scenes
         public sealed override void Tick()
         {
             // check pause
-            if (_paused)
+            if (_paused || _instance == null)
                 return;
             // tick player
             _player.Tick();
@@ -117,7 +120,6 @@ namespace BulletHell.Scenes
             if (--_cleanupTicks <= 0)
                 Cleanup();
             // update camera offset
-            const float MAX_MOUSE_OFFSET = 50f;
             var mouseOffset = InputManager.MousePositionOffset - _player.Position;
             if (mouseOffset.Length() > MAX_MOUSE_OFFSET)
                 mouseOffset = Vector2.Normalize(mouseOffset) * MAX_MOUSE_OFFSET;
@@ -147,7 +149,6 @@ namespace BulletHell.Scenes
 
         private void DrawBackground()
         {
-            const int TILE_SIZE = 64;
             // TODO needs a little further fine tuning
             var startX = (-Display.CameraOffset.X % TILE_SIZE) - TILE_SIZE;
             var startY = (-Display.CameraOffset.Y % TILE_SIZE) - TILE_SIZE;
@@ -243,9 +244,15 @@ namespace BulletHell.Scenes
             _projectiles.RemoveAll(projectile => !projectile.Alive);
         }
 
-        private static void BackToMainMenu() => SceneManager.Scene = new MainMenuScene();
+        private static void BackToMainMenu()
+        {
+            SceneManager.Scene = new MainMenuScene();
+            NullifySingleton();
+        }
 
         private static void ResumeGame() => _instance._paused = false;
+
+        public static void NullifySingleton() => _instance = null;
 
         public static void AddEnemy(Enemy enemy) => _instance._enemies.Add(enemy);
 
