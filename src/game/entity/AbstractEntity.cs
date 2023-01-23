@@ -18,6 +18,8 @@ namespace BulletHell.Game.Entities
             private set => _life = Math.Max(0f, value);
         }
 
+        protected virtual DrawData DrawData => _drawData;
+
         public Vector2 Position;
 
         private readonly DrawData _drawData;
@@ -55,7 +57,7 @@ namespace BulletHell.Game.Entities
             // get relative screen position
             var drawPos = Position * new Vector2(1, -1);
             // draw to surface
-            Display.DrawOffsetCentered(drawPos, DrawSize, _drawData);
+            Display.DrawOffsetCentered(drawPos, DrawSize, DrawData);
         }
 
         public bool CollidesWith(AbstractEntity other)
@@ -65,7 +67,7 @@ namespace BulletHell.Game.Entities
             return distance < radiusSum;
         }
 
-        public void Damage(float amount = 1f) => Life -= amount;
+        public virtual void Damage(float amount = 1f) => Life -= amount;
 
         public void Kill() => Life = 0f;
     }

@@ -6,12 +6,23 @@ namespace BulletHell.Game.Entities
 {
     public sealed class Player : AbstractEntity
     {
-        private const float PLAYER_LIFE = 50f;
+        private const float PLAYER_LIFE = 3f;
         private const float PLAYER_SPEED = 5f;
 
         public const float PLAYER_RADIUS = 16f;
 
+        private static readonly int InvincibilityResetTicks = GameManager.SecondsToTicks(1f);
+
         private static DrawData PlayerDrawData => new(Textures.Circle, new(0, 255, 0));
+        private static DrawData PlayerInvincibleDrawData => new(Textures.Circle, new(255, 128, 0));
+
+        protected sealed override DrawData DrawData => _invincibilityTicks % 2 == 1 ? PlayerInvincibleDrawData : base.DrawData;
+
+        public int InvincibilityTicks => _invincibilityTicks;
+
+        private bool IsInvincible => _invincibilityTicks > 0;
+
+        private int _invincibilityTicks = 0;
 
         public Player() :
             base(Vector2.Zero,
@@ -22,6 +33,8 @@ namespace BulletHell.Game.Entities
 
         public sealed override void Tick()
         {
+            if (IsInvincible)
+                _invincibilityTicks--;
             // reset velocity
             RawVelocity = Vector2.Zero;
             // handle movement input
@@ -37,6 +50,13 @@ namespace BulletHell.Game.Entities
             base.Tick();
         }
 
-        // TODO add iframes when getting damaged
+        public sealed override void Damage(float damage = 1f)
+        {
+            if (IsInvincible)
+                return;
+            _invincibilityTicks = InvincibilityResetTicks;
+            base.Damage(damage);
+            // TODO go to game end scene when dead (add OnDeath overridable method)
+        }
     }
 }

@@ -232,7 +232,7 @@ namespace BulletHell.Scenes
                     var direction = Vector2.Normalize(enemy.Position - _player.Position);
                     var newPos = _player.Position + (direction * (enemy.Radius + _player.Radius));
                     enemy.Position = newPos;
-                    // TODO damage player
+                    _player.Damage(); // TODO pass enemy damage
                 }
             }
         }
