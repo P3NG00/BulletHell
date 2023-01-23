@@ -18,7 +18,7 @@ namespace BulletHell.Scenes
 
         public static Player Player => _instance._player;
 
-        public static int Score { get; private set; }
+        public static int Score;
 
         private readonly Button _buttonResume = CreateMainButton("resume", Colors.ThemeDefault, ResumeGame);
         private readonly Button _buttonExit = CreateExitButton(BackToMainMenu);
@@ -203,7 +203,6 @@ namespace BulletHell.Scenes
                     {
                         enemy.Damage(); // TODO pass damage amount from weapon type
                         projectile.Kill();
-                        Score++; // TODO score increase should be based on enemy death instead of projectile death
                         break;
                     }
                 }

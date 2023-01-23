@@ -27,5 +27,7 @@ namespace BulletHell.Game.Entities
         }
 
         // TODO draw health bar horizontally across enemy body
+
+        protected sealed override void OnDeath() => GameScene.Score++; // TODO increase score based on enemy difficulty
     }
 }
