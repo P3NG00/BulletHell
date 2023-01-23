@@ -9,7 +9,7 @@ namespace BulletHell.Game.Waves
         public static int CurrentWaveTicks { get; private set; }
         public static int NextSpawnTicks { get; private set; }
 
-        public static float SpawnDistance => Display.WindowSize.ToVector2().Length() * 1.05f;
+        public static float SpawnDistance => Display.WindowSize.ToVector2().Length();
         public static float EnemyHealth => s_wave.EnemyHealth;
         public static int CurrentWave => s_wave.ID;
 
@@ -40,7 +40,7 @@ namespace BulletHell.Game.Waves
         {
             s_wave = Waves.FromID(0);
             CurrentWaveTicks = s_wave.WaveLengthTicks;
-            NextSpawnTicks = s_wave.SpawnRateTicks;
+            NextSpawnTicks = 0;
         }
 
         private static void NextWave()
@@ -57,8 +57,9 @@ namespace BulletHell.Game.Waves
 
         private static void SpawnEnemy()
         {
-            var direction = SpawnDistance * Util.Random.NextUnitVector();
-            var position = GameScene.Player.Position + direction;
+            var direction = Util.Random.NextUnitVector();
+            var spawnOffset = SpawnDistance * direction;
+            var position = GameScene.Player.Position + spawnOffset;
             GameScene.AddEnemy(new(position, EnemyHealth));
         }
     }

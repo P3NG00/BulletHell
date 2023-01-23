@@ -203,7 +203,7 @@ namespace BulletHell.Scenes
                     {
                         enemy.Damage(); // TODO pass damage amount from weapon type
                         projectile.Kill();
-                        Score++;
+                        Score++; // TODO score increase should be based on enemy death instead of projectile death
                         break;
                     }
                 }
