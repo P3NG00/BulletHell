@@ -51,7 +51,7 @@ namespace BulletHell.Game.Waves
                 CurrentWaveTicks = s_wave.WaveLengthTicks;
                 return;
             }
-            SceneManager.Scene = new GameEndScene(GameScene.Score);
+            SceneManager.Scene = new GameEndScene();
             GameScene.NullifySingleton();
         }
 

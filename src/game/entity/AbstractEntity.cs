@@ -15,7 +15,12 @@ namespace BulletHell.Game.Entities
         public float Life
         {
             get => _life;
-            private set => _life = Math.Max(0f, value);
+            private set
+            {
+                _life = Math.Max(0f, value);
+                if (!Alive)
+                    OnDeath();
+            }
         }
 
         protected virtual DrawData DrawData => _drawData;
@@ -59,6 +64,8 @@ namespace BulletHell.Game.Entities
             // draw to surface
             Display.DrawOffsetCentered(drawPos, DrawSize, DrawData);
         }
+
+        protected virtual void OnDeath() {}
 
         public bool CollidesWith(AbstractEntity other)
         {

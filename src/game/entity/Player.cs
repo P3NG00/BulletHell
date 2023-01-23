@@ -1,4 +1,5 @@
 using BulletHell.Input;
+using BulletHell.Scenes;
 using BulletHell.Utils;
 using Microsoft.Xna.Framework;
 
@@ -56,7 +57,12 @@ namespace BulletHell.Game.Entities
                 return;
             _invincibilityTicks = InvincibilityResetTicks;
             base.Damage(damage);
-            // TODO go to game end scene when dead (add OnDeath overridable method)
+        }
+
+        protected sealed override void OnDeath()
+        {
+            SceneManager.Scene = new GameEndScene();
+            GameScene.NullifySingleton();
         }
     }
 }
