@@ -51,12 +51,12 @@ namespace BulletHell.Scenes
             }),
             ("player",
             new[] {
-                $"player_vel_x: {_player.Velocity.X:0.000}",
-                $"player_vel_y: {_player.Velocity.Y:0.000}",
-                $"player_x: {_player.Position.X:0.000}",
-                $"player_y: {_player.Position.Y:0.000}",
-                $"player_life: {_player.Life:0.000}",
-                $"player_i_ticks: {_player.InvincibilityTicks}",
+                $"velocity_x: {_player.Velocity.X:0.000}",
+                $"velocity_y: {_player.Velocity.Y:0.000}",
+                $"pos_x: {_player.Position.X:0.000}",
+                $"pos_y: {_player.Position.Y:0.000}",
+                $"life: {_player.Life:0.000}",
+                $"invincible_ticks: {_player.InvincibilityTicks}",
             }),
             ("wave",
             new[] {
