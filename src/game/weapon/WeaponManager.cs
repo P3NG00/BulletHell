@@ -91,7 +91,7 @@ namespace BulletHell.Game.Weapon
             else
                 direction.Normalize();
             var spawnPos = playerPos + (direction * (SPAWN_DISTANCE));
-            GameScene.AddProjectile(new Projectile(spawnPos, direction));
+            new Projectile(spawnPos, direction);
         }
     }
 }

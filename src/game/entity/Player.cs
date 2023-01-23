@@ -25,12 +25,7 @@ namespace BulletHell.Game.Entities
 
         private int _invincibilityTicks = 0;
 
-        public Player() :
-            base(Vector2.Zero,
-                 PLAYER_RADIUS,
-                 PLAYER_SPEED,
-                 PLAYER_LIFE,
-                 PlayerDrawData) {}
+        public Player() : base(Vector2.Zero, PLAYER_RADIUS, PLAYER_SPEED, PLAYER_LIFE, PlayerDrawData) {}
 
         public sealed override void Tick()
         {

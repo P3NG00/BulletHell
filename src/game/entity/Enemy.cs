@@ -12,11 +12,8 @@ namespace BulletHell.Game.Entities
         private static DrawData EnemyDrawData => new(Textures.Circle, new(255, 0, 0));
 
         public Enemy(Vector2 position, float enemyLife) :
-            base(position,
-                 ENEMY_RADIUS,
-                 ENEMY_SPEED,
-                 enemyLife,
-                 EnemyDrawData) {}
+            base(position, ENEMY_RADIUS, ENEMY_SPEED, enemyLife, EnemyDrawData) =>
+            GameScene.AddEnemy(this);
 
         public sealed override void Tick()
         {
