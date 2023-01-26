@@ -9,7 +9,7 @@ namespace BulletHell.Game.Weapon
 {
     public static class WeaponManager
     {
-        private const float SPAWN_DISTANCE = Player.PLAYER_RADIUS + Projectile.PROJECTILE_RADIUS;
+        private const float PROJECTILE_SPAWN_DISTANCE = Player.PLAYER_RADIUS + Projectile.PROJECTILE_RADIUS;
 
         public static int SwitchTicks { get; private set; } = 0;
         public static int ReloadTicks { get; private set; } = 0;
@@ -90,7 +90,7 @@ namespace BulletHell.Game.Weapon
                 direction = Vector2.UnitX;
             else
                 direction.Normalize();
-            var spawnPos = playerPos + (direction * (SPAWN_DISTANCE));
+            var spawnPos = playerPos + (direction * PROJECTILE_SPAWN_DISTANCE);
             new Projectile(spawnPos, direction);
         }
     }
