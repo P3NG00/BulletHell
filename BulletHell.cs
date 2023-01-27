@@ -44,8 +44,8 @@ namespace BulletHell
             Fonts.LoadContent(Content);
             Display.LoadContent(GraphicsDevice);
             // initialize items after textures when items use textures
-            new Weapons().Initialize();
-            new Waves().Initialize();
+            new Weapons();
+            new Waves();
             // base call
             base.LoadContent();
         }
