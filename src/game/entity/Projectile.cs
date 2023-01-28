@@ -16,7 +16,7 @@ namespace BulletHell.Game.Entities
 
         public Projectile(Vector2 position, Vector2 direction) :
             base(position, PROJECTILE_RADIUS, PROJECTILE_SPEED, ProjectileLife, ProjectileDrawData, direction) =>
-            GameScene.AddProjectile(this);
+                GameScene.AddProjectile(this);
 
         public sealed override void Tick()
         {

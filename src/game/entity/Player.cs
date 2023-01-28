@@ -17,20 +17,18 @@ namespace BulletHell.Game.Entities
         private static DrawData PlayerDrawData => new(Textures.Circle, new(0, 255, 0));
         private static DrawData PlayerInvincibleDrawData => new(Textures.Circle, new(255, 128, 0));
 
-        protected sealed override DrawData DrawData => _invincibilityTicks % 2 == 1 ? PlayerInvincibleDrawData : base.DrawData;
+        protected sealed override DrawData DrawData => InvincibilityTicks % 2 == 1 ? PlayerInvincibleDrawData : base.DrawData;
 
-        public int InvincibilityTicks => _invincibilityTicks;
+        public int InvincibilityTicks { get; private set; } = 0;
 
-        private bool IsInvincible => _invincibilityTicks > 0;
-
-        private int _invincibilityTicks = 0;
+        private bool IsInvincible => InvincibilityTicks > 0;
 
         public Player() : base(Vector2.Zero, PLAYER_RADIUS, PLAYER_SPEED, PLAYER_LIFE, PlayerDrawData) {}
 
         public sealed override void Tick()
         {
             if (IsInvincible)
-                _invincibilityTicks--;
+                InvincibilityTicks--;
             // reset velocity
             RawVelocity = Vector2.Zero;
             // handle movement input
@@ -50,7 +48,7 @@ namespace BulletHell.Game.Entities
         {
             if (IsInvincible)
                 return;
-            _invincibilityTicks = InvincibilityResetTicks;
+            InvincibilityTicks = InvincibilityResetTicks;
             base.Damage(damage);
         }
 

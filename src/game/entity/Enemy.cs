@@ -13,12 +13,15 @@ namespace BulletHell.Game.Entities
 
         public Enemy(Vector2 position, float enemyLife) :
             base(position, ENEMY_RADIUS, ENEMY_SPEED, enemyLife, EnemyDrawData) =>
-            GameScene.AddEnemy(this);
+                GameScene.AddEnemy(this);
 
         public sealed override void Tick()
         {
             // set velocity towards player
-            RawVelocity = GameScene.Player.Position - Position;
+            var playerDirection = GameScene.Player.Position - Position;
+            if (playerDirection.Length() != 0f)
+                playerDirection.Normalize();
+            RawVelocity = Vector2.Lerp(RawVelocity, playerDirection, 0.8f);
             // base call
             base.Tick();
         }
