@@ -76,6 +76,7 @@ namespace BulletHell.Scenes
             Score = 0;
         }
 
+        // TODO implement scroll wheel for zooming in and out
         public sealed override void Update()
         {
             // toggle pause

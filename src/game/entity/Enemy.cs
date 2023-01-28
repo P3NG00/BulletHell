@@ -9,7 +9,7 @@ namespace BulletHell.Game.Entities
         private const float ENEMY_SPEED = 3f;
         private const float ENEMY_RADIUS = 16f;
 
-        private static DrawData EnemyDrawData => new(Textures.Circle, new(255, 0, 0));
+        private static DrawData EnemyDrawData => new(Textures.Circle, new(0, 0, 255));
 
         public Enemy(Vector2 position, float enemyLife) :
             base(position, ENEMY_RADIUS, ENEMY_SPEED, enemyLife, EnemyDrawData) =>
@@ -25,8 +25,6 @@ namespace BulletHell.Game.Entities
             // base call
             base.Tick();
         }
-
-        // TODO draw health bar horizontally across enemy body
 
         protected sealed override void OnDeath() => GameScene.Score++; // TODO increase score based on enemy difficulty
     }

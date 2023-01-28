@@ -10,6 +10,8 @@ namespace BulletHell.Game.Entities
         public Vector2 Velocity => RawVelocity * _moveSpeed;
 
         private Vector2 DrawSize => new Vector2(Radius * 2f);
+        private Vector2 HealthBarSize => new Vector2(Radius * 2f, Radius / 4f);
+        private DrawData HealthBarDrawData => new(new(255, 0, 0));
 
         public float Radius { get; private set; }
         public float Life
@@ -29,6 +31,7 @@ namespace BulletHell.Game.Entities
 
         private readonly DrawData _drawData;
         private readonly float _moveSpeed;
+        private readonly float _maxLife;
 
         private float _life;
 
@@ -39,6 +42,7 @@ namespace BulletHell.Game.Entities
             Position = position;
             Radius = radius;
             _moveSpeed = moveSpeed;
+            _maxLife = maxLife;
             Life = maxLife;
             _drawData = drawData;
             RawVelocity = velocity ?? Vector2.Zero;
@@ -63,6 +67,11 @@ namespace BulletHell.Game.Entities
             var drawPos = Position * new Vector2(1, -1);
             // draw to surface
             Display.DrawOffsetCentered(drawPos, DrawSize, DrawData);
+            // draw health bar horizontally across enemy body
+            var healthPercentage = Life / _maxLife;
+            var healthBarSize = HealthBarSize;
+            healthBarSize.X *= healthPercentage;
+            Display.DrawOffsetCentered(drawPos, healthBarSize, HealthBarDrawData);
         }
 
         protected virtual void OnDeath() {}
