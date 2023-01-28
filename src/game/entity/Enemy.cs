@@ -10,9 +10,10 @@ namespace BulletHell.Game.Entities
         private const float ENEMY_RADIUS = 16f;
 
         private static DrawData EnemyDrawData => new(Textures.Circle, new(0, 0, 255));
+        private static Color EnemyHealthColor => new(255, 0, 0);
 
         public Enemy(Vector2 position, float enemyLife) :
-            base(position, ENEMY_RADIUS, ENEMY_SPEED, enemyLife, EnemyDrawData) =>
+            base(position, ENEMY_RADIUS, ENEMY_SPEED, enemyLife, EnemyDrawData, healthColor: EnemyHealthColor) =>
                 GameScene.AddEnemy(this);
 
         public sealed override void Tick()

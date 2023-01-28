@@ -11,7 +11,6 @@ namespace BulletHell.Game.Entities
 
         private Vector2 DrawSize => new Vector2(Radius * 2f);
         private Vector2 HealthBarSize => new Vector2(Radius * 2f, Radius / 4f);
-        private DrawData HealthBarDrawData => new(new(255, 0, 0));
 
         public float Radius { get; private set; }
         public float Life
@@ -29,6 +28,7 @@ namespace BulletHell.Game.Entities
 
         public Vector2 Position;
 
+        private readonly DrawData? _healthBarDrawData;
         private readonly DrawData _drawData;
         private readonly float _moveSpeed;
         private readonly float _maxLife;
@@ -37,7 +37,7 @@ namespace BulletHell.Game.Entities
 
         protected Vector2 RawVelocity;
 
-        public AbstractEntity(Vector2 position, float radius, float moveSpeed, float maxLife, DrawData drawData, Vector2? velocity = null)
+        public AbstractEntity(Vector2 position, float radius, float moveSpeed, float maxLife, DrawData drawData, Vector2? velocity = null, Color? healthColor = null)
         {
             Position = position;
             Radius = radius;
@@ -46,6 +46,7 @@ namespace BulletHell.Game.Entities
             Life = maxLife;
             _drawData = drawData;
             RawVelocity = velocity ?? Vector2.Zero;
+            _healthBarDrawData = healthColor.HasValue ? new DrawData(Textures.Circle, healthColor.Value) : null;
         }
 
         public virtual void Tick()
@@ -68,10 +69,11 @@ namespace BulletHell.Game.Entities
             // draw to surface
             Display.DrawOffsetCentered(drawPos, DrawSize, DrawData);
             // draw health bar horizontally across enemy body
+            if (!_healthBarDrawData.HasValue)
+                return;
             var healthPercentage = Life / _maxLife;
-            var healthBarSize = HealthBarSize;
-            healthBarSize.X *= healthPercentage;
-            Display.DrawOffsetCentered(drawPos, healthBarSize, HealthBarDrawData);
+            var healthBarDrawSize = DrawSize * healthPercentage;
+            Display.DrawOffsetCentered(drawPos, healthBarDrawSize, _healthBarDrawData.Value);
         }
 
         protected virtual void OnDeath() {}
