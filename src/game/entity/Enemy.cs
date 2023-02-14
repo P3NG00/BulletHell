@@ -6,6 +6,8 @@ namespace BulletHell.Game.Entities
 {
     public sealed class Enemy : AbstractEntity
     {
+        // TODO add different types of enemies
+
         private const float ENEMY_SPEED = 3f;
         private const float ENEMY_RADIUS = 16f;
 
@@ -27,6 +29,6 @@ namespace BulletHell.Game.Entities
             base.Tick();
         }
 
-        protected sealed override void OnDeath() => GameScene.Score++; // TODO increase score based on enemy difficulty
+        protected sealed override void OnDeath() => GameScene.Score += (int)MaxLife;
     }
 }

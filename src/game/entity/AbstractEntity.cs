@@ -9,9 +9,6 @@ namespace BulletHell.Game.Entities
         public bool Alive => _life > 0f;
         public Vector2 Velocity => RawVelocity * _moveSpeed;
 
-        private Vector2 DrawSize => new Vector2(Radius * 2f);
-
-        public float Radius { get; private set; }
         public float Life
         {
             get => _life;
@@ -25,23 +22,25 @@ namespace BulletHell.Game.Entities
 
         protected virtual DrawData DrawData => _drawData;
 
+        private Vector2 DrawSize => new Vector2(Radius * 2f);
+
+        public float Radius { get; private set; }
+        public readonly float MaxLife;
         public Vector2 Position;
+
+        protected Vector2 RawVelocity;
 
         private readonly DrawData? _healthBarDrawData = null;
         private readonly DrawData _drawData;
         private readonly float _moveSpeed;
-        private readonly float _maxLife;
-
         private float _life;
-
-        protected Vector2 RawVelocity;
 
         public AbstractEntity(Vector2 position, float radius, float moveSpeed, float maxLife, DrawData drawData, Vector2? velocity = null, Color? healthColor = null)
         {
             Position = position;
             Radius = radius;
             _moveSpeed = moveSpeed;
-            _maxLife = maxLife;
+            MaxLife = maxLife;
             Life = maxLife;
             _drawData = drawData;
             RawVelocity = velocity ?? Vector2.Zero;
@@ -71,7 +70,7 @@ namespace BulletHell.Game.Entities
             // draw health
             if (!_healthBarDrawData.HasValue)
                 return;
-            var healthPercentage = Life / _maxLife;
+            var healthPercentage = Life / MaxLife;
             var healthBarDrawSize = DrawSize * healthPercentage;
             Display.DrawOffsetCentered(drawPos, healthBarDrawSize, _healthBarDrawData.Value);
         }
