@@ -1,4 +1,3 @@
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -18,7 +17,5 @@ namespace BulletHell.Utils
             // load func
             Texture2D Load(string name) => content.Load<Texture2D>($"textures/{name}");
         }
-
-        private delegate Color ColorFunc(int x, int y, int squareSize);
     }
 }

@@ -68,7 +68,7 @@ namespace BulletHell.Game.Entities
             var drawPos = Position * new Vector2(1, -1);
             // draw to surface
             Display.DrawOffsetCentered(drawPos, DrawSize, DrawData);
-            // draw health bar horizontally across enemy body
+            // draw health
             if (!_healthBarDrawData.HasValue)
                 return;
             var healthPercentage = Life / _maxLife;
