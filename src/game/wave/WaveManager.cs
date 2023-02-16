@@ -14,8 +14,6 @@ namespace BulletHell.Game.Waves
         public static float SpawnDistance => Display.WindowSize.ToVector2().Length() * 0.625f;
         public static int CurrentWave => s_wave.ID;
 
-        private static bool CanSpawn => NextSpawnTicks <= 0;
-
         private static Wave s_wave;
 
         public static void Update()
@@ -26,11 +24,9 @@ namespace BulletHell.Game.Waves
 
         public static void Tick()
         {
-            CurrentWaveTicks--;
-            if (CurrentWaveTicks <= 0)
+            if (--CurrentWaveTicks <= 0)
                 NextWave();
-            NextSpawnTicks--;
-            if (CanSpawn)
+            if (--NextSpawnTicks <= 0)
             {
                 NextSpawnTicks = s_wave.SpawnRateTicks; // TODO keep track of different enemy spawn ticks separately
                 SpawnEnemy();
