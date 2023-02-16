@@ -46,13 +46,13 @@ namespace BulletHell.Game.Waves
 
         private static void NextWave()
         {
-            if (CurrentWave < Waves.Amount - 1)
+            if (CurrentWave >= Waves.Amount - 1)
             {
-                s_wave = Waves.FromID(CurrentWave + 1);
-                CurrentWaveTicks = s_wave.WaveLengthTicks;
+                SceneManager.Scene = new GameEndScene();
                 return;
             }
-            SceneManager.Scene = new GameEndScene();
+            s_wave = Waves.FromID(CurrentWave + 1);
+            CurrentWaveTicks = s_wave.WaveLengthTicks;
         }
 
         private static void SpawnEnemy()
