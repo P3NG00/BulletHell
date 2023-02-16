@@ -7,8 +7,6 @@ namespace BulletHell.Game.Entities.Enemies
 {
     public sealed class TeleportEnemy : AbstractBasicEnemy
     {
-        private const float ENEMY_LERP_VALUE = 0.8f;
-
         private static readonly int TeleportIntervalTicksMin = GameManager.SecondsToTicks(5f);
         private static readonly int TeleportIntervalTicksMax = GameManager.SecondsToTicks(10f);
 
@@ -25,7 +23,6 @@ namespace BulletHell.Game.Entities.Enemies
             var distance = Vector2.Distance(playerPos, Position);
             var newRelativePos = Util.Random.NextUnitVector() * distance;
             Position = playerPos + newRelativePos;
-            UpdateVelocityTowardsPlayer(ENEMY_LERP_VALUE);
         }
 
         public sealed override void Tick()

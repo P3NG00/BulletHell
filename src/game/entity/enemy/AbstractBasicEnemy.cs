@@ -7,7 +7,7 @@ namespace BulletHell.Game.Entities.Enemies
     {
         private const float ENEMY_SPEED = 3f;
         private const float ENEMY_RADIUS = 16f;
-        private const float ENEMY_LERP_VALUE = 0.6f;
+        private const float ENEMY_LERP_VALUE = 0.1f;
 
         public AbstractBasicEnemy(Vector2 position, float enemyLife, DrawData drawData, Color healthColor) : base(position, ENEMY_RADIUS, ENEMY_SPEED, enemyLife, drawData, healthColor) {}
 
