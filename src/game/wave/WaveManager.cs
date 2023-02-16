@@ -53,7 +53,6 @@ namespace BulletHell.Game.Waves
                 return;
             }
             SceneManager.Scene = new GameEndScene();
-            GameScene.NullifySingleton();
         }
 
         private static void SpawnEnemy()

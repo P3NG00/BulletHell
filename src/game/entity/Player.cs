@@ -53,10 +53,6 @@ namespace BulletHell.Game.Entities
             base.Damage(damage);
         }
 
-        protected sealed override void OnDeath()
-        {
-            SceneManager.Scene = new GameEndScene();
-            GameScene.NullifySingleton();
-        }
+        protected sealed override void OnDeath() => SceneManager.Scene = new GameEndScene();
     }
 }

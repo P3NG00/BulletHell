@@ -7,7 +7,12 @@ namespace BulletHell.Scenes
         public static AbstractScene Scene
         {
             get => _scene;
-            set => _nextScene = value;
+            set
+            {
+                _nextScene = value;
+                if (_scene is GameScene)
+                    GameScene.NullifySingleton();
+            }
         }
 
         private static AbstractScene _nextScene = null;
