@@ -15,8 +15,7 @@ namespace BulletHell.Game.Entities
         private static Color EnemyHealthColor => new(255, 0, 0);
 
         public Enemy(Vector2 position, float enemyLife) :
-            base(position, ENEMY_RADIUS, ENEMY_SPEED, enemyLife, EnemyDrawData, healthColor: EnemyHealthColor) =>
-                GameScene.AddEnemy(this);
+            base(position, ENEMY_RADIUS, ENEMY_SPEED, enemyLife, EnemyDrawData, healthColor: EnemyHealthColor) {}
 
         public sealed override void Tick()
         {

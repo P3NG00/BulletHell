@@ -60,7 +60,7 @@ namespace BulletHell.Game.Waves
             var direction = Util.Random.NextUnitVector();
             var spawnOffset = SpawnDistance * direction;
             var position = GameScene.Player.Position + spawnOffset;
-            new Enemy(position, EnemyHealth);
+            GameScene.AddEnemy(new Enemy(position, EnemyHealth));
         }
     }
 }

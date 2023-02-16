@@ -1,4 +1,3 @@
-using BulletHell.Scenes;
 using BulletHell.Utils;
 using Microsoft.Xna.Framework;
 
@@ -15,8 +14,7 @@ namespace BulletHell.Game.Entities
         private static DrawData ProjectileDrawData => new(Textures.Circle, new Color(255, 0, 255));
 
         public Projectile(Vector2 position, Vector2 direction) :
-            base(position, PROJECTILE_RADIUS, PROJECTILE_SPEED, ProjectileLife, ProjectileDrawData, direction) =>
-                GameScene.AddProjectile(this);
+            base(position, PROJECTILE_RADIUS, PROJECTILE_SPEED, ProjectileLife, ProjectileDrawData, direction) {}
 
         public sealed override void Tick()
         {
