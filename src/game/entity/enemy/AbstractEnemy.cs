@@ -7,7 +7,8 @@ namespace BulletHell.Game.Entities.Enemies
     public abstract class AbstractEnemy : AbstractEntity
     {
         public AbstractEnemy(Vector2 position, float radius, float moveSpeed, float enemyLife, DrawData drawData, Color healthColor) :
-            base(position, radius, moveSpeed, enemyLife, drawData, healthColor: healthColor) {}
+            base(position, radius, moveSpeed, enemyLife, drawData, healthColor: healthColor) =>
+                UpdateVelocityTowardsPlayer(1f);
 
         protected void UpdateVelocityTowardsPlayer(float lerpValue)
         {
