@@ -81,7 +81,7 @@ namespace BulletHell.Game.Entities
         {
             var distance = Vector2.Distance(Position, other.Position);
             var radiusSum = Radius + other.Radius;
-            return distance < radiusSum;
+            return distance <= radiusSum;
         }
 
         public virtual void Damage(float amount = 1f) => Life -= amount;
