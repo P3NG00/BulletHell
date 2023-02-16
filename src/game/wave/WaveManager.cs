@@ -11,7 +11,7 @@ namespace BulletHell.Game.Waves
         public static int CurrentWaveTicks { get; private set; }
         public static int NextSpawnTicks { get; private set; }
 
-        public static float SpawnDistance => Display.WindowSize.ToVector2().Length();
+        public static float SpawnDistance => Display.WindowSize.ToVector2().Length() * 0.625f;
         public static int CurrentWave => s_wave.ID;
 
         private static bool CanSpawn => NextSpawnTicks <= 0;
