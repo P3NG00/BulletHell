@@ -1,4 +1,5 @@
-using BulletHell.Game.Entities;
+using System;
+using BulletHell.Game.Entities.Enemies;
 using BulletHell.Input;
 using BulletHell.Scenes;
 using BulletHell.Utils;
@@ -11,7 +12,6 @@ namespace BulletHell.Game.Waves
         public static int NextSpawnTicks { get; private set; }
 
         public static float SpawnDistance => Display.WindowSize.ToVector2().Length();
-        public static float EnemyHealth => s_wave.EnemyHealth;
         public static int CurrentWave => s_wave.ID;
 
         private static bool CanSpawn => NextSpawnTicks <= 0;
@@ -32,7 +32,7 @@ namespace BulletHell.Game.Waves
             NextSpawnTicks--;
             if (CanSpawn)
             {
-                NextSpawnTicks = s_wave.SpawnRateTicks;
+                NextSpawnTicks = s_wave.SpawnRateTicks; // TODO keep track of different enemy spawn ticks separately
                 SpawnEnemy();
             }
         }
@@ -60,7 +60,9 @@ namespace BulletHell.Game.Waves
             var direction = Util.Random.NextUnitVector();
             var spawnOffset = SpawnDistance * direction;
             var position = GameScene.Player.Position + spawnOffset;
-            GameScene.AddEnemy(new Enemy(position, EnemyHealth));
+            var (EnemyType, EnemyHealth) = s_wave.EnemyTypes.GetRandom(); // TODO keep track of each enemy spawn ticks separately instead of choosing a random entity to spawn
+            var enemy = (AbstractEnemy)Activator.CreateInstance(EnemyType, position, EnemyHealth);
+            GameScene.AddEnemy(enemy);
         }
     }
 }

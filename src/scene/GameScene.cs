@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using BulletHell.Game.Entities;
+using BulletHell.Game.Entities.Enemies;
 using BulletHell.Game.Waves;
 using BulletHell.Game.Weapon;
 using BulletHell.Input;
@@ -23,7 +24,7 @@ namespace BulletHell.Scenes
         private readonly Button _buttonResume = CreateMainButton("resume", Colors.ThemeDefault, ResumeGame);
         private readonly Button _buttonExit = CreateExitButton(BackToMainMenu);
         private readonly List<Projectile> _projectiles = new();
-        private readonly List<Enemy> _enemies = new();
+        private readonly List<AbstractEnemy> _enemies = new();
         private readonly Player _player = new();
 
         private Vector2 _mouseOffset = Vector2.Zero;
@@ -61,7 +62,7 @@ namespace BulletHell.Scenes
             ("wave",
             new[] {
                 $"wave: {WaveManager.CurrentWave}",
-                $"enemy_health: {WaveManager.EnemyHealth}",
+                // $"enemy_health: {WaveManager.EnemyHealth}", // TODO remove or fix with new entity system
                 $"wave_ticks: {WaveManager.CurrentWaveTicks}",
                 $"spawn_ticks: {WaveManager.NextSpawnTicks}",
                 $"spawn_distance: {WaveManager.SpawnDistance:0.000}",
@@ -255,7 +256,7 @@ namespace BulletHell.Scenes
 
         public static void NullifySingleton() => _instance = null;
 
-        public static void AddEnemy(Enemy enemy) => _instance._enemies.Add(enemy);
+        public static void AddEnemy(AbstractEnemy enemy) => _instance._enemies.Add(enemy);
 
         public static void AddProjectile(Projectile projectile) => _instance._projectiles.Add(projectile);
     }
