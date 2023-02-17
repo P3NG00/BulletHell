@@ -25,7 +25,7 @@ namespace BulletHell.Game.Entities.Enemies
 
         public sealed override void Tick()
         {
-            if (--_teleportTicks <= 0)
+            if (Alive && --_teleportTicks <= 0)
             {
                 _teleportTicks = TeleportIntervalTicks;
                 TeleportAroundPlayer();
