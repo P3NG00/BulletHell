@@ -69,7 +69,7 @@ namespace BulletHell.Scenes
             }),
         };
 
-        public GameScene()
+        public GameScene() // TODO take DeathReason as parameter to display accurate death message. make DeathReason enum
         {
             this.SingletonCheck(ref _instance);
             WeaponManager.Reset();
@@ -101,6 +101,8 @@ namespace BulletHell.Scenes
             WeaponManager.Update();
             // update wave manager
             WaveManager.Update();
+            // update player
+            _player.Update();
         }
 
         public sealed override void Tick()
@@ -246,11 +248,7 @@ namespace BulletHell.Scenes
             _projectiles.RemoveAll(projectile => !projectile.Alive);
         }
 
-        private static void BackToMainMenu()
-        {
-            SceneManager.Scene = new MainMenuScene();
-            NullifySingleton();
-        }
+        private static void BackToMainMenu() => SceneManager.Scene = new MainMenuScene();
 
         private static void ResumeGame() => _instance._paused = false;
 

@@ -7,7 +7,7 @@ namespace BulletHell.Game.Entities
     public abstract class AbstractEntity
     {
         public bool Alive => _life > 0f;
-        public Vector2 Velocity => RawVelocity * _moveSpeed;
+        public Vector2 Velocity => RawVelocity * MoveSpeed;
 
         public float Life
         {
@@ -21,6 +21,7 @@ namespace BulletHell.Game.Entities
         }
 
         protected virtual DrawData DrawData => _drawData;
+        protected virtual float MoveSpeed => _moveSpeed;
 
         private Vector2 DrawSize => new Vector2(Radius * 2f);
 

@@ -20,6 +20,7 @@ namespace BulletHell.Input
         public static readonly KeyInput MoveRight = new(Keys.D);
         public static readonly KeyInput MoveUp = new(Keys.W);
         public static readonly KeyInput MoveDown = new(Keys.S);
+        public static readonly KeyInput MoveDash = new(Keys.Space);
 
         // time
         public static readonly KeyInput TimeScaleDecrement = new(Keys.F1);

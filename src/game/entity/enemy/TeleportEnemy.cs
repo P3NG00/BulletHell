@@ -1,4 +1,3 @@
-using System;
 using BulletHell.Scenes;
 using BulletHell.Utils;
 using Microsoft.Xna.Framework;
