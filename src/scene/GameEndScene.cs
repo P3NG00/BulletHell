@@ -4,6 +4,8 @@ namespace BulletHell.Scenes
 {
     public sealed class GameEndScene : AbstractScene
     {
+        // TODO remove GameEndScene. make end screen an overlay on the GameScene while it's still unpaused and stop spawning new enemies
+
         private readonly Button _restartButton = CreateMainButton("restart", Colors.ThemeGreen, RestartGame);
         private readonly Button _mainMenuButton = CreateExitButton(BackToMainMenu);
         private readonly int _score = GameScene.Score;

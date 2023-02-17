@@ -62,9 +62,7 @@ namespace BulletHell.Scenes
             ("wave",
             new[] {
                 $"wave: {WaveManager.CurrentWave}",
-                // $"enemy_health: {WaveManager.EnemyHealth}", // TODO remove or fix with new entity system
                 $"wave_ticks: {WaveManager.CurrentWaveTicks}",
-                $"spawn_ticks: {WaveManager.NextSpawnTicks}",
                 $"spawn_distance: {WaveManager.SpawnDistance:0.000}",
             }),
         };
@@ -198,18 +196,21 @@ namespace BulletHell.Scenes
                 var projectile = _projectiles[i];
                 if (!projectile.Alive)
                     continue;
+                // check against enemies
                 for (int j = 0; j < _enemies.Count; j++)
                 {
                     var enemy = _enemies[j];
-                    if (!enemy.Alive)
+                    if (!enemy.Alive || projectile.SourceEntity is AbstractEnemy || !projectile.CollidesWith(enemy))
                         continue;
-                    if (projectile.CollidesWith(enemy))
-                    {
-                        enemy.Damage(); // TODO pass damage amount from weapon type
-                        projectile.Kill();
-                        break;
-                    }
+                    enemy.Damage(); // TODO pass damage amount from weapon type. make weapons have different damage amounts
+                    projectile.Kill();
+                    break;
                 }
+                // check against player
+                if (projectile.SourceEntity is not AbstractEnemy || !projectile.CollidesWith(_player))
+                    continue;
+                _player.Damage(); // TODO pass damage amount from weapon type. make weapons have different damage amounts
+                projectile.Kill();
             }
             // handle entity collisions
             for (int i = 0; i < _enemies.Count; i++)

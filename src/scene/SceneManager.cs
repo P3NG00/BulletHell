@@ -7,12 +7,7 @@ namespace BulletHell.Scenes
         public static AbstractScene Scene
         {
             get => _scene;
-            set
-            {
-                _nextScene = value;
-                if (_scene is GameScene)
-                    GameScene.NullifySingleton();
-            }
+            set => _nextScene = value;
         }
 
         private static AbstractScene _nextScene = null;
@@ -30,6 +25,9 @@ namespace BulletHell.Scenes
             _scene.Update();
             // update ticks
             GameManager.UpdateTicks();
+            // nullify singleton if leaving GameScene
+            if (_scene is GameScene && _nextScene != null)
+                GameScene.NullifySingleton();
         }
     }
 }

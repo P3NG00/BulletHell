@@ -22,5 +22,7 @@ namespace BulletHell.Game.Weapon
             ReloadTicks = GameManager.SecondsToTicks(reloadSeconds);
             SwitchTicks = GameManager.SecondsToTicks(switchSeconds);
         }
+
+        // TODO move some of WeaponManager.FireWeapon() into new function here 'FireWeapon()' with parameters
     }
 }

@@ -13,7 +13,8 @@ namespace BulletHell.Game.Entities.Enemies
 
         public override void Tick()
         {
-            UpdateVelocityTowardsPlayer(ENEMY_LERP_VALUE);
+            if (Alive)
+                UpdateVelocityTowardsPlayer(ENEMY_LERP_VALUE);
             base.Tick();
         }
     }

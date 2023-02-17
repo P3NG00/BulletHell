@@ -84,14 +84,15 @@ namespace BulletHell.Game.Weapon
                 ReloadTicks = Weapon.ReloadTicks;
             else
                 NextShotTicks = Weapon.ShotTicks;
-            var playerPos = GameScene.Player.Position;
+            var player = GameScene.Player;
+            var playerPos = player.Position;
             var direction = InputManager.MousePositionOffset - playerPos;
             if (direction == Vector2.Zero)
                 direction = Vector2.UnitX;
             else
                 direction.Normalize();
             var spawnPos = playerPos + (direction * PROJECTILE_SPAWN_DISTANCE);
-            GameScene.AddProjectile(new Projectile(spawnPos, direction));
+            GameScene.AddProjectile(new Projectile(spawnPos, direction, player));
         }
     }
 }
