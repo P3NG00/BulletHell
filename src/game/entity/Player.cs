@@ -15,6 +15,7 @@ namespace BulletHell.Game.Entities
         public const float PLAYER_RADIUS = 16f;
 
         private static readonly int InvincibilityResetTicks = GameManager.SecondsToTicks(1f);
+        private static readonly int DashCooldownResetTicks = GameManager.SecondsToTicks(2f);
         private static readonly int DashResetTicks = GameManager.SecondsToTicks(0.25f);
 
         private static DrawData PlayerDrawData => new(Textures.Circle, new(255, 0, 0));
@@ -25,21 +26,22 @@ namespace BulletHell.Game.Entities
         protected sealed override float MoveSpeed => IsDashing ? PLAYER_DASH_SPEED : base.MoveSpeed;
 
         public int InvincibilityTicks { get; private set; } = 0;
-
-        public int DashTicks => _dashTicks;
+        public int DashCooldownTicks { get; private set; } = 0;
+        public int DashTicks { get; private set; } = 0;
 
         private bool IsInvincible => InvincibilityTicks > 0;
-        private bool IsDashing => _dashTicks > 0;
-
-        // TODO add dash cooldown ticks
-        private int _dashTicks = 0;
+        private bool CanDash => DashCooldownTicks <= 0;
+        private bool IsDashing => DashTicks > 0;
 
         public Player() : base(Vector2.Zero, PLAYER_RADIUS, PLAYER_SPEED, PLAYER_LIFE, PlayerDrawData, healthColor: PlayerHealthColor) {}
 
         public void Update()
         {
-            if (Keybinds.MoveDash.PressedThisFrame && !IsDashing && RawVelocity.Length() != 0f)
-                _dashTicks = DashResetTicks;
+            // check dash keybind
+            if (!Keybinds.MoveDash.PressedThisFrame || !CanDash || RawVelocity.Length() == 0f)
+                return;
+            DashCooldownTicks = DashCooldownResetTicks;
+            DashTicks = DashResetTicks;
         }
 
         public sealed override void Tick()
@@ -48,8 +50,10 @@ namespace BulletHell.Game.Entities
             if (IsInvincible)
                 InvincibilityTicks--;
             // tick dashing
+            if (!CanDash)
+                DashCooldownTicks--;
             if (IsDashing)
-                _dashTicks--;
+                DashTicks--;
             // handle movement input
             var direction = Vector2.Zero;
             if (Keybinds.MoveLeft.Held)
