@@ -9,7 +9,7 @@ namespace BulletHell.Game.Waves
     public static class WaveManager
     {
         public static int CurrentWaveTicks { get; private set; }
-        public static int NextSpawnTicks { get; private set; }
+        public static int[] NextSpawnTicks { get; private set; }
 
         public static float SpawnDistance => Display.WindowSize.ToVector2().Length() * 0.625f;
         public static int CurrentWave => s_wave.ID;
@@ -24,12 +24,17 @@ namespace BulletHell.Game.Waves
 
         public static void Tick()
         {
+            // check next wave
             if (--CurrentWaveTicks <= 0)
                 NextWave();
-            if (--NextSpawnTicks <= 0)
+            // decrement spawn ticks
+            for (int i = 0; i < NextSpawnTicks.Length; i++)
             {
-                NextSpawnTicks = s_wave.SpawnRateTicks; // TODO keep track of different enemy spawn ticks separately
-                SpawnEnemy();
+                if (--NextSpawnTicks[i] <= 0)
+                {
+                    NextSpawnTicks[i] = s_wave.WaveInfoArray[i].SpawnRateTicks;
+                    SpawnEnemy(s_wave.WaveInfoArray[i]);
+                }
             }
         }
 
@@ -37,7 +42,14 @@ namespace BulletHell.Game.Waves
         {
             s_wave = Waves.FromID(0);
             CurrentWaveTicks = s_wave.WaveLengthTicks;
-            NextSpawnTicks = 0;
+            ResetNextSpawnTicks();
+        }
+
+        private static void ResetNextSpawnTicks()
+        {
+            NextSpawnTicks = new int[s_wave.WaveInfoArray.Length];
+            for (int i = 0; i < NextSpawnTicks.Length; i++)
+                NextSpawnTicks[i] = s_wave.WaveInfoArray[i].SpawnRateTicks;
         }
 
         private static void NextWave()
@@ -49,15 +61,15 @@ namespace BulletHell.Game.Waves
             }
             s_wave = Waves.FromID(CurrentWave + 1);
             CurrentWaveTicks = s_wave.WaveLengthTicks;
+            ResetNextSpawnTicks();
         }
 
-        private static void SpawnEnemy()
+        private static void SpawnEnemy(WaveInfo waveInfo)
         {
             var direction = Util.Random.NextUnitVector();
             var spawnOffset = SpawnDistance * direction;
             var position = GameScene.Player.Position + spawnOffset;
-            var (EnemyType, EnemyHealth) = s_wave.EnemyTypes.GetRandom(); // TODO keep track of each enemy spawn ticks separately instead of choosing a random entity to spawn
-            var enemy = (AbstractEnemy)Activator.CreateInstance(EnemyType, position, EnemyHealth);
+            var enemy = (AbstractEnemy)Activator.CreateInstance(waveInfo.EnemyType, position, waveInfo.EnemyHealth);
             GameScene.AddEnemy(enemy);
         }
     }

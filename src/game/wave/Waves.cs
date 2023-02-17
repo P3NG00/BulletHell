@@ -1,4 +1,3 @@
-using System;
 using BulletHell.Game.Entities.Enemies;
 
 namespace BulletHell.Game.Waves
@@ -11,14 +10,12 @@ namespace BulletHell.Game.Waves
 
         // TODO make waves more challenging
         protected sealed override Wave[] ObjectArray => new Wave[] {
-            new(25f, 0.75f, CreateEnemyTypes((typeof(FollowerEnemy), 2f)), 0),
-            new(25f, 1f, CreateEnemyTypes((typeof(FollowerEnemy), 3f)), 1),
-            new(50f, 1.5f, CreateEnemyTypes((typeof(FollowerEnemy), 5f), (typeof(TeleportEnemy), 4f)), 2),
+            new(25f, 0, new WaveInfo(typeof(FollowerEnemy), 2f, 0.75f)),
+            new(25f, 1, new WaveInfo(typeof(FollowerEnemy), 3f, 1f)),
+            new(50f, 2, new WaveInfo(typeof(FollowerEnemy), 5f, 1.5f), new WaveInfo(typeof(TeleportEnemy), 4f, 0.75f)),
         };
 
         public Waves() : base(ref s_instance) {}
-
-        private (Type, float)[] CreateEnemyTypes(params (Type, float)[] enemyTypes) => enemyTypes;
 
         public static Wave FromID(int id) => s_instance.ObjectFromID(id);
     }
