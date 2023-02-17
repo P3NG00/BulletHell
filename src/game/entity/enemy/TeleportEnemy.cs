@@ -6,8 +6,7 @@ namespace BulletHell.Game.Entities.Enemies
 {
     public sealed class TeleportEnemy : AbstractBasicEnemy
     {
-        private static readonly int TeleportIntervalTicksMin = GameManager.SecondsToTicks(5f);
-        private static readonly int TeleportIntervalTicksMax = GameManager.SecondsToTicks(10f);
+        private static readonly int TeleportIntervalTicks = GameManager.SecondsToTicks(6f);
 
         private static DrawData EnemyDrawData => new(Textures.Circle, new(0, 255, 255));
         private static Color EnemyHealthColor => new(255, 255, 0);
@@ -28,7 +27,7 @@ namespace BulletHell.Game.Entities.Enemies
         {
             if (--_teleportTicks <= 0)
             {
-                _teleportTicks = Util.Random.Next(TeleportIntervalTicksMin, TeleportIntervalTicksMax);
+                _teleportTicks = TeleportIntervalTicks;
                 TeleportAroundPlayer();
             }
             base.Tick();

@@ -9,7 +9,7 @@ namespace BulletHell.Game.Entities.Enemies
         private static DrawData EnemyDrawData => new(Textures.Circle, new(255, 0, 255));
         private static Color EnemyHealthColor => new(255, 128, 128);
 
-        private static readonly int ProjectileTicks = GameManager.SecondsToTicks(5f); // TODO make shooting timer random
+        private static readonly int ProjectileTicks = GameManager.SecondsToTicks(5f);
 
         private int _nextProjectileTicks = ProjectileTicks;
 
