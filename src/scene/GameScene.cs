@@ -58,6 +58,7 @@ namespace BulletHell.Scenes
                 $"pos_y: {_player.Position.Y:0.000}",
                 $"life: {_player.Life:0.000}",
                 $"invincible_ticks: {_player.InvincibilityTicks}",
+                $"dash_ticks: {_player.DashTicks}",
             }),
             ("wave",
             new[] {
