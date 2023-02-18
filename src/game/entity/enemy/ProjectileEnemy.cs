@@ -22,6 +22,7 @@ namespace BulletHell.Game.Entities.Enemies
             {
                 _nextProjectileTicks = ProjectileTicks;
                 // spawn projectile
+                // TODO spawn projectile in front of enemy like in WeaponManager
                 var projectileDirection = GameScene.Player.Position - Position;
                 var projectile = new Projectile(Position, projectileDirection, this);
                 GameScene.AddProjectile(projectile);

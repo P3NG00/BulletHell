@@ -13,7 +13,7 @@ namespace BulletHell.Game.Waves
             new(30f, 0, new WaveInfo(typeof(FollowerEnemy), 2f, 0.75f)),
             new(30f, 1, new WaveInfo(typeof(FollowerEnemy), 2f, 0.75f), new WaveInfo(typeof(TeleportEnemy), 3f, 0.25f)),
             new(60f, 2, new WaveInfo(typeof(FollowerEnemy), 4f, 1f), new WaveInfo(typeof(ProjectileEnemy), 3f, 0.5f)),
-            new(60f, 3, new WaveInfo(typeof(ProjectileEnemy), 5f, 1.25f)),
+            new(60f, 3, new WaveInfo(typeof(ProjectileEnemy), 5f, 1.25f), new WaveInfo(typeof(DashingEnemy), 4f, 0.75f)),
         };
 
         public Waves() : base(ref s_instance) {}

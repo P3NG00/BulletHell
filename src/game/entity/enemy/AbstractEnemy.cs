@@ -4,10 +4,10 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Game.Entities.Enemies
 {
-    public abstract class AbstractEnemy : AbstractEntity
+    public abstract class AbstractEnemy : AbstractCreatureEntity
     {
-        public AbstractEnemy(Vector2 position, float radius, float moveSpeed, float enemyLife, DrawData drawData, Color healthColor) :
-            base(position, radius, moveSpeed, enemyLife, drawData, healthColor: healthColor) =>
+        public AbstractEnemy(Vector2 position, float radius, float moveSpeed, float enemyLife, DrawData drawData, Color healthColor, float dashMultiplier = 0f, float dashSeconds = 0f, float dashCooldownSeconds = 0f) :
+            base(position, radius, moveSpeed, enemyLife, drawData, healthColor: healthColor, dashMultiplier: dashMultiplier, dashSeconds: dashSeconds, dashCooldownSeconds: dashCooldownSeconds) =>
                 UpdateVelocityTowardsPlayer(1f);
 
         protected void UpdateVelocityTowardsPlayer(float lerpValue)

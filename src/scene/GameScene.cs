@@ -58,8 +58,8 @@ namespace BulletHell.Scenes
                 $"pos_y: {_player.Position.Y:0.000}",
                 $"life: {_player.Life:0.000}",
                 $"invincible_ticks: {_player.InvincibilityTicks}",
-                $"dash_cooldown_ticks: {_player.DashCooldownTicks}",
                 $"dash_ticks: {_player.DashTicks}",
+                $"dash_cooldown_ticks: {_player.DashCooldownTicks}",
             }),
             ("wave",
             new[] {

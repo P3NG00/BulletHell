@@ -29,11 +29,16 @@ namespace BulletHell.Game.Entities
         public readonly float MaxLife;
         public Vector2 Position;
 
-        protected Vector2 RawVelocity;
+        protected virtual Vector2 RawVelocity
+        {
+            get => _rawVelocity;
+            set => _rawVelocity = value;
+        }
 
         private readonly DrawData? _healthBarDrawData = null;
         private readonly DrawData _drawData;
         private readonly float _moveSpeed;
+        private Vector2 _rawVelocity;
         private float _life;
 
         public AbstractEntity(Vector2 position, float radius, float moveSpeed, float maxLife, DrawData drawData, Vector2? velocity = null, Color? healthColor = null)
@@ -76,6 +81,8 @@ namespace BulletHell.Game.Entities
             Display.DrawOffsetCentered(drawPos, healthBarDrawSize, _healthBarDrawData.Value);
         }
 
+        public virtual void Damage(float amount = 1f) => Life -= amount;
+
         protected virtual void OnDeath() {}
 
         public bool CollidesWith(AbstractEntity other)
@@ -84,8 +91,6 @@ namespace BulletHell.Game.Entities
             var radiusSum = Radius + other.Radius;
             return distance <= radiusSum;
         }
-
-        public virtual void Damage(float amount = 1f) => Life -= amount;
 
         public void Kill() => Life = 0f;
     }
