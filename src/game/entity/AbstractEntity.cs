@@ -60,7 +60,7 @@ namespace BulletHell.Game.Entities
                 return;
             // normalize velocity
             if (RawVelocity.Length() != 0f)
-                RawVelocity.Normalize();
+                RawVelocity = Vector2.Normalize(RawVelocity);
             // update position
             Position += Velocity;
         }
