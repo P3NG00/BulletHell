@@ -11,8 +11,10 @@ namespace BulletHell.Game.Weapon
         public readonly int ShotTicks;
 
         // TODO different projectile types
-        // TODO different projectile velocities
         // TODO different projectile life ticks
+        // TODO different projectile damage
+        // TODO different projectile speed
+        // TODO different projectile size
 
         public Weapon(string name, int clipSize, float fireRateSeconds, float reloadSeconds, float switchSeconds, int id) : base(id)
         {
