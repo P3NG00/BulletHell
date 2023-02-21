@@ -12,10 +12,10 @@ namespace BulletHell.Scenes
 
         public sealed override (string, string[])[] ExtraDebugInfo => new[] { ("game_end", new[] {$"score: {_score}",}) };
 
-        public sealed override void Update()
+        public sealed override void HandleInput()
         {
-            _restartButton.Update();
-            _mainMenuButton.Update();
+            _restartButton.HandleInput();
+            _mainMenuButton.HandleInput();
         }
 
         public sealed override void Draw()

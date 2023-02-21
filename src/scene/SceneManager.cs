@@ -12,8 +12,9 @@ namespace BulletHell.Scenes
 
         private static AbstractScene _nextScene = null;
         private static AbstractScene _scene;
+        private static bool _lastHandledInput = false;
 
-        public static void Update()
+        public static void Update(bool handleInput)
         {
             // check next scene
             if (_nextScene != null)
@@ -21,10 +22,15 @@ namespace BulletHell.Scenes
                 _scene = _nextScene;
                 _nextScene = null;
             }
+            // test lost focus
+            if (_lastHandledInput && !handleInput)
+                _scene.OnLostFocus();
+            _lastHandledInput = handleInput;
             // update scene
-            _scene.Update();
+            if (handleInput)
+                _scene.HandleInput();
             // update ticks
-            GameManager.UpdateTicks();
+            GameManager.UpdateTicks(handleInput);
             // nullify singleton if leaving GameScene
             if (_scene is GameScene && _nextScene != null)
                 GameScene.NullifySingleton();

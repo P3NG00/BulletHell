@@ -78,7 +78,7 @@ namespace BulletHell.Scenes
         }
 
         // TODO implement scroll wheel for zooming in and out
-        public sealed override void Update()
+        public sealed override void HandleInput()
         {
             // toggle pause
             if (Keybinds.Pause.PressedThisFrame)
@@ -93,16 +93,16 @@ namespace BulletHell.Scenes
             // paused
             if (_paused)
             {
-                _buttonResume.Update();
-                _buttonExit.Update();
+                _buttonResume.HandleInput();
+                _buttonExit.HandleInput();
                 return;
             }
             // update weapon
-            WeaponManager.Update();
+            WeaponManager.HandleInput();
             // update wave manager
-            WaveManager.Update();
+            WaveManager.HandleInput();
             // update player
-            _player.Update();
+            _player.HandleInput();
         }
 
         public sealed override void Tick()
@@ -140,6 +140,8 @@ namespace BulletHell.Scenes
             // draw pause
             DrawPause();
         }
+
+        public sealed override void OnLostFocus() => _paused = true;
 
         private void DrawGame()
         {

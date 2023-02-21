@@ -15,6 +15,8 @@ namespace BulletHell
 
         private static BulletHell _instance;
 
+        public static bool HandleInput { get; private set; } = false;
+
         public BulletHell()
         {
             this.SingletonCheck(ref _instance);
@@ -50,7 +52,6 @@ namespace BulletHell
             base.LoadContent();
         }
 
-        // ensure all "<Input>ThisFrame" inputs are checked in Update to avoid missed inputs in Tick
         protected sealed override void Update(GameTime gameTime)
         {
             // update input
@@ -58,12 +59,14 @@ namespace BulletHell
             // check fullscreen
             if (Keybinds.Fullscreen.PressedThisFrame)
                 Display.ToggleFullscreen();
-            // update ticks
-            GameManager.Update(gameTime.ElapsedGameTime.TotalSeconds);
-            // update debug
-            Debug.Update();
+            // handle game input
+            HandleInput = _instance.IsActive && new Rectangle(Point.Zero, Display.WindowSize).Contains(InputManager.MousePosition);
+            GameManager.HandleInput(gameTime.ElapsedGameTime.TotalSeconds);
+            // uhandle debug input
+            if (HandleInput)
+                Debug.HandleInput();
             // update scene
-            SceneManager.Update();
+            SceneManager.Update(HandleInput);
             // base call
             base.Update(gameTime);
         }

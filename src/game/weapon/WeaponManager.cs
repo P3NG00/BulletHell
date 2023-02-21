@@ -39,7 +39,7 @@ namespace BulletHell.Game.Weapon
         private static int[] s_clipAmounts;
         private static Weapon s_weapon;
 
-        public static void Update()
+        public static void HandleInput()
         {
             if (Keybinds.Reload.PressedThisFrame && !IsFiring && !IsReloading && AmmoAmount != Weapon.ClipSize)
                 ReloadTicks = Weapon.ReloadTicks;

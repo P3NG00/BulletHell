@@ -12,11 +12,13 @@ namespace BulletHell.Scenes
 
         public AbstractScene(Color? backgroundColor = null) => BackgroundColor = backgroundColor ?? Colors.Background;
 
-        public virtual void Update() {}
+        public virtual void HandleInput() {}
 
         public virtual void Tick() {}
 
         public virtual void Draw() {}
+
+        public virtual void OnLostFocus() {}
 
         protected static Button CreateMainButton(string text, ColorTheme colorTheme, Action action) => new(new(0.5f, 0.6f), new(250, 100), text, colorTheme, action, 3);
 

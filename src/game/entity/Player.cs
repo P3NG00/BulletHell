@@ -29,7 +29,7 @@ namespace BulletHell.Game.Entities
 
         public Player() : base(Vector2.Zero, PLAYER_RADIUS, PLAYER_SPEED, PLAYER_LIFE, PlayerDrawData, healthColor: PlayerHealthColor, dashMultiplier: PLAYER_DASH_MULT, dashSeconds: PLAYER_DASH_SECONDS, dashCooldownSeconds: PLAYER_DASH_COOLDOWN_SECONDS) {}
 
-        public void Update()
+        public void HandleInput()
         {
             // check dash keybind
             if (Keybinds.MoveDash.PressedThisFrame)

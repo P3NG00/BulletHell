@@ -31,11 +31,8 @@ namespace BulletHell.Utils
             _textScale = new(textScale);
         }
 
-        public void Update()
+        public void HandleInput()
         {
-            // update relative rectangle position
-            var topLeftPos = ((Display.WindowSize.ToVector2() * _relativeCenter) - (_size.ToVector2() / 2f)).ToPoint();
-            _lastRectangle = new Rectangle(topLeftPos, _size);
             // update highlighted
             _highlighted = !_mouseLock && _lastRectangle.Contains(InputManager.MousePosition);
             // update mouse lock
@@ -51,6 +48,9 @@ namespace BulletHell.Utils
 
         public void Draw()
         {
+            // update relative rectangle position
+            var topLeftPos = ((Display.WindowSize.ToVector2() * _relativeCenter) - (_size.ToVector2() / 2f)).ToPoint();
+            _lastRectangle = new Rectangle(topLeftPos, _size);
             // draw box
             Display.Draw(_lastRectangle.Location.ToVector2(), _size.ToVector2(), new(_highlighted ? _colorTheme.MainHighlight : _colorTheme.Main));
             // draw text centered in box

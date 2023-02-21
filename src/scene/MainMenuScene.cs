@@ -17,11 +17,11 @@ namespace BulletHell.Scenes
 
         public sealed override (string, string[])[] ExtraDebugInfo => new[] { ("main_menu", new[] {$"rotation: {_rotation}"})};
 
-        public sealed override void Update()
+        public sealed override void HandleInput()
         {
             // update buttons
-            _buttonStart.Update();
-            _buttonExit.Update();
+            _buttonStart.HandleInput();
+            _buttonExit.HandleInput();
         }
 
         public sealed override void Draw()

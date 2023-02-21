@@ -10,7 +10,7 @@ namespace BulletHell.Utils
 
         public static bool Enabled => _enabled;
 
-        public static void Update()
+        public static void HandleInput()
         {
             // toggle debug
             if (Keybinds.Debug.PressedThisFrame)
@@ -37,8 +37,11 @@ namespace BulletHell.Utils
                 $"ticks_per_frame: {GameManager.AverageTicksPerFrame:0.000}",
                 $"camera_offset_x: {Display.CameraOffset.X:0.000}",
                 $"camera_offset_y: {Display.CameraOffset.Y:0.000}",
+                $"mouse_x: {InputManager.MousePosition.X:0.000}",
+                $"mouse_y: {InputManager.MousePosition.Y:0.000}",
                 $"offset_mouse_x: {InputManager.MousePositionOffset.X:0.000}",
-                $"offset_mouse_y: {InputManager.MousePositionOffset.Y:0.000}"};
+                $"offset_mouse_y: {InputManager.MousePositionOffset.Y:0.000}",
+                $"handle_input: {BulletHell.HandleInput}"};
             debugInfo.ForEach(DrawDebugInfo);
             // draw extra info
             foreach (var e in SceneManager.Scene.ExtraDebugInfo)

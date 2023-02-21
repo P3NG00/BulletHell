@@ -16,7 +16,7 @@ namespace BulletHell.Game.Waves
 
         private static Wave s_wave;
 
-        public static void Update()
+        public static void HandleInput()
         {
             if (Keybinds.WaveIncrease.PressedThisFrame)
                 NextWave();

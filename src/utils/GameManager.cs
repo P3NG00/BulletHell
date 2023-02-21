@@ -26,7 +26,7 @@ namespace BulletHell.Utils
         private static double[] s_lastFps = new double[FRAMES_PER_SECOND];
         private static double s_tickDelta = 0f;
 
-        public static void Update(double timeThisUpdate)
+        public static void HandleInput(double timeThisUpdate)
         {
             if (Keybinds.TimeScaleDecrement.PressedThisFrame)
                 s_timeScale = Math.Max(TIME_SCALE_MIN, s_timeScale - TIME_SCALE_STEP);
@@ -53,7 +53,7 @@ namespace BulletHell.Utils
             s_ticks[1] = s_ticks[0];
         }
 
-        public static void UpdateTicks()
+        public static void UpdateTicks(bool tickScene)
         {
             while (s_tickDelta >= TICK_STEP)
             {
@@ -62,7 +62,8 @@ namespace BulletHell.Utils
                 // increment tick counter
                 s_ticks[0]++;
                 // update scene tick
-                SceneManager.Scene.Tick();
+                if (tickScene)
+                    SceneManager.Scene.Tick();
             }
         }
 
