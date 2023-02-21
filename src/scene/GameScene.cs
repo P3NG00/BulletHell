@@ -107,7 +107,7 @@ namespace BulletHell.Scenes
 
         public sealed override void Tick()
         {
-            // check pause
+            // check pause. check instance because it's referenced in following function calls
             if (_paused || _instance == null)
                 return;
             // tick player
