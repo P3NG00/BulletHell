@@ -8,12 +8,11 @@ namespace BulletHell.Game.Entities.Enemies
     {
         private static readonly int TeleportIntervalTicks = GameManager.SecondsToTicks(6f);
 
-        private static DrawData EnemyDrawData => new(Textures.Circle, new(0, 255, 255));
-        private static Color EnemyHealthColor => new(255, 255, 0);
+        private static DrawData EnemyDrawData => new(Textures.Circle, Colors.EnemyTeleport);
 
         private int _teleportTicks = 0;
 
-        public TeleportEnemy(Vector2 position, float enemyLife) : base(position, enemyLife, EnemyDrawData, EnemyHealthColor) {}
+        public TeleportEnemy(Vector2 position, float enemyLife) : base(position, enemyLife, EnemyDrawData, Colors.EnemyTeleportHealth) {}
 
         private void TeleportAroundPlayer()
         {

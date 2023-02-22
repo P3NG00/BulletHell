@@ -17,9 +17,8 @@ namespace BulletHell.Game.Entities
 
         private static readonly int InvincibilityResetTicks = GameManager.SecondsToTicks(1f);
 
-        private static DrawData PlayerDrawData => new(Textures.Circle, new(255, 0, 0));
-        private static DrawData PlayerInvincibleDrawData => new(Textures.Circle, new(255, 128, 0));
-        private static Color PlayerHealthColor => new(0, 255, 0);
+        private static DrawData PlayerDrawData => new(Textures.Circle, Colors.Player);
+        private static DrawData PlayerInvincibleDrawData => new(Textures.Circle, Colors.PlayerInvincible);
 
         protected sealed override DrawData DrawData => !InvincibilityTicks.IsEven() ? PlayerInvincibleDrawData : base.DrawData;
 
@@ -27,7 +26,7 @@ namespace BulletHell.Game.Entities
 
         private bool IsInvincible => InvincibilityTicks > 0;
 
-        public Player() : base(Vector2.Zero, PLAYER_RADIUS, PLAYER_SPEED, PLAYER_LIFE, PlayerDrawData, healthColor: PlayerHealthColor, dashMultiplier: PLAYER_DASH_MULT, dashSeconds: PLAYER_DASH_SECONDS, dashCooldownSeconds: PLAYER_DASH_COOLDOWN_SECONDS) {}
+        public Player() : base(Vector2.Zero, PLAYER_RADIUS, PLAYER_SPEED, PLAYER_LIFE, PlayerDrawData, healthColor: Colors.PlayerHealth, dashMultiplier: PLAYER_DASH_MULT, dashSeconds: PLAYER_DASH_SECONDS, dashCooldownSeconds: PLAYER_DASH_COOLDOWN_SECONDS) {}
 
         public void HandleInput()
         {

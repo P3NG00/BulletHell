@@ -11,7 +11,7 @@ namespace BulletHell.Game.Entities
 
         private static readonly float ProjectileLife = GameManager.SecondsToTicks(1f);
 
-        private static DrawData ProjectileDrawData => new(Textures.Circle, new Color(255, 0, 255));
+        private static DrawData ProjectileDrawData => new(Textures.Circle, Colors.Projectile);
 
         public readonly AbstractEntity SourceEntity;
 

@@ -6,14 +6,13 @@ namespace BulletHell.Game.Entities.Enemies
 {
     public sealed class ProjectileEnemy : AbstractBasicEnemy
     {
-        private static DrawData EnemyDrawData => new(Textures.Circle, new(255, 0, 255));
-        private static Color EnemyHealthColor => new(255, 128, 128);
+        private static DrawData EnemyDrawData => new(Textures.Circle, Colors.EnemyProjectile);
 
         private static readonly int ProjectileTicks = GameManager.SecondsToTicks(5f);
 
         private int _nextProjectileTicks = ProjectileTicks;
 
-        public ProjectileEnemy(Vector2 position, float enemyLife) : base(position, enemyLife, EnemyDrawData, EnemyHealthColor) {}
+        public ProjectileEnemy(Vector2 position, float enemyLife) : base(position, enemyLife, EnemyDrawData, Colors.EnemyProjectileHealth) {}
 
         public sealed override void Tick()
         {
