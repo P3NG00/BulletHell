@@ -21,7 +21,7 @@ namespace BulletHell.Game.Entities
         private static DrawData PlayerInvincibleDrawData => new(Textures.Circle, new(255, 128, 0));
         private static Color PlayerHealthColor => new(0, 255, 0);
 
-        protected sealed override DrawData DrawData => InvincibilityTicks % 2 == 1 ? PlayerInvincibleDrawData : base.DrawData;
+        protected sealed override DrawData DrawData => !InvincibilityTicks.IsEven() ? PlayerInvincibleDrawData : base.DrawData;
 
         public int InvincibilityTicks { get; private set; } = 0;
 
