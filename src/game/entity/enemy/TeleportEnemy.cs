@@ -10,7 +10,7 @@ namespace BulletHell.Game.Entities.Enemies
 
         private static DrawData EnemyDrawData => new(Textures.Circle, Colors.EnemyTeleport);
 
-        private int _teleportTicks = 0;
+        private int _teleportTicks = TeleportIntervalTicks;
 
         public TeleportEnemy(Vector2 position, float enemyLife) : base(position, enemyLife, EnemyDrawData, Colors.EnemyTeleportHealth) {}
 
