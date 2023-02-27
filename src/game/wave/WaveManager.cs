@@ -30,10 +30,12 @@ namespace BulletHell.Game.Waves
             // decrement spawn ticks
             for (int i = 0; i < NextSpawnTicks.Length; i++)
             {
-                if (--NextSpawnTicks[i] <= 0)
+                ref var nextSpawnTick = ref NextSpawnTicks[i];
+                ref var waveInfo = ref s_wave.WaveInfoArray[i];
+                if (--nextSpawnTick <= 0)
                 {
-                    NextSpawnTicks[i] = s_wave.WaveInfoArray[i].SpawnRateTicks;
-                    SpawnEnemy(s_wave.WaveInfoArray[i]);
+                    nextSpawnTick = waveInfo.SpawnRateTicks;
+                    SpawnEnemy(waveInfo);
                 }
             }
         }
