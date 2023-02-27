@@ -2,7 +2,6 @@ using BulletHell.Game.Entities;
 using BulletHell.Input;
 using BulletHell.Scenes;
 using BulletHell.Utils;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
 namespace BulletHell.Game.Weapon
@@ -85,14 +84,8 @@ namespace BulletHell.Game.Weapon
             else
                 NextShotTicks = Weapon.ShotTicks;
             var player = GameScene.Player;
-            var playerPos = player.Position;
-            var direction = InputManager.MousePositionOffset - playerPos;
-            if (direction == Vector2.Zero)
-                direction = Vector2.UnitX;
-            else
-                direction.Normalize();
-            var spawnPos = playerPos + (direction * PROJECTILE_SPAWN_DISTANCE);
-            GameScene.AddProjectile(new Projectile(spawnPos, direction, player));
+            var direction = InputManager.MousePositionOffset - player.Position;
+            Projectile.FireFromEntity(player, direction);
         }
     }
 }

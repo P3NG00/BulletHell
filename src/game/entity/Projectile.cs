@@ -1,3 +1,4 @@
+using BulletHell.Scenes;
 using BulletHell.Utils;
 using Microsoft.Xna.Framework;
 
@@ -24,6 +25,21 @@ namespace BulletHell.Game.Entities
             Damage();
             // base call
             base.Tick();
+        }
+
+        public static void FireFromEntity(AbstractEntity entity, Vector2 direction)
+        {
+            // fix direction
+            if (direction == Vector2.Zero)
+                direction = Vector2.UnitX;
+            else
+                direction.Normalize();
+            // spawn projectile
+            var distance = Projectile.PROJECTILE_RADIUS + entity.Radius;
+            var spawnOffset = direction * distance;
+            var spawnPos = entity.Position + spawnOffset;
+            var projectile = new Projectile(spawnPos, direction, entity);
+            GameScene.AddProjectile(projectile);
         }
     }
 }
