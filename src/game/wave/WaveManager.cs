@@ -45,12 +45,7 @@ namespace BulletHell.Game.Waves
             ResetNextSpawnTicks();
         }
 
-        private static void ResetNextSpawnTicks()
-        {
-            NextSpawnTicks = new int[s_wave.WaveInfoArray.Length];
-            for (int i = 0; i < NextSpawnTicks.Length; i++)
-                NextSpawnTicks[i] = s_wave.WaveInfoArray[i].SpawnRateTicks;
-        }
+        private static void ResetNextSpawnTicks() => NextSpawnTicks = Util.PopulateArray(s_wave.WaveInfoArray.Length, i => s_wave.WaveInfoArray[i].SpawnRateTicks);
 
         private static void NextWave()
         {
