@@ -25,7 +25,7 @@ namespace BulletHell.Game.Entities
 
         private Vector2 DrawSize => new Vector2(Radius * 2f);
 
-        public float Radius { get; private set; }
+        public readonly float Radius;
         public readonly float MaxLife;
         public Vector2 Position;
 
@@ -47,9 +47,9 @@ namespace BulletHell.Game.Entities
             Radius = radius;
             _moveSpeed = moveSpeed;
             MaxLife = maxLife;
-            Life = maxLife;
+            _life = maxLife;
             _drawData = drawData;
-            RawVelocity = velocity ?? Vector2.Zero;
+            _rawVelocity = velocity ?? Vector2.Zero;
             if (healthColor.HasValue)
                 _healthBarDrawData = new DrawData(Textures.Circle, healthColor.Value);
         }
@@ -59,7 +59,7 @@ namespace BulletHell.Game.Entities
             if (!Alive)
                 return;
             // normalize velocity
-            if (RawVelocity.Length() != 0f)
+            if (RawVelocity.Length() > 1f)
                 RawVelocity = Vector2.Normalize(RawVelocity);
             // update position
             Position += Velocity;
