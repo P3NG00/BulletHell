@@ -22,14 +22,15 @@ namespace BulletHell.Scenes
         public static int Score;
 
         private readonly Button _buttonResume = CreateMainButton("resume", Colors.ThemeDefault, ResumeGame);
-        private readonly Button _buttonExit = CreateExitButton(BackToMainMenu);
+        private readonly Button _buttonRestart = CreateMainButton("restart", Colors.ThemeGreen, NewGame);
+        private readonly Button _buttonMainMenu = CreateExitButton(BackToMainMenu);
         private readonly List<Projectile> _projectiles = new();
         private readonly List<AbstractEnemy> _enemies = new();
-        private readonly Player _player = new();
 
-        private Vector2 _mouseOffset = Vector2.Zero;
-        private bool _paused = false;
-        private int _cleanupTicks = CleanupInterval;
+        private Player _player;
+        private Vector2 _mouseOffset;
+        private bool _paused;
+        private int _cleanupTicks;
         private int _lastTilesDrawn;
 
         public sealed override (string, string[])[] ExtraDebugInfo => new[] {
@@ -72,9 +73,7 @@ namespace BulletHell.Scenes
         public GameScene()
         {
             this.SingletonCheck(ref _instance);
-            WeaponManager.Reset();
-            WaveManager.Reset();
-            Score = 0;
+            NewGame();
         }
 
         // TODO implement scroll wheel for zooming in and out
@@ -87,14 +86,21 @@ namespace BulletHell.Scenes
                 if (_paused)
                 {
                     _buttonResume.ResetMouseLock();
-                    _buttonExit.ResetMouseLock();
+                    _buttonMainMenu.ResetMouseLock();
                 }
             }
             // paused
             if (_paused)
             {
                 _buttonResume.HandleInput();
-                _buttonExit.HandleInput();
+                _buttonMainMenu.HandleInput();
+                return;
+            }
+            // if dead
+            if (!_player.Alive)
+            {
+                _buttonRestart.HandleInput();
+                _buttonMainMenu.HandleInput();
                 return;
             }
             // update weapon
@@ -110,22 +116,27 @@ namespace BulletHell.Scenes
             // check pause. check instance because it's referenced in following function calls
             if (_paused || _instance == null)
                 return;
-            // tick player
-            _player.Tick();
-            // tick weapon
-            WeaponManager.Tick();
+            // if alive
+            var playerAlive = _player.Alive;
+            if (playerAlive)
+            {
+                // tick player
+                _player.Tick();
+                // tick weapon
+                WeaponManager.Tick();
+                // tick wave
+                WaveManager.Tick();
+            }
             // tick entities
             _enemies.ForEach(enemy => enemy.Tick());
             _projectiles.ForEach(projectile => projectile.Tick());
-            // tick wave
-            WaveManager.Tick();
             // check collisions
             HandleCollisions();
             // tick cleanup
             if (--_cleanupTicks <= 0)
                 Cleanup();
             // update camera offset
-            var mouseOffset = InputManager.MousePositionOffset - _player.Position;
+            var mouseOffset = playerAlive ? InputManager.MousePositionOffset - _player.Position : Vector2.Zero;
             if (mouseOffset.Length() > MAX_MOUSE_OFFSET)
                 mouseOffset = Vector2.Normalize(mouseOffset) * MAX_MOUSE_OFFSET;
             _mouseOffset = Vector2.Lerp(_mouseOffset, mouseOffset, 0.1f);
@@ -141,7 +152,11 @@ namespace BulletHell.Scenes
             DrawPause();
         }
 
-        public sealed override void OnLostFocus() => _paused = true;
+        public sealed override void OnLostFocus()
+        {
+            if (_player.Alive)
+                _paused = true;
+        }
 
         private void DrawGame()
         {
@@ -152,6 +167,16 @@ namespace BulletHell.Scenes
             // draw entities
             _enemies.ForEach(enemy => enemy.Draw());
             _projectiles.ForEach(projectile => projectile.Draw());
+            // check alive
+            if (_player.Alive)
+                return;
+            Display.DrawFadedOverlay();
+            // TODO display game over reason: death from projectile, death from enemy, game end success, etc.
+            // draw score
+            FontType.VeniceClassic.DrawCenteredString(new(0.5f, 0.4f), $"score: {Score}", Colors.UI_Text, new(4), drawStringFunc: Fonts.DrawStringWithShadow);
+            // draw buttons
+            _buttonRestart.Draw();
+            _buttonMainMenu.Draw();
         }
 
         private void DrawBackground()
@@ -183,12 +208,12 @@ namespace BulletHell.Scenes
             if (!_paused)
                 return;
             // draw overlay
-            Display.DrawPauseOverlay();
+            Display.DrawFadedOverlay();
             // draw paused text
             FontType.VeniceClassic.DrawCenteredString(new(0.5f, 0.4f), "paused", Colors.UI_Text, new(3), drawStringFunc: Fonts.DrawStringWithShadow);
             // draw buttons
             _buttonResume.Draw();
-            _buttonExit.Draw();
+            _buttonMainMenu.Draw();
         }
 
         // TODO optimize collision checking
@@ -251,6 +276,22 @@ namespace BulletHell.Scenes
             _cleanupTicks = CleanupInterval;
             _enemies.RemoveAll(enemy => !enemy.Alive);
             _projectiles.RemoveAll(projectile => !projectile.Alive);
+        }
+
+        private static void NewGame()
+        {
+            var inst = _instance;
+            inst._player = new();
+            inst._projectiles.Clear();
+            inst._enemies.Clear();
+            inst._mouseOffset = Vector2.Zero;
+            inst._cleanupTicks = CleanupInterval;
+            inst._paused = false;
+            inst._buttonMainMenu.ResetMouseLock();
+            inst._buttonRestart.ResetMouseLock();
+            WeaponManager.Reset();
+            WaveManager.Reset();
+            Score = 0;
         }
 
         private static void BackToMainMenu() => SceneManager.Scene = new MainMenuScene();

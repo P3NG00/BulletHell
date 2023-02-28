@@ -53,7 +53,7 @@ namespace BulletHell.Game.Waves
         {
             if (CurrentWave >= Waves.Amount - 1)
             {
-                SceneManager.Scene = new GameEndScene();
+                // TODO handle new game ending, clear enemies or something
                 return;
             }
             s_wave = Waves.FromID(CurrentWave + 1);

@@ -1,5 +1,4 @@
 using BulletHell.Input;
-using BulletHell.Scenes;
 using BulletHell.Utils;
 using Microsoft.Xna.Framework;
 
@@ -62,7 +61,5 @@ namespace BulletHell.Game.Entities
             InvincibilityTicks = InvincibilityResetTicks;
             base.Damage(damage);
         }
-
-        protected sealed override void OnDeath() => SceneManager.Scene = new GameEndScene();
     }
 }
