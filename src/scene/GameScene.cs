@@ -69,7 +69,7 @@ namespace BulletHell.Scenes
             }),
         };
 
-        public GameScene() // TODO take DeathReason as parameter to display accurate death message. make DeathReason enum
+        public GameScene()
         {
             this.SingletonCheck(ref _instance);
             WeaponManager.Reset();

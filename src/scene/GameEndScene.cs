@@ -5,6 +5,7 @@ namespace BulletHell.Scenes
     public sealed class GameEndScene : AbstractScene
     {
         // TODO remove GameEndScene. make end screen an overlay on the GameScene while it's still unpaused and stop spawning new enemies
+        // TODO take DeathReason as parameter to display accurate death message. make DeathReason enum
 
         private readonly Button _restartButton = CreateMainButton("restart", Colors.ThemeGreen, RestartGame);
         private readonly Button _mainMenuButton = CreateExitButton(BackToMainMenu);
