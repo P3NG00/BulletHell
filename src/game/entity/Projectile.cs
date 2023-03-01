@@ -1,3 +1,4 @@
+using BulletHell.Game.Weapon;
 using BulletHell.Scenes;
 using BulletHell.Utils;
 using Microsoft.Xna.Framework;
@@ -6,19 +7,17 @@ namespace BulletHell.Game.Entities
 {
     public sealed class Projectile : AbstractEntity
     {
-        private const float PROJECTILE_SPEED = 6.25f;
+        private static readonly DrawData ProjectileDrawData = new(Textures.Circle, Colors.Projectile);
 
-        public const float PROJECTILE_RADIUS = 8f;
-
-        private static readonly float ProjectileLife = GameManager.SecondsToTicks(1f);
-
-        private static DrawData ProjectileDrawData => new(Textures.Circle, Colors.Projectile);
-
+        public readonly ProjectileInfo ProjectileInfo;
         public readonly AbstractEntity SourceEntity;
 
-        public Projectile(Vector2 position, Vector2 direction, AbstractEntity source) :
-            base(position, PROJECTILE_RADIUS, PROJECTILE_SPEED, ProjectileLife, ProjectileDrawData, direction) =>
-                SourceEntity = source;
+        public Projectile(ProjectileInfo projectileInfo, AbstractEntity source, Vector2 position, Vector2 direction) :
+            base(position, projectileInfo.Radius, projectileInfo.Speed, projectileInfo.LifeTicks, ProjectileDrawData, direction)
+        {
+            ProjectileInfo = projectileInfo;
+            SourceEntity = source;
+        }
 
         public sealed override void Tick()
         {
@@ -27,7 +26,7 @@ namespace BulletHell.Game.Entities
             base.Tick();
         }
 
-        public static void FireFromEntity(AbstractEntity entity, Vector2 direction)
+        public static void FireFromEntity(ProjectileInfo projectileInfo, AbstractEntity entity, Vector2 direction)
         {
             // fix direction
             if (direction == Vector2.Zero)
@@ -35,10 +34,10 @@ namespace BulletHell.Game.Entities
             else
                 direction.Normalize();
             // spawn projectile
-            var distance = Projectile.PROJECTILE_RADIUS + entity.Radius;
+            var distance = projectileInfo.Radius + entity.Radius;
             var spawnOffset = direction * distance;
             var spawnPos = entity.Position + spawnOffset;
-            var projectile = new Projectile(spawnPos, direction, entity);
+            var projectile = new Projectile(projectileInfo, entity, spawnPos, direction);
             GameScene.AddProjectile(projectile);
         }
     }

@@ -14,10 +14,9 @@ namespace BulletHell.Game.Entities
 
         public const float PLAYER_RADIUS = 16f;
 
+        private static readonly DrawData PlayerDrawData = new(Textures.Circle, Colors.Player);
+        private static readonly DrawData PlayerInvincibleDrawData = new(Textures.Circle, Colors.PlayerInvincible);
         private static readonly int InvincibilityResetTicks = GameManager.SecondsToTicks(1f);
-
-        private static DrawData PlayerDrawData => new(Textures.Circle, Colors.Player);
-        private static DrawData PlayerInvincibleDrawData => new(Textures.Circle, Colors.PlayerInvincible);
 
         protected sealed override DrawData DrawData => !InvincibilityTicks.IsEven() ? PlayerInvincibleDrawData : base.DrawData;
 

@@ -5,7 +5,7 @@ namespace BulletHell.Game.Entities.Enemies
 {
     public sealed class FollowerEnemy : AbstractBasicEnemy
     {
-        private static DrawData EnemyDrawData => new(Textures.Circle, Colors.EnemyFollower);
+        private static readonly DrawData EnemyDrawData = new(Textures.Circle, Colors.EnemyFollower);
 
         public FollowerEnemy(Vector2 position, float enemyLife) : base(position, enemyLife, EnemyDrawData, Colors.EnemyFollowerHealth) {}
     }

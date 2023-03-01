@@ -8,8 +8,6 @@ namespace BulletHell.Game.Weapon
 {
     public static class WeaponManager
     {
-        private const float PROJECTILE_SPAWN_DISTANCE = Player.PLAYER_RADIUS + Projectile.PROJECTILE_RADIUS;
-
         public static int SwitchTicks { get; private set; } = 0;
         public static int ReloadTicks { get; private set; } = 0;
         public static int NextShotTicks { get; private set; } = 0;
@@ -85,7 +83,7 @@ namespace BulletHell.Game.Weapon
                 NextShotTicks = Weapon.ShotTicks;
             var player = GameScene.Player;
             var direction = InputManager.MousePositionOffset - player.Position;
-            Projectile.FireFromEntity(player, direction);
+            Projectile.FireFromEntity(s_weapon.ProjectileInfo, player, direction);
         }
     }
 }

@@ -1,3 +1,4 @@
+using BulletHell.Game.Weapon;
 using BulletHell.Scenes;
 using BulletHell.Utils;
 using Microsoft.Xna.Framework;
@@ -6,8 +7,8 @@ namespace BulletHell.Game.Entities.Enemies
 {
     public sealed class ProjectileEnemy : AbstractBasicEnemy
     {
-        private static DrawData EnemyDrawData => new(Textures.Circle, Colors.EnemyProjectile);
-
+        private static readonly ProjectileInfo ProjectileInfo = new(1f, 6f, 8f, 1.25f);
+        private static readonly DrawData EnemyDrawData = new(Textures.Circle, Colors.EnemyProjectile);
         private static readonly int ProjectileTicks = GameManager.SecondsToTicks(5f);
 
         private int _nextProjectileTicks = ProjectileTicks;
@@ -22,7 +23,7 @@ namespace BulletHell.Game.Entities.Enemies
                 _nextProjectileTicks = ProjectileTicks;
                 // spawn projectile
                 var direction = GameScene.Player.Position - Position;
-                Projectile.FireFromEntity(this, direction);
+                Projectile.FireFromEntity(ProjectileInfo, this, direction);
             }
             base.Tick();
         }

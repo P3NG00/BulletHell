@@ -6,9 +6,8 @@ namespace BulletHell.Game.Entities.Enemies
 {
     public sealed class TeleportEnemy : AbstractBasicEnemy
     {
+        private static readonly DrawData EnemyDrawData = new(Textures.Circle, Colors.EnemyTeleport);
         private static readonly int TeleportIntervalTicks = GameManager.SecondsToTicks(6f);
-
-        private static DrawData EnemyDrawData => new(Textures.Circle, Colors.EnemyTeleport);
 
         private int _teleportTicks = TeleportIntervalTicks;
 

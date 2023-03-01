@@ -4,20 +4,16 @@ namespace BulletHell.Game.Weapon
 {
     public sealed class Weapon : GameObject
     {
+        public readonly ProjectileInfo ProjectileInfo;
         public readonly string Name;
         public readonly int ClipSize;
         public readonly int SwitchTicks;
         public readonly int ReloadTicks;
         public readonly int ShotTicks;
 
-        // TODO different projectile types
-        // TODO different projectile life ticks
-        // TODO different projectile damage
-        // TODO different projectile speed
-        // TODO different projectile size
-
-        public Weapon(string name, int clipSize, float fireRateSeconds, float reloadSeconds, float switchSeconds, int id) : base(id)
+        public Weapon(ProjectileInfo projectileInfo, string name, int clipSize, float fireRateSeconds, float reloadSeconds, float switchSeconds, int id) : base(id)
         {
+            ProjectileInfo = projectileInfo;
             Name = name;
             ClipSize = clipSize;
             ShotTicks = GameManager.SecondsToTicks(fireRateSeconds);

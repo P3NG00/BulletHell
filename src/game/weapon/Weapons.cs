@@ -6,9 +6,9 @@ namespace BulletHell.Game.Weapon
 
         public static int Amount => s_instance.ObjectAmount;
 
-        public static Weapon Pistol = new Weapon("Pistol", 12, 0.5f, 1.2f, 0.5f, 0); // TODO shoot faster but less damage
-        public static Weapon MachineGun = new Weapon("Machine Gun", 32, 0.1f, 1.5f, 0.75f, 1);
-        public static Weapon MiniGun = new Weapon("Mini Gun", 100, 0.05f, 7f, 1.25f, 2); // TODO less damage but more bullets
+        public static Weapon Pistol = new Weapon(new(2f, 9.5f, 8f, 1.5f), "Pistol", 16, 0.25f, 1.1f, 0.4f, 0);
+        public static Weapon MachineGun = new Weapon(new(1.5f, 8f, 12f, 1f), "Machine Gun", 48, 0.1f, 1.25f, 0.6f, 1);
+        public static Weapon MiniGun = new Weapon(new(0.75f, 4f, 6f, 0.75f), "Mini Gun", 256, 0.05f, 3.5f, 0.8f, 2);
 
         protected sealed override Weapon[] ObjectArray => new[]
         {
