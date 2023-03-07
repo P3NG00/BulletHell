@@ -40,9 +40,9 @@ namespace BulletHell.Game.Waves
             }
         }
 
-        public static void Reset()
+        public static void SetWave(int waveID)
         {
-            s_wave = Waves.FromID(0);
+            s_wave = Waves.FromID(waveID);
             CurrentWaveTicks = s_wave.WaveLengthTicks;
             ResetNextSpawnTicks();
         }
@@ -56,9 +56,7 @@ namespace BulletHell.Game.Waves
                 // TODO handle new game ending, clear enemies or something
                 return;
             }
-            s_wave = Waves.FromID(CurrentWave + 1);
-            CurrentWaveTicks = s_wave.WaveLengthTicks;
-            ResetNextSpawnTicks();
+            SetWave(CurrentWave + 1);
         }
 
         private static void SpawnEnemy(WaveInfo waveInfo)

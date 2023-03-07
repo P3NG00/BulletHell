@@ -290,7 +290,7 @@ namespace BulletHell.Scenes
             inst._buttonMainMenu.ResetMouseLock();
             inst._buttonRestart.ResetMouseLock();
             WeaponManager.Reset();
-            WaveManager.Reset();
+            WaveManager.SetWave(0);
             Score = 0;
         }
 
