@@ -11,8 +11,15 @@ namespace BulletHell.Game.Weapon
         public readonly int ReloadTicks;
         public readonly int ShotTicks;
 
-        // TODO make more verbose and readable
-        public Weapon(ProjectileInfo projectileInfo, string name, int clipSize, float fireRateSeconds, float reloadSeconds, float switchSeconds, int id) : base(id)
+        public Weapon(
+            ProjectileInfo projectileInfo,
+            string name,
+            int clipSize,
+            float fireRateSeconds,
+            float reloadSeconds,
+            float switchSeconds,
+            int id) :
+        base(id)
         {
             ProjectileInfo = projectileInfo;
             Name = name;

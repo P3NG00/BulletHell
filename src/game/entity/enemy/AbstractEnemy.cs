@@ -9,17 +9,26 @@ namespace BulletHell.Game.Entities.Enemies
         public readonly float EnemyDamage;
         public readonly float PointReward;
 
-        public AbstractEnemy(Vector2 position, float radius, float moveSpeed, float enemyLife, float enemyDamage, float pointReward, DrawData drawData, float dashMultiplier = 0f, float dashSeconds = 0f, float dashCooldownSeconds = 0f) :
-            base(
-                position: position,
-                radius: radius,
-                moveSpeed: moveSpeed,
-                life: enemyLife,
-                drawData: drawData,
-                dashMultiplier: dashMultiplier,
-                dashSeconds: dashSeconds,
-                dashCooldownSeconds: dashCooldownSeconds
-            )
+        public AbstractEnemy(
+            Vector2 position,
+            float radius,
+            float moveSpeed,
+            float enemyLife,
+            float enemyDamage,
+            float pointReward,
+            DrawData drawData,
+            float dashMultiplier = 0f,
+            float dashSeconds = 0f,
+            float dashCooldownSeconds = 0f) :
+        base(
+            position: position,
+            radius: radius,
+            moveSpeed: moveSpeed,
+            life: enemyLife,
+            drawData: drawData,
+            dashMultiplier: dashMultiplier,
+            dashSeconds: dashSeconds,
+            dashCooldownSeconds: dashCooldownSeconds)
         {
             EnemyDamage = enemyDamage;
             PointReward = pointReward;

@@ -39,7 +39,13 @@ namespace BulletHell.Game.Entities
         private Vector2 _rawVelocity;
         private float _life;
 
-        public AbstractEntity(Vector2 position, float radius, float moveSpeed, float life, DrawData drawData, Vector2? velocity = null)
+        public AbstractEntity(
+            Vector2 position,
+            float radius,
+            float moveSpeed,
+            float life,
+            DrawData drawData,
+            Vector2? velocity = null)
         {
             Position = position;
             Radius = radius;

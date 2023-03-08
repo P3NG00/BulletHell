@@ -7,10 +7,48 @@ namespace BulletHell.Game.Weapon
         public static int Amount => s_instance.ObjectAmount;
 
         // TODO make weapons less overpowered
-        // TODO make more verbose and readable
-        public static Weapon Pistol = new Weapon(new(2f, 9.5f, 8f, 1.5f), "Pistol", 16, 0.25f, 1.1f, 0.4f, 0);
-        public static Weapon MachineGun = new Weapon(new(1.5f, 8f, 12f, 1f), "Machine Gun", 48, 0.1f, 1.25f, 0.6f, 1); // TODO make bullets smaller and shoot slower
-        public static Weapon MiniGun = new Weapon(new(0.75f, 4f, 6f, 0.75f), "Mini Gun", 256, 0.05f, 3.5f, 0.8f, 2);
+        public static readonly Weapon Pistol = new Weapon(
+            projectileInfo: new(
+                damage: 2f,
+                speed: 9.5f,
+                radius: 8f,
+                lifeSeconds: 1.5f
+            ),
+            name: "Pistol",
+            clipSize: 16,
+            fireRateSeconds: 0.25f,
+            reloadSeconds: 1.1f,
+            switchSeconds: 0.4f,
+            id: 0
+        );
+        public static readonly Weapon MachineGun = new Weapon(
+            projectileInfo: new(
+                damage: 1.5f,
+                speed: 8f,
+                radius: 12f,
+                lifeSeconds: 1f
+            ),
+            name: "Machine Gun",
+            clipSize: 48,
+            fireRateSeconds: 0.1f,
+            reloadSeconds: 1.25f,
+            switchSeconds: 0.6f,
+            id: 1
+        ); // TODO make bullets smaller and shoot slower
+        public static readonly Weapon MiniGun = new Weapon(
+            projectileInfo: new(
+                damage: 0.75f,
+                speed: 4f,
+                radius: 6f,
+                lifeSeconds: 0.75f
+            ),
+            name: "Mini Gun",
+            clipSize: 256,
+            fireRateSeconds: 0.05f,
+            reloadSeconds: 3.5f,
+            switchSeconds: 0.8f,
+            id: 2
+        );
         // TODO create shotgun with spread
 
         protected sealed override Weapon[] ObjectArray => new[]

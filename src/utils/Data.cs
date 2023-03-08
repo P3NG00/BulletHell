@@ -8,6 +8,8 @@ namespace BulletHell.Utils
 
         public static bool SaveExists => File.Exists(SAVE_FILE);
 
+        // TODO implement 'high score' saving for displaying when the game is over or from the homescreen
+
         public static void Save()
         {
             using (var stream = new BinaryWriter(File.Open(SAVE_FILE, FileMode.Create)))
