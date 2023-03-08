@@ -8,12 +8,13 @@ namespace BulletHell.Game.Waves
 
         public static int Amount => s_instance.ObjectAmount;
 
-        // TODO make waves more even
+        // TODO add more waves to draw out the experience
+        // TODO expand wave declaration (make more verbose and readable)
         protected sealed override Wave[] ObjectArray => new Wave[] {
-            new(45f, 0, new WaveInfo(typeof(FollowerEnemy), 2f, 1.25f)),
-            new(45f, 1, new WaveInfo(typeof(FollowerEnemy), 3f, 1f), new WaveInfo(typeof(DashingEnemy), 3f, 1.5f)),
-            new(45f, 2, new WaveInfo(typeof(DashingEnemy), 4f, 1.25f), new WaveInfo(typeof(ProjectileEnemy), 3f, 2f)),
-            new(45f, 3, new WaveInfo(typeof(DashingEnemy), 3.5f, 1.5f), new WaveInfo(typeof(ProjectileEnemy), 5f, 2f), new WaveInfo(typeof(TeleportEnemy), 4f, 4f)),
+            new(45f, 0, new EnemyInfo(typeof(FollowerEnemy), 2f, 0.5f, 1.25f)),
+            new(45f, 1, new EnemyInfo(typeof(FollowerEnemy), 3f, 0.5f, 1f), new EnemyInfo(typeof(DashingEnemy), 3f, 0.75f, 1.5f)),
+            new(45f, 2, new EnemyInfo(typeof(DashingEnemy), 4f, 0.75f, 1.25f), new EnemyInfo(typeof(ProjectileEnemy), 3f, 1f, 2f)),
+            new(45f, 3, new EnemyInfo(typeof(DashingEnemy), 3.5f, 1f, 1.5f), new EnemyInfo(typeof(ProjectileEnemy), 5f, 1.25f, 2f), new EnemyInfo(typeof(TeleportEnemy), 4f, 1.5f, 4f)),
         };
 
         public Waves() : base(ref s_instance) {}

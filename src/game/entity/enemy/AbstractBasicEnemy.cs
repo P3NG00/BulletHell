@@ -9,8 +9,20 @@ namespace BulletHell.Game.Entities.Enemies
         private const float ENEMY_RADIUS = 16f;
         private const float ENEMY_LERP_VALUE = 0.085f;
 
-        public AbstractBasicEnemy(Vector2 position, float enemyLife, DrawData drawData, Color healthColor, float dashMultiplier = 0f, float dashSeconds = 0f, float dashCooldownSeconds = 0f) :
-            base(position, ENEMY_RADIUS, ENEMY_SPEED, enemyLife, drawData, healthColor, dashMultiplier, dashSeconds, dashCooldownSeconds) {}
+        public AbstractBasicEnemy(Vector2 position, float enemyLife, float enemyDamage, DrawData drawData, Color healthColor, float dashMultiplier = 0f, float dashSeconds = 0f, float dashCooldownSeconds = 0f) :
+            base(
+                position: position,
+                radius: ENEMY_RADIUS,
+                moveSpeed: ENEMY_SPEED,
+                enemyLife: enemyLife,
+                enemyDamage: enemyDamage,
+                drawData: drawData,
+                healthColor: healthColor,
+                dashMultiplier: dashMultiplier,
+                dashSeconds: dashSeconds,
+                dashCooldownSeconds: dashCooldownSeconds
+            )
+        {}
 
         public override void Tick()
         {

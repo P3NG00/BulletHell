@@ -31,11 +31,11 @@ namespace BulletHell.Game.Waves
             for (int i = 0; i < NextSpawnTicks.Length; i++)
             {
                 ref var nextSpawnTick = ref NextSpawnTicks[i];
-                ref var waveInfo = ref s_wave.WaveInfoArray[i];
+                ref var enemyInfo = ref s_wave.EnemyInfoArray[i];
                 if (--nextSpawnTick <= 0)
                 {
-                    nextSpawnTick = waveInfo.SpawnTicks;
-                    SpawnEnemy(waveInfo);
+                    nextSpawnTick = enemyInfo.SpawnTicks;
+                    SpawnEnemy(enemyInfo);
                 }
             }
         }
@@ -47,7 +47,7 @@ namespace BulletHell.Game.Waves
             ResetNextSpawnTicks();
         }
 
-        private static void ResetNextSpawnTicks() => NextSpawnTicks = Util.PopulateArray(s_wave.WaveInfoArray.Length, i => s_wave.WaveInfoArray[i].SpawnTicks);
+        private static void ResetNextSpawnTicks() => NextSpawnTicks = Util.PopulateArray(s_wave.EnemyInfoArray.Length, i => s_wave.EnemyInfoArray[i].SpawnTicks);
 
         private static void NextWave()
         {
@@ -59,12 +59,12 @@ namespace BulletHell.Game.Waves
             SetWave(CurrentWave + 1);
         }
 
-        private static void SpawnEnemy(WaveInfo waveInfo)
+        private static void SpawnEnemy(EnemyInfo enemyInfo)
         {
             var direction = Util.Random.NextUnitVector();
             var spawnOffset = SpawnDistance * direction;
             var position = GameScene.Player.Position + spawnOffset;
-            var enemy = (AbstractEnemy)Activator.CreateInstance(waveInfo.EnemyType, position, waveInfo.EnemyHealth);
+            var enemy = (AbstractEnemy)Activator.CreateInstance(enemyInfo.EnemyType, position, enemyInfo.EnemyHealth, enemyInfo.EnemyDamage);
             GameScene.AddEnemy(enemy);
         }
     }

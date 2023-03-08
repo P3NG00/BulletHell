@@ -11,8 +11,18 @@ namespace BulletHell.Game.Entities.Enemies
 
         private static readonly DrawData EnemyDrawData = new(Textures.Circle, Colors.EnemyDashing);
 
-        public DashingEnemy(Vector2 position, float enemyLife) :
-            base(position, enemyLife, EnemyDrawData, Colors.EnemyDashingHealth, ENEMY_DASH_MULTPLIER, ENEMY_DASH_SECONDS, ENEMY_DASH_COOLDOWN_SECONDS) {}
+        public DashingEnemy(Vector2 position, float enemyLife, float enemyDamage) :
+            base(
+                position: position,
+                enemyLife: enemyLife,
+                enemyDamage: enemyDamage,
+                drawData: EnemyDrawData,
+                healthColor: Colors.EnemyDashingHealth,
+                dashMultiplier: ENEMY_DASH_MULTPLIER,
+                dashSeconds: ENEMY_DASH_SECONDS,
+                dashCooldownSeconds: ENEMY_DASH_COOLDOWN_SECONDS
+            )
+        {}
 
         public sealed override void Tick()
         {

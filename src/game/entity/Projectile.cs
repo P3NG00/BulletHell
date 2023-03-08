@@ -9,13 +9,20 @@ namespace BulletHell.Game.Entities
     {
         private static readonly DrawData ProjectileDrawData = new(Textures.Circle, Colors.Projectile);
 
-        public readonly ProjectileInfo ProjectileInfo;
         public readonly AbstractEntity SourceEntity;
+        public readonly float ProjectileDamage;
 
         public Projectile(ProjectileInfo projectileInfo, AbstractEntity source, Vector2 position, Vector2 direction) :
-            base(position, projectileInfo.Radius, projectileInfo.Speed, projectileInfo.LifeTicks, ProjectileDrawData, direction)
+            base(
+                position: position,
+                radius: projectileInfo.Radius,
+                moveSpeed: projectileInfo.Speed,
+                maxLife: projectileInfo.LifeTicks,
+                drawData: ProjectileDrawData,
+                velocity: direction
+            )
         {
-            ProjectileInfo = projectileInfo;
+            ProjectileDamage = projectileInfo.Damage;
             SourceEntity = source;
         }
 

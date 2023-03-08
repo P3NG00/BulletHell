@@ -26,7 +26,7 @@ namespace BulletHell.Game.Entities
         private Vector2 DrawSize => new Vector2(Radius * 2f);
 
         public readonly float Radius;
-        public readonly float MaxLife;
+        public readonly float MaxLife; // TODO move to AbstractEnemy
         public Vector2 Position;
 
         protected virtual Vector2 RawVelocity

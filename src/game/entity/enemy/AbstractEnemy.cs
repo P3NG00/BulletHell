@@ -6,9 +6,24 @@ namespace BulletHell.Game.Entities.Enemies
 {
     public abstract class AbstractEnemy : AbstractCreatureEntity
     {
-        public AbstractEnemy(Vector2 position, float radius, float moveSpeed, float enemyLife, DrawData drawData, Color healthColor, float dashMultiplier = 0f, float dashSeconds = 0f, float dashCooldownSeconds = 0f) :
-            base(position, radius, moveSpeed, enemyLife, drawData, healthColor: healthColor, dashMultiplier: dashMultiplier, dashSeconds: dashSeconds, dashCooldownSeconds: dashCooldownSeconds) =>
-                UpdateVelocityTowardsPlayer(1f);
+        public readonly float EnemyDamage;
+
+        public AbstractEnemy(Vector2 position, float radius, float moveSpeed, float enemyLife, float enemyDamage, DrawData drawData, Color healthColor, float dashMultiplier = 0f, float dashSeconds = 0f, float dashCooldownSeconds = 0f) :
+            base(
+                position: position,
+                radius: radius,
+                moveSpeed: moveSpeed,
+                maxLife: enemyLife,
+                drawData: drawData,
+                healthColor: healthColor,
+                dashMultiplier: dashMultiplier,
+                dashSeconds: dashSeconds,
+                dashCooldownSeconds: dashCooldownSeconds
+            )
+        {
+            EnemyDamage = enemyDamage;
+            UpdateVelocityTowardsPlayer(1f);
+        }
 
         protected void UpdateVelocityTowardsPlayer(float lerpValue)
         {
@@ -18,6 +33,7 @@ namespace BulletHell.Game.Entities.Enemies
             RawVelocity = Vector2.Lerp(RawVelocity, playerDirection, lerpValue);
         }
 
-        protected sealed override void OnDeath() => GameScene.Score += (int)MaxLife;
+        // TODO make 'float Reward' a property when MaxLife is removed
+        protected sealed override void OnDeath() => GameScene.Score += MaxLife;
     }
 }

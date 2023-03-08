@@ -24,7 +24,19 @@ namespace BulletHell.Game.Entities
 
         private bool IsInvincible => InvincibilityTicks > 0;
 
-        public Player() : base(Vector2.Zero, PLAYER_RADIUS, PLAYER_SPEED, PLAYER_LIFE, PlayerDrawData, healthColor: Colors.PlayerHealth, dashMultiplier: PLAYER_DASH_MULT, dashSeconds: PLAYER_DASH_SECONDS, dashCooldownSeconds: PLAYER_DASH_COOLDOWN_SECONDS) {}
+        public Player() :
+            base(
+                position: Vector2.Zero,
+                radius: PLAYER_RADIUS,
+                moveSpeed: PLAYER_SPEED,
+                maxLife: PLAYER_LIFE,
+                drawData: PlayerDrawData,
+                healthColor: Colors.PlayerHealth,
+                dashMultiplier: PLAYER_DASH_MULT,
+                dashSeconds: PLAYER_DASH_SECONDS,
+                dashCooldownSeconds: PLAYER_DASH_COOLDOWN_SECONDS
+            )
+        {}
 
         public void HandleInput()
         {

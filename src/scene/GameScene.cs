@@ -19,7 +19,7 @@ namespace BulletHell.Scenes
 
         public static Player Player => _instance._player;
 
-        public static int Score;
+        public static float Score;
 
         private readonly Button _buttonResume = CreateMainButton("resume", Colors.ThemeDefault, ResumeGame);
         private readonly Button _buttonRestart = CreateMainButton("restart", Colors.ThemeGreen, NewGame);
@@ -69,6 +69,8 @@ namespace BulletHell.Scenes
                 $"spawn_distance: {WaveManager.SpawnDistance:0.000}",
             }),
         };
+
+        // TODO add health pickups that spawn randomly and rarely
 
         public GameScene()
         {
@@ -223,6 +225,7 @@ namespace BulletHell.Scenes
             for (int i = 0; i < _projectiles.Count; i++)
             {
                 var projectile = _projectiles[i];
+                var projectileDamage = projectile.ProjectileDamage;
                 if (!projectile.Alive)
                     continue;
                 // check against enemies
@@ -231,14 +234,14 @@ namespace BulletHell.Scenes
                     var enemy = _enemies[j];
                     if (!enemy.Alive || projectile.SourceEntity is AbstractEnemy || !projectile.CollidesWith(enemy))
                         continue;
-                    enemy.Damage(); // TODO pass damage amount from weapon type. make weapons have different damage amounts
+                    enemy.Damage(projectileDamage);
                     projectile.Kill();
                     break;
                 }
                 // check against player
                 if (projectile.SourceEntity is not AbstractEnemy || !projectile.CollidesWith(_player))
                     continue;
-                _player.Damage(); // TODO pass damage amount from weapon type. make weapons have different damage amounts
+                _player.Damage(projectileDamage);
                 projectile.Kill();
             }
             // handle entity collisions
@@ -266,7 +269,7 @@ namespace BulletHell.Scenes
                     var direction = Vector2.Normalize(enemy.Position - _player.Position);
                     var newPos = _player.Position + (direction * (enemy.Radius + _player.Radius));
                     enemy.Position = newPos;
-                    _player.Damage(); // TODO pass enemy damage
+                    _player.Damage(enemy.EnemyDamage);
                 }
             }
         }
@@ -291,7 +294,7 @@ namespace BulletHell.Scenes
             inst._buttonRestart.ResetMouseLock();
             WeaponManager.Reset();
             WaveManager.SetWave(0);
-            Score = 0;
+            Score = 0f;
         }
 
         private static void BackToMainMenu() => SceneManager.Scene = new MainMenuScene();

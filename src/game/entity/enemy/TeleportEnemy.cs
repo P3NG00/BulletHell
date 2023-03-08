@@ -11,7 +11,15 @@ namespace BulletHell.Game.Entities.Enemies
 
         private int _teleportTicks = TeleportIntervalTicks;
 
-        public TeleportEnemy(Vector2 position, float enemyLife) : base(position, enemyLife, EnemyDrawData, Colors.EnemyTeleportHealth) {}
+        public TeleportEnemy(Vector2 position, float enemyLife, float enemyDamage) :
+            base(
+                position: position,
+                enemyLife: enemyLife,
+                enemyDamage: enemyDamage,
+                drawData: EnemyDrawData,
+                healthColor: Colors.EnemyTeleportHealth
+            )
+        {}
 
         private void TeleportAroundPlayer()
         {
