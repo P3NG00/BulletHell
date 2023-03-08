@@ -175,7 +175,7 @@ namespace BulletHell.Scenes
             Display.DrawFadedOverlay();
             // TODO display game over reason: death from projectile, death from enemy, game end success, etc.
             // draw score
-            FontType.VeniceClassic.DrawCenteredString(new(0.5f, 0.4f), $"score: {Score}", Colors.UI_Text, new(4), drawStringFunc: Fonts.DrawStringWithShadow);
+            FontType.VeniceClassic.DrawCenteredString(new(0.5f, 0.4f), $"score: {Score}", Colors.Text, new(4), drawStringFunc: Fonts.DrawStringWithShadow);
             // draw buttons
             _buttonRestart.Draw();
             _buttonMainMenu.Draw();
@@ -212,7 +212,7 @@ namespace BulletHell.Scenes
             // draw overlay
             Display.DrawFadedOverlay();
             // draw paused text
-            FontType.VeniceClassic.DrawCenteredString(new(0.5f, 0.4f), "paused", Colors.UI_Text, new(3), drawStringFunc: Fonts.DrawStringWithShadow);
+            FontType.VeniceClassic.DrawCenteredString(new(0.5f, 0.4f), "paused", Colors.Text, new(3), drawStringFunc: Fonts.DrawStringWithShadow);
             // draw buttons
             _buttonResume.Draw();
             _buttonMainMenu.Draw();

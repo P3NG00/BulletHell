@@ -67,11 +67,7 @@ namespace BulletHell.Utils
             Draw(drawPos, size, drawData, rotation);
         }
 
-        public static void DrawOffsetCentered(Vector2 position, Vector2 size, DrawData drawData, float rotation = 0f)
-        {
-            var drawPos = position - CameraOffset - (size / 2f);
-            Draw(drawPos, size, drawData, rotation);
-        }
+        public static void DrawOffsetCentered(Vector2 position, Vector2 size, DrawData drawData, float rotation = 0f) => DrawOffset(position - (size / 2f), size, drawData, rotation);
 
         public static void DrawScreenRelativeCentered(Vector2 screenPosition, Vector2 size, DrawData drawData, float rotation = 0f)
         {

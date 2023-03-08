@@ -5,6 +5,8 @@ namespace BulletHell.Game.Entities
 {
     public abstract class AbstractCreatureEntity : AbstractEntity
     {
+        private const float TEXT_HEALTH_SCALE = 2f;
+
         private const float DASH_ROTATION_LERP = 0.05f;
 
         public bool CanDash => DashCooldownTicks <= 0;
@@ -57,6 +59,17 @@ namespace BulletHell.Game.Entities
                 DashTicks--;
             // base call
             base.Tick();
+        }
+
+        public override void Draw()
+        {
+            if (!Alive)
+                return;
+            // base draw
+            base.Draw();
+            // draw health
+            var drawScale = new Vector2(TEXT_HEALTH_SCALE);
+            FontType.type_writer.DrawOffsetStringCentered(DrawPosition, Life.ToString(), Colors.Health, drawScale);
         }
 
         protected void Dash()

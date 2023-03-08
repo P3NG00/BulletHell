@@ -20,6 +20,7 @@ namespace BulletHell.Game.Entities
             }
         }
 
+        protected Vector2 DrawPosition => Position * new Vector2(1, -1);
         protected virtual DrawData DrawData => _drawData;
         protected virtual float MoveSpeed => _moveSpeed;
 
@@ -66,16 +67,12 @@ namespace BulletHell.Game.Entities
             Position += Velocity;
         }
 
-        public void Draw()
+        public virtual void Draw()
         {
             if (!Alive)
                 return;
-            // get relative screen position
-            var drawPos = Position * new Vector2(1, -1);
             // draw to surface
-            Display.DrawOffsetCentered(drawPos, DrawSize, DrawData);
-            // draw health
-            // TODO draw number centered on entity to display health amount
+            Display.DrawOffsetCentered(DrawPosition, DrawSize, DrawData);
         }
 
         public virtual void Damage(float amount = 1f) => Life -= amount;

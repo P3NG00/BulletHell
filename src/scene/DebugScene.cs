@@ -30,7 +30,7 @@ namespace BulletHell.Scenes
             // local func
             void DrawFont(FontType fontType, DrawStringFunc drawStringFunc)
             {
-                drawStringFunc(fontType, drawPos, fontType.ToString(), Colors.UI_Text, new Vector2(TEXT_SCALE));
+                drawStringFunc(fontType, drawPos, fontType.ToString(), Colors.Text, new Vector2(TEXT_SCALE));
                 drawPos.Y += fontType.GetFont().LineSpacing * TEXT_SCALE;
             }
         }

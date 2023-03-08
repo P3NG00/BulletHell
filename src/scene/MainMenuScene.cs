@@ -32,7 +32,7 @@ namespace BulletHell.Scenes
         {
             // draw title
             _rotation = MathF.Sin(GameManager.Ticks * TITLE_ROT_FREQ) * TITLE_ROT_AMP;
-            FontType.alagard.DrawCenteredString(new(0.5f, 0.35f), BulletHell.TITLE, Colors.UI_Title, new(6), _rotation, Fonts.DrawStringWithShadow);
+            FontType.alagard.DrawCenteredString(new(0.5f, 0.35f), BulletHell.TITLE, Colors.Title, new(6), _rotation, Fonts.DrawStringWithShadow);
             // draw buttons
             _buttonStart.Draw();
             _buttonExit.Draw();

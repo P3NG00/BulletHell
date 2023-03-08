@@ -53,7 +53,7 @@ namespace BulletHell.Utils
             // local func
             void DrawDebugInfo(string debugLine)
             {
-                FontType.type_writer.DrawStringWithBackground(drawPos, debugLine, Colors.UI_Text);
+                FontType.type_writer.DrawStringWithBackground(drawPos, debugLine, Colors.Text);
                 AddSpacer();
             }
             void AddSpacer() => drawPos.Y += spacer;

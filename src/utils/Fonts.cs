@@ -35,6 +35,31 @@ namespace BulletHell.Utils
             Display.SpriteBatch.DrawString(fontType.GetFont(), text, position + (origin * scale.Value), color, rotation, origin, scale.Value, SpriteEffects.None, 0f);
         }
 
+        public static void DrawOffsetString(this FontType fontType, Vector2 position, string text, Color color, Vector2? scale = null, float rotation = 0f, DrawStringFunc drawStringFunc = null)
+        {
+            FixDrawStringFunc(ref drawStringFunc);
+            var drawPos = position - Display.CameraOffset;
+            drawStringFunc(fontType, drawPos, text, color, scale, rotation);
+        }
+
+        public static void DrawOffsetStringCentered(this FontType fontType, Vector2 position, string text, Color color, Vector2? scale = null, float rotation = 0f, DrawStringFunc drawStringFunc = null)
+        {
+            FixScale(ref scale);
+            var textSize = fontType.MeasureString(text) * scale.Value;
+            DrawOffsetString(fontType, position - (textSize / 2f), text, color, scale, rotation, drawStringFunc);
+        }
+
+        // (0f, 0f) = top-left of window.
+        // (1f, 1f) = bottom-right of window.
+        public static void DrawCenteredString(this FontType fontType, Vector2 relativeScreenPosition, string text, Color color, Vector2? scale = null, float rotation = 0f, DrawStringFunc drawStringFunc = null)
+        {
+            FixDrawStringFunc(ref drawStringFunc);
+            var textSize = fontType.MeasureString(text) * scale.Value;
+            var screenPosition = relativeScreenPosition * Display.WindowSize.ToVector2();
+            var drawPos = screenPosition - (textSize / 2f);
+            drawStringFunc(fontType, drawPos, text, color, scale, rotation);
+        }
+
         public static void DrawStringWithBackground(this FontType fontType, Vector2 position, string text, Color color, Vector2? scale = null, float rotation = 0f)
         {
             FixScale(ref scale);
@@ -54,24 +79,6 @@ namespace BulletHell.Utils
             DrawString(fontType, position + scale.Value, text, Colors.TextShadow, scale, rotation);
             // draw regular text
             DrawString(fontType, position, text, color, scale, rotation);
-        }
-
-        // (0f, 0f) = top-left of window.
-        // (1f, 1f) = bottom-right of window.
-        public static void DrawCenteredString(this FontType fontType, Vector2 relativeScreenPosition, string text, Color color, Vector2? scale = null, float rotation = 0f, DrawStringFunc drawStringFunc = null)
-        {
-            FixDrawStringFunc(ref drawStringFunc);
-            var textSize = fontType.MeasureString(text) * scale.Value;
-            var screenPosition = relativeScreenPosition * Display.WindowSize.ToVector2();
-            var drawPos = screenPosition - (textSize / 2f);
-            drawStringFunc(fontType, drawPos, text, color, scale, rotation);
-        }
-
-        public static void DrawOffsetString(this FontType fontType, Vector2 position, string text, Color color, Vector2? scale = null, float rotation = 0f, DrawStringFunc drawStringFunc = null)
-        {
-            FixDrawStringFunc(ref drawStringFunc);
-            var drawPos = position - Display.CameraOffset;
-            drawStringFunc(fontType, drawPos, text, color, scale, rotation);
         }
 
         public delegate void DrawStringFunc(FontType fontType, Vector2 position, string text, Color color, Vector2? scale = null, float rotation = 0f);
