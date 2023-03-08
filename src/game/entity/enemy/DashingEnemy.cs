@@ -16,8 +16,8 @@ namespace BulletHell.Game.Entities.Enemies
                 position: position,
                 enemyLife: enemyLife,
                 enemyDamage: enemyDamage,
+                pointReward: enemyLife,
                 drawData: EnemyDrawData,
-                healthColor: Colors.EnemyDashingHealth,
                 dashMultiplier: ENEMY_DASH_MULTPLIER,
                 dashSeconds: ENEMY_DASH_SECONDS,
                 dashCooldownSeconds: ENEMY_DASH_COOLDOWN_SECONDS

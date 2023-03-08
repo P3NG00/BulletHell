@@ -26,7 +26,6 @@ namespace BulletHell.Game.Entities
         private Vector2 DrawSize => new Vector2(Radius * 2f);
 
         public readonly float Radius;
-        public readonly float MaxLife; // TODO move to AbstractEnemy
         public Vector2 Position;
 
         protected virtual Vector2 RawVelocity
@@ -35,23 +34,19 @@ namespace BulletHell.Game.Entities
             set => _rawVelocity = value;
         }
 
-        private readonly DrawData? _healthBarDrawData = null;
         private readonly DrawData _drawData;
         private readonly float _moveSpeed;
         private Vector2 _rawVelocity;
         private float _life;
 
-        public AbstractEntity(Vector2 position, float radius, float moveSpeed, float maxLife, DrawData drawData, Vector2? velocity = null, Color? healthColor = null)
+        public AbstractEntity(Vector2 position, float radius, float moveSpeed, float life, DrawData drawData, Vector2? velocity = null)
         {
             Position = position;
             Radius = radius;
             _moveSpeed = moveSpeed;
-            MaxLife = maxLife;
-            _life = maxLife;
+            _life = life;
             _drawData = drawData;
             _rawVelocity = velocity ?? Vector2.Zero;
-            if (healthColor.HasValue)
-                _healthBarDrawData = new DrawData(Textures.Circle, healthColor.Value);
         }
 
         public virtual void Tick()
@@ -74,11 +69,7 @@ namespace BulletHell.Game.Entities
             // draw to surface
             Display.DrawOffsetCentered(drawPos, DrawSize, DrawData);
             // draw health
-            if (!_healthBarDrawData.HasValue)
-                return;
-            var healthPercentage = Life / MaxLife;
-            var healthBarDrawSize = DrawSize * healthPercentage;
-            Display.DrawOffsetCentered(drawPos, healthBarDrawSize, _healthBarDrawData.Value);
+            // TODO draw number centered on entity to display health amount
         }
 
         public virtual void Damage(float amount = 1f) => Life -= amount;

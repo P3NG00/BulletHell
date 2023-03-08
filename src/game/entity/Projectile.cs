@@ -17,7 +17,7 @@ namespace BulletHell.Game.Entities
                 position: position,
                 radius: projectileInfo.Radius,
                 moveSpeed: projectileInfo.Speed,
-                maxLife: projectileInfo.LifeTicks,
+                life: projectileInfo.LifeTicks,
                 drawData: ProjectileDrawData,
                 velocity: direction
             )

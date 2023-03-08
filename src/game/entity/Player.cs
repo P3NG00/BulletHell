@@ -29,9 +29,8 @@ namespace BulletHell.Game.Entities
                 position: Vector2.Zero,
                 radius: PLAYER_RADIUS,
                 moveSpeed: PLAYER_SPEED,
-                maxLife: PLAYER_LIFE,
+                life: PLAYER_LIFE,
                 drawData: PlayerDrawData,
-                healthColor: Colors.PlayerHealth,
                 dashMultiplier: PLAYER_DASH_MULT,
                 dashSeconds: PLAYER_DASH_SECONDS,
                 dashCooldownSeconds: PLAYER_DASH_COOLDOWN_SECONDS

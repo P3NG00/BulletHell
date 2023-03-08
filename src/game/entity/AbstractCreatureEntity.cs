@@ -25,15 +25,14 @@ namespace BulletHell.Game.Entities
         private readonly int _dashResetTicks;
         private readonly int _dashCooldownResetTicks;
 
-        protected AbstractCreatureEntity(Vector2 position, float radius, float moveSpeed, float maxLife, DrawData drawData, Vector2? velocity = null, Color? healthColor = null, float dashMultiplier = 0f, float dashSeconds = 0f, float dashCooldownSeconds = 0f) :
+        protected AbstractCreatureEntity(Vector2 position, float radius, float moveSpeed, float life, DrawData drawData, Vector2? velocity = null, float dashMultiplier = 0f, float dashSeconds = 0f, float dashCooldownSeconds = 0f) :
             base(
                 position: position,
                 radius: radius,
                 moveSpeed: moveSpeed,
-                maxLife: maxLife,
+                life: life,
                 drawData: drawData,
-                velocity: velocity,
-                healthColor: healthColor
+                velocity: velocity
             )
         {
             _dashSpeed = moveSpeed * dashMultiplier;

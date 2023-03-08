@@ -16,8 +16,8 @@ namespace BulletHell.Game.Entities.Enemies
                 position: position,
                 enemyLife: enemyLife,
                 enemyDamage: enemyDamage,
-                drawData: EnemyDrawData,
-                healthColor: Colors.EnemyTeleportHealth
+                pointReward: enemyLife,
+                drawData: EnemyDrawData
             )
         {}
 

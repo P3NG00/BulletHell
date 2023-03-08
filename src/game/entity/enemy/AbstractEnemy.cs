@@ -7,21 +7,22 @@ namespace BulletHell.Game.Entities.Enemies
     public abstract class AbstractEnemy : AbstractCreatureEntity
     {
         public readonly float EnemyDamage;
+        public readonly float PointReward;
 
-        public AbstractEnemy(Vector2 position, float radius, float moveSpeed, float enemyLife, float enemyDamage, DrawData drawData, Color healthColor, float dashMultiplier = 0f, float dashSeconds = 0f, float dashCooldownSeconds = 0f) :
+        public AbstractEnemy(Vector2 position, float radius, float moveSpeed, float enemyLife, float enemyDamage, float pointReward, DrawData drawData, float dashMultiplier = 0f, float dashSeconds = 0f, float dashCooldownSeconds = 0f) :
             base(
                 position: position,
                 radius: radius,
                 moveSpeed: moveSpeed,
-                maxLife: enemyLife,
+                life: enemyLife,
                 drawData: drawData,
-                healthColor: healthColor,
                 dashMultiplier: dashMultiplier,
                 dashSeconds: dashSeconds,
                 dashCooldownSeconds: dashCooldownSeconds
             )
         {
             EnemyDamage = enemyDamage;
+            PointReward = pointReward;
             UpdateVelocityTowardsPlayer(1f);
         }
 
@@ -34,6 +35,6 @@ namespace BulletHell.Game.Entities.Enemies
         }
 
         // TODO make 'float Reward' a property when MaxLife is removed
-        protected sealed override void OnDeath() => GameScene.Score += MaxLife;
+        protected sealed override void OnDeath() => GameScene.Score += PointReward;
     }
 }
