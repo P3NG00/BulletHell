@@ -8,7 +8,7 @@ namespace BulletHell.Utils
     {
         public const int UI_SPACER = 5;
 
-        public static Vector2 UISpacerVec => new(UI_SPACER);
+        public static Vector2 UISpacerVector => new(UI_SPACER);
 
         public static readonly Random Random = new Random();
 

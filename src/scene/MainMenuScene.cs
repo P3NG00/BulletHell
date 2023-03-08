@@ -1,4 +1,5 @@
 using System;
+using BulletHell.Input;
 using BulletHell.Utils;
 
 namespace BulletHell.Scenes
@@ -22,6 +23,9 @@ namespace BulletHell.Scenes
             // update buttons
             _buttonStart.HandleInput();
             _buttonExit.HandleInput();
+            // check debug screen input
+            if (Keybinds.Pause.Held && Keybinds.Debug.Held)
+                SceneManager.Scene = new DebugScene();
         }
 
         public sealed override void Draw()

@@ -43,7 +43,6 @@ namespace BulletHell.Game.Entities.Enemies
             RawVelocity = Vector2.Lerp(RawVelocity, playerDirection, lerpValue);
         }
 
-        // TODO make 'float Reward' a property when MaxLife is removed
         protected sealed override void OnDeath() => GameScene.Score += PointReward;
     }
 }

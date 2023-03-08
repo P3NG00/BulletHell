@@ -24,7 +24,7 @@ namespace BulletHell.Utils
             // draw center point
             Display.DrawScreenRelativeCentered(new Vector2(0.5f), new Vector2(6), new(new Color(0, 0, 255)));
             // draw ui info
-            var drawPos = Util.UISpacerVec;
+            var drawPos = Util.UISpacerVector;
             var spacer = Util.UI_SPACER + FontType.type_writer.GetFont().LineSpacing;
             var debugInfo = new[] {
                 $"window_size: {Display.WindowSize.X} x {Display.WindowSize.Y}",
