@@ -15,6 +15,7 @@ namespace BulletHell.Game.Entities.Enemies
 
         public ProjectileEnemy(Vector2 position, float enemyLife) : base(position, enemyLife, EnemyDrawData, Colors.EnemyProjectileHealth) {}
 
+        // TODO 2 types of directional shots: one in direction of player with random aspect to it, and one exactly where the player will be if they continue moving in the same direction
         public sealed override void Tick()
         {
             // tick projectile timer

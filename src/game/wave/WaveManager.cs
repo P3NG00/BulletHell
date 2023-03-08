@@ -34,7 +34,7 @@ namespace BulletHell.Game.Waves
                 ref var waveInfo = ref s_wave.WaveInfoArray[i];
                 if (--nextSpawnTick <= 0)
                 {
-                    nextSpawnTick = waveInfo.SpawnRateTicks;
+                    nextSpawnTick = waveInfo.SpawnTicks;
                     SpawnEnemy(waveInfo);
                 }
             }
@@ -47,7 +47,7 @@ namespace BulletHell.Game.Waves
             ResetNextSpawnTicks();
         }
 
-        private static void ResetNextSpawnTicks() => NextSpawnTicks = Util.PopulateArray(s_wave.WaveInfoArray.Length, i => s_wave.WaveInfoArray[i].SpawnRateTicks);
+        private static void ResetNextSpawnTicks() => NextSpawnTicks = Util.PopulateArray(s_wave.WaveInfoArray.Length, i => s_wave.WaveInfoArray[i].SpawnTicks);
 
         private static void NextWave()
         {

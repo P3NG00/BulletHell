@@ -7,14 +7,13 @@ namespace BulletHell.Game.Waves
     {
         public readonly Type EnemyType;
         public readonly float EnemyHealth;
-        public readonly int SpawnRateTicks;
+        public readonly int SpawnTicks;
 
-        // TODO change 'spawnRatePerSecond' to 'spawnSeconds' and adjust accordingly
-        public WaveInfo(Type enemyType, float enemyHealth, float spawnRatePerSecond)
+        public WaveInfo(Type enemyType, float enemyHealth, float spawnSeconds)
         {
             EnemyType = enemyType;
             EnemyHealth = enemyHealth;
-            SpawnRateTicks = GameManager.SecondsToTicks(1f / spawnRatePerSecond);
+            SpawnTicks = GameManager.SecondsToTicks(spawnSeconds);
         }
     }
 }
