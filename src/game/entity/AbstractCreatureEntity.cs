@@ -6,7 +6,6 @@ namespace BulletHell.Game.Entities
     public abstract class AbstractCreatureEntity : AbstractEntity
     {
         private const float TEXT_HEALTH_SCALE = 2f;
-
         private const float DASH_ROTATION_LERP = 0.05f;
 
         public bool CanDash => DashCooldownTicks <= 0;

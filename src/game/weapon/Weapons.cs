@@ -11,7 +11,7 @@ namespace BulletHell.Game.Weapon
             projectileInfo: new(
                 damage: 2f,
                 speed: 9.5f,
-                radius: 8f,
+                radius: 10f,
                 lifeSeconds: 1.5f
             ),
             name: "Pistol",
@@ -25,16 +25,16 @@ namespace BulletHell.Game.Weapon
             projectileInfo: new(
                 damage: 1.5f,
                 speed: 8f,
-                radius: 12f,
+                radius: 8f,
                 lifeSeconds: 1f
             ),
             name: "Machine Gun",
             clipSize: 48,
-            fireRateSeconds: 0.1f,
+            fireRateSeconds: 0.17f,
             reloadSeconds: 1.25f,
             switchSeconds: 0.6f,
             id: 1
-        ); // TODO make bullets smaller and shoot slower
+        );
         public static readonly Weapon MiniGun = new Weapon(
             projectileInfo: new(
                 damage: 0.75f,

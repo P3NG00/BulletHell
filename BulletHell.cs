@@ -78,6 +78,7 @@ namespace BulletHell
             // update frames per second
             GameManager.UpdateFramesPerSecond(gameTime.ElapsedGameTime.TotalMilliseconds);
             // begin drawing
+            // TODO implement SpriteSortMode.BackToFront and add layerDepth to draw calls
             Display.SpriteBatch.Begin(samplerState: SamplerState.PointClamp);
             // draw scene
             SceneManager.Scene.Draw();
