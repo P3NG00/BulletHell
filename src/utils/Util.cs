@@ -79,6 +79,8 @@ namespace BulletHell.Utils
             return new Vector2((float)Math.Cos(angle), (float)Math.Sin(angle));
         }
 
+        public static float NextFloat(this Random random, float min, float max) => (random.NextSingle() * (max - min)) + min;
+
         public delegate void ActionRef<T>(ref T t);
     }
 }

@@ -11,35 +11,35 @@ namespace BulletHell.Game.Waves
         // TODO add more waves to draw out the experience
         private static readonly Wave Wave0 = new(
             waveLengthSeconds: 45f,
-            id: 0,
             enemyInfos: new EnemyInfo[] {
                 new EnemyInfo(typeof(FollowerEnemy), 2f, 0.5f, 1.25f)
-            }
+            },
+            id: 0
         );
         private static readonly Wave Wave1 = new(
             waveLengthSeconds: 45f,
-            id: 1,
             enemyInfos: new EnemyInfo[] {
                 new EnemyInfo(typeof(FollowerEnemy), 3f, 0.5f, 1f),
                 new EnemyInfo(typeof(DashingEnemy), 3f, 0.75f, 1.5f)
-            }
+            },
+            id: 1
         );
         private static readonly Wave Wave2 = new(
             waveLengthSeconds: 45f,
-            id: 2,
             enemyInfos: new EnemyInfo[] {
                 new EnemyInfo(typeof(DashingEnemy), 4f, 0.75f, 1.25f),
                 new EnemyInfo(typeof(ProjectileEnemy), 3f, 1f, 2f)
-            }
+            },
+            id: 2
         );
         private static readonly Wave Wave3 = new(
             waveLengthSeconds: 45f,
-            id: 3,
             enemyInfos: new EnemyInfo[] {
                 new EnemyInfo(typeof(DashingEnemy), 3.5f, 1f, 1.5f),
                 new EnemyInfo(typeof(ProjectileEnemy), 5f, 1.25f, 2f),
                 new EnemyInfo(typeof(TeleportEnemy), 4f, 1.5f, 4f)
-            }
+            },
+            id: 3
         );
 
         protected sealed override Wave[] ObjectArray => new Wave[] {

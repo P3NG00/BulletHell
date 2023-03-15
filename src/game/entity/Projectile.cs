@@ -33,18 +33,22 @@ namespace BulletHell.Game.Entities
             base.Tick();
         }
 
-        public static void FireFromEntity(ProjectileInfo projectileInfo, AbstractEntity entity, Vector2 direction)
+        public static void FireFromEntity(ProjectileInfo projectileInfo, AbstractEntity sourceEntity, Vector2 towardsPoint, float angleRadians = 0f)
         {
+            var direction = towardsPoint - sourceEntity.Position;
             // fix direction
             if (direction == Vector2.Zero)
                 direction = Vector2.UnitX;
             else
                 direction.Normalize();
+            // rotate direction
+            if (angleRadians != 0f)
+                direction = Vector2.Transform(direction, Matrix.CreateRotationZ(angleRadians));
             // spawn projectile
-            var distance = projectileInfo.Radius + entity.Radius;
+            var distance = projectileInfo.Radius + sourceEntity.Radius;
             var spawnOffset = direction * distance;
-            var spawnPos = entity.Position + spawnOffset;
-            var projectile = new Projectile(projectileInfo, entity, spawnPos, direction);
+            var spawnPos = sourceEntity.Position + spawnOffset;
+            var projectile = new Projectile(projectileInfo, sourceEntity, spawnPos, direction);
             GameScene.AddProjectile(projectile);
         }
     }

@@ -20,8 +20,8 @@ namespace BulletHell.Game.Weapon
                 if (s_weapon == value || IsSwitching || IsFiring)
                     return;
                 s_weapon = value;
-                SwitchTicks = value.SwitchTicks;
-                ReloadTicks = s_clipAmounts[value.ID] <= 0 ? value.ReloadTicks : 0;
+                SwitchTicks = value.WeaponInfo.SwitchTicks;
+                ReloadTicks = s_clipAmounts[value.ID] <= 0 ? value.WeaponInfo.ReloadTicks : 0;
             }
         }
 
@@ -38,8 +38,8 @@ namespace BulletHell.Game.Weapon
 
         public static void HandleInput()
         {
-            if (Keybinds.Reload.PressedThisFrame && !IsFiring && !IsReloading && AmmoAmount != Weapon.ClipSize)
-                ReloadTicks = Weapon.ReloadTicks;
+            if (Keybinds.Reload.PressedThisFrame && !IsFiring && !IsReloading && AmmoAmount != Weapon.WeaponInfo.ClipSize)
+                ReloadTicks = Weapon.WeaponInfo.ReloadTicks;
             for (int i = 0; i < Weapons.Amount; i++)
                 if (InputManager.KeyPressedThisFrame(Keys.D1 + i))
                     WeaponManager.Weapon = Weapons.FromID(i);
@@ -53,7 +53,7 @@ namespace BulletHell.Game.Weapon
             {
                 ReloadTicks--;
                 if (!IsReloading)
-                    CurrentAmmo = Weapon.ClipSize;
+                    CurrentAmmo = Weapon.WeaponInfo.ClipSize;
             }
             else if (IsFiring)
                 NextShotTicks--;
@@ -64,7 +64,7 @@ namespace BulletHell.Game.Weapon
         public static void Reset()
         {
             // reset clip amounts
-            s_clipAmounts = Util.PopulateArray<int>(Weapons.Amount, id => Weapons.FromID(id).ClipSize);
+            s_clipAmounts = Util.PopulateArray<int>(Weapons.Amount, id => Weapons.FromID(id).WeaponInfo.ClipSize);
             // reset value to allow weapon switching
             s_weapon = null;
             SwitchTicks = 0;
@@ -76,14 +76,24 @@ namespace BulletHell.Game.Weapon
 
         private static void FireWeapon()
         {
-            CurrentAmmo--;
-            if (IsEmpty)
-                ReloadTicks = Weapon.ReloadTicks;
-            else
-                NextShotTicks = Weapon.ShotTicks;
+            var weaponInfo = Weapon.WeaponInfo;
             var player = GameScene.Player;
-            var direction = InputManager.MousePositionOffset - player.Position;
-            Projectile.FireFromEntity(s_weapon.ProjectileInfo, player, direction);
+            // decrement ammo
+            CurrentAmmo--;
+            // adjust weapon ticks
+            if (IsEmpty)
+                ReloadTicks = weaponInfo.ReloadTicks;
+            else
+                NextShotTicks = weaponInfo.ShotTicks;
+            // fire projectile(s)
+            for (int i = 0; i < weaponInfo.ProjectilesPerShot; i++)
+            {
+                var spreadRadians = weaponInfo.ProjectileSpreadRadians;
+                var angleRadians = spreadRadians;
+                if (angleRadians != 0f)
+                    angleRadians = Util.Random.NextFloat(-spreadRadians, spreadRadians);
+                Projectile.FireFromEntity(Weapon.ProjectileInfo, player, InputManager.MousePositionOffset, angleRadians);
+            }
         }
     }
 }

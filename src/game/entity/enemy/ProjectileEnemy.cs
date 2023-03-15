@@ -32,8 +32,7 @@ namespace BulletHell.Game.Entities.Enemies
             {
                 _nextProjectileTicks = ProjectileTicks;
                 // spawn projectile
-                var direction = GameScene.Player.Position - Position;
-                Projectile.FireFromEntity(ProjectileInfo, this, direction);
+                Projectile.FireFromEntity(ProjectileInfo, this, GameScene.Player.Position);
             }
             base.Tick();
         }

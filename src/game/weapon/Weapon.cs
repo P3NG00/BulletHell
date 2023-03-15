@@ -1,32 +1,18 @@
-using BulletHell.Utils;
-
 namespace BulletHell.Game.Weapon
 {
     public sealed class Weapon : GameObject
     {
+        public readonly WeaponInfo WeaponInfo;
         public readonly ProjectileInfo ProjectileInfo;
-        public readonly string Name;
-        public readonly int ClipSize;
-        public readonly int SwitchTicks;
-        public readonly int ReloadTicks;
-        public readonly int ShotTicks;
 
         public Weapon(
+            WeaponInfo weaponInfo,
             ProjectileInfo projectileInfo,
-            string name,
-            int clipSize,
-            float fireRateSeconds,
-            float reloadSeconds,
-            float switchSeconds,
             int id) :
         base(id)
         {
+            WeaponInfo = weaponInfo;
             ProjectileInfo = projectileInfo;
-            Name = name;
-            ClipSize = clipSize;
-            ShotTicks = GameManager.SecondsToTicks(fireRateSeconds);
-            ReloadTicks = GameManager.SecondsToTicks(reloadSeconds);
-            SwitchTicks = GameManager.SecondsToTicks(switchSeconds);
         }
     }
 }

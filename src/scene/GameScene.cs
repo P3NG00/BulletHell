@@ -45,7 +45,9 @@ namespace BulletHell.Scenes
             }),
             ("weapon",
             new[] {
-                $"weapon: {WeaponManager.Weapon.Name}",
+                $"weapon: {WeaponManager.Weapon.WeaponInfo.Name}",
+                $"weapon_projectiles: {WeaponManager.Weapon.WeaponInfo.ProjectilesPerShot}",
+                $"weapon_spread: {WeaponManager.Weapon.WeaponInfo.ProjectileSpreadRadians:0.000}",
                 $"clip_amount: {WeaponManager.AmmoAmount}",
                 $"switch_ticks: {WeaponManager.SwitchTicks}",
                 $"reload_ticks: {WeaponManager.ReloadTicks}",

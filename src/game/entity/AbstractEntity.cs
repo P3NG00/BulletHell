@@ -75,7 +75,7 @@ namespace BulletHell.Game.Entities
             Display.DrawOffsetCentered(DrawPosition, DrawSize, DrawData);
         }
 
-        public virtual void Damage(float amount = 1f) => Life -= amount;
+        public virtual void Damage(float amount = 1f) => Life = (float)((decimal)Life - (decimal)amount);
 
         protected virtual void OnDeath() {}
 
