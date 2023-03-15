@@ -45,7 +45,8 @@ namespace BulletHell.Game.Weapon
                 clipSize: 256,
                 fireRateSeconds: 0.05f,
                 reloadSeconds: 3.5f,
-                switchSeconds: 1f
+                switchSeconds: 1f,
+                projectileSpread: 0.15f
             ),
             projectileInfo: new(
                 damage: 0.75f,
