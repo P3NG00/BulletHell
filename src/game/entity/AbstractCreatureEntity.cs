@@ -73,7 +73,7 @@ namespace BulletHell.Game.Entities
 
         protected void Dash()
         {
-            if (_dashSpeed <= 0f || !CanDash || RawVelocity.Length() == 0f)
+            if (_dashSpeed <= 0f || !CanDash || RawVelocity == Vector2.Zero)
                 return;
             DashTicks = _dashResetTicks;
             DashCooldownTicks = _dashCooldownResetTicks;
