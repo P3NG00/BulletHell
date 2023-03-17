@@ -89,10 +89,9 @@ namespace BulletHell.Game.Weapon
             for (int i = 0; i < weaponInfo.ProjectilesPerShot; i++)
             {
                 var spreadRadians = weaponInfo.ProjectileSpreadRadians;
-                var angleRadians = spreadRadians;
-                if (angleRadians != 0f)
-                    angleRadians = Util.Random.NextFloat(-spreadRadians, spreadRadians);
-                Projectile.FireFromEntity(Weapon.ProjectileInfo, player, InputManager.MousePositionOffset, angleRadians);
+                if (spreadRadians != 0f)
+                    spreadRadians = Util.Random.NextFloat(-spreadRadians, spreadRadians);
+                Projectile.FireFromEntity(Weapon.ProjectileInfo, player, InputManager.MousePositionOffset, spreadRadians);
             }
         }
     }
