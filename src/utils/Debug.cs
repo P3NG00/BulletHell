@@ -6,7 +6,7 @@ namespace BulletHell.Utils
 {
     public static class Debug
     {
-        public static bool _enabled = false;
+        private static bool _enabled = false;
 
         public static bool Enabled => _enabled;
 
@@ -29,7 +29,7 @@ namespace BulletHell.Utils
             var debugInfo = new[] {
                 $"window_size: {Display.WindowSize.X} x {Display.WindowSize.Y}",
                 $"time_scale: {GameManager.TimeScale:0.00}",
-                $"seconds: {(GameManager.Ticks / (float)GameManager.TICKS_PER_SECOND):0.000}",
+                $"seconds: {GameManager.Ticks / (float)GameManager.TICKS_PER_SECOND:0.000}",
                 $"ticks: {GameManager.Ticks}",
                 $"tps: {GameManager.TICKS_PER_SECOND}",
                 $"tps_scaled: {GameManager.TICKS_PER_SECOND * GameManager.TimeScale:0.000}",
@@ -44,11 +44,11 @@ namespace BulletHell.Utils
                 $"handle_input: {BulletHell.HandleInput}"};
             debugInfo.ForEach(DrawDebugInfo);
             // draw extra info
-            foreach (var e in SceneManager.Scene.ExtraDebugInfo)
+            foreach (var (Title, Lines) in SceneManager.Scene.ExtraDebugInfo)
             {
                 AddSpacer();
-                DrawDebugInfo($"category_{e.Title}");
-                e.Lines.ForEach(DrawDebugInfo);
+                DrawDebugInfo($"category_{Title}");
+                Lines.ForEach(DrawDebugInfo);
             }
             // local func
             void DrawDebugInfo(string debugLine)

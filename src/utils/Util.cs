@@ -15,7 +15,7 @@ namespace BulletHell.Utils
         public static void SingletonCheck<T>(this T instance, ref T singleton)
         {
             if (singleton != null)
-                throw new System.Exception("Singleton already instantiated.");
+                throw new Exception("Singleton already instantiated.");
             singleton = instance;
         }
 

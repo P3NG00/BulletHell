@@ -9,7 +9,7 @@ namespace BulletHell.Game.Entities.Enemies
         public readonly float EnemyDamage;
         public readonly float PointReward;
 
-        public AbstractEnemy(
+        protected AbstractEnemy(
             Vector2 position,
             float radius,
             float moveSpeed,

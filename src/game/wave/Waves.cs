@@ -12,32 +12,32 @@ namespace BulletHell.Game.Waves
         private static readonly Wave Wave0 = new(
             waveLengthSeconds: 45f,
             enemyInfos: new EnemyInfo[] {
-                new EnemyInfo(typeof(FollowerEnemy), 2f, 0.5f, 1.25f)
+                new(typeof(FollowerEnemy), 2f, 0.5f, 1.25f)
             },
             id: 0
         );
         private static readonly Wave Wave1 = new(
             waveLengthSeconds: 45f,
             enemyInfos: new EnemyInfo[] {
-                new EnemyInfo(typeof(FollowerEnemy), 3f, 0.5f, 1f),
-                new EnemyInfo(typeof(DashingEnemy), 3f, 0.75f, 1.5f)
+                new(typeof(FollowerEnemy), 3f, 0.5f, 1f),
+                new(typeof(DashingEnemy), 3f, 0.75f, 1.5f)
             },
             id: 1
         );
         private static readonly Wave Wave2 = new(
             waveLengthSeconds: 45f,
             enemyInfos: new EnemyInfo[] {
-                new EnemyInfo(typeof(DashingEnemy), 4f, 0.75f, 1.25f),
-                new EnemyInfo(typeof(ProjectileEnemy), 3f, 1f, 2f)
+                new(typeof(DashingEnemy), 4f, 0.75f, 1.25f),
+                new(typeof(ProjectileEnemy), 3f, 1f, 2f)
             },
             id: 2
         );
         private static readonly Wave Wave3 = new(
             waveLengthSeconds: 45f,
             enemyInfos: new EnemyInfo[] {
-                new EnemyInfo(typeof(DashingEnemy), 3.5f, 1f, 1.5f),
-                new EnemyInfo(typeof(ProjectileEnemy), 5f, 1.25f, 2f),
-                new EnemyInfo(typeof(TeleportEnemy), 4f, 1.5f, 4f)
+                new(typeof(DashingEnemy), 3.5f, 1f, 1.5f),
+                new(typeof(ProjectileEnemy), 5f, 1.25f, 2f),
+                new(typeof(TeleportEnemy), 4f, 1.5f, 4f)
             },
             id: 3
         );

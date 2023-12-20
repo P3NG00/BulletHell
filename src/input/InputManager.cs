@@ -25,20 +25,20 @@ namespace BulletHell.Input
 
         public static bool MousePressedThisFrame(Mouse mouse)
         {
-            var states = GetMouseButtonStates(mouse);
-            return states.previous == ButtonState.Released && states.current == ButtonState.Pressed;
+            var (previous, current) = GetMouseButtonStates(mouse);
+            return previous == ButtonState.Released && current == ButtonState.Pressed;
         }
 
         public static bool MouseReleasedThisFrame(Mouse mouse)
         {
-            var states = GetMouseButtonStates(mouse);
-            return states.previous == ButtonState.Pressed && states.current == ButtonState.Released;
+            var (previous, current) = GetMouseButtonStates(mouse);
+            return previous == ButtonState.Pressed && current == ButtonState.Released;
         }
 
         public static bool MouseHeld(Mouse mouse)
         {
-            var states = GetMouseButtonStates(mouse);
-            return states.current == ButtonState.Pressed;
+            var (_, current) = GetMouseButtonStates(mouse);
+            return current == ButtonState.Pressed;
         }
 
         private static (ButtonState previous, ButtonState current) GetMouseButtonStates(Mouse mouse) => mouse switch

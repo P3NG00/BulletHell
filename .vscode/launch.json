@@ -22,7 +22,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "buildRelease",
-            "program": "${workspaceFolder}/bin/Release/net6.0/BulletHell.exe",
+            "program": "${workspaceFolder}/bin/Release/net6.0-windows/BulletHell.exe",
             "args": [],
             "cwd": "${workspaceFolder}",
             "console": "internalConsole",

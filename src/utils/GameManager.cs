@@ -21,9 +21,9 @@ namespace BulletHell.Utils
         public static double AverageTicksPerFrame => s_lastTickDifferences.Average();
 
         private static double s_timeScale = 1f;
-        private static ulong[] s_ticks = new ulong[] {0, 0};
-        private static ulong[] s_lastTickDifferences = new ulong[TICKS_PER_SECOND];
-        private static double[] s_lastFps = new double[FRAMES_PER_SECOND];
+        private static readonly ulong[] s_ticks = new ulong[] {0, 0};
+        private static readonly ulong[] s_lastTickDifferences = new ulong[TICKS_PER_SECOND];
+        private static readonly double[] s_lastFps = new double[FRAMES_PER_SECOND];
         private static double s_tickDelta = 0f;
 
         public static void HandleInput(double timeThisUpdate)

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace BulletHell.Utils
 {
-    public struct DrawData
+    public readonly struct DrawData
     {
         public readonly Texture2D Texture;
         public readonly Color Color;

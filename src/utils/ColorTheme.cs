@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Utils
 {
-    public struct ColorTheme
+    public readonly struct ColorTheme
     {
         public readonly Color Main;
         public readonly Color MainHighlight;

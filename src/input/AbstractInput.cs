@@ -4,7 +4,7 @@ namespace BulletHell.Input
     {
         protected readonly T InputType;
 
-        public AbstractInput(T t) => InputType = t;
+        protected AbstractInput(T t) => InputType = t;
 
         public abstract bool PressedThisFrame { get; }
 

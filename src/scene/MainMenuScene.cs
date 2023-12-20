@@ -16,7 +16,7 @@ namespace BulletHell.Scenes
 
         private float _rotation;
 
-        public sealed override (string, string[])[] ExtraDebugInfo => new[] { ("main_menu", new[] {$"rotation: {_rotation}"})};
+        public sealed override (string, string[])[] ExtraDebugInfo => new[] { ("main_menu", new[] {$"rotation: {_rotation}"}) };
 
         public sealed override void HandleInput()
         {
