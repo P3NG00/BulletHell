@@ -3,7 +3,7 @@ using BulletHell.Utils;
 
 namespace BulletHell.Game.Waves
 {
-    public struct EnemyInfo
+    public readonly struct EnemyInfo
     {
         public readonly Type EnemyType;
         public readonly float EnemyHealth;
