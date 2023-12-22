@@ -10,7 +10,7 @@ namespace BulletHell.Utils
 
         public static Vector2 UISpacerVector => new(UI_SPACER);
 
-        public static readonly Random Random = new Random();
+        public static readonly Random Random = new();
 
         public static void SingletonCheck<T>(this T instance, ref T singleton)
         {

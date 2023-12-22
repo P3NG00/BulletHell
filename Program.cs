@@ -7,8 +7,8 @@ namespace BulletHell
         [STAThread]
         static void Main()
         {
-            using (var game = new BulletHell())
-                game.Run();
+            using var game = new BulletHell();
+            game.Run();
         }
     }
 }
