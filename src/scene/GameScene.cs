@@ -285,15 +285,14 @@ namespace BulletHell.Scenes
 
         private static void NewGame()
         {
-            var inst = _instance;
-            inst._player = new();
-            inst._projectiles.Clear();
-            inst._enemies.Clear();
-            inst._mouseOffset = Vector2.Zero;
-            inst._cleanupTicks = CleanupInterval;
-            inst._paused = false;
-            inst._buttonMainMenu.ResetMouseLock();
-            inst._buttonRestart.ResetMouseLock();
+            _instance._player = new();
+            _instance._projectiles.Clear();
+            _instance._enemies.Clear();
+            _instance._mouseOffset = Vector2.Zero;
+            _instance._cleanupTicks = CleanupInterval;
+            _instance._paused = false;
+            _instance._buttonMainMenu.ResetMouseLock();
+            _instance._buttonRestart.ResetMouseLock();
             WeaponManager.Reset();
             WaveManager.SetWave(0);
             Score = 0f;
