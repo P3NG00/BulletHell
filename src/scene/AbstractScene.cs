@@ -8,9 +8,9 @@ namespace BulletHell.Scenes
     {
         public readonly Color BackgroundColor;
 
-        public virtual (string Title, string[] Lines)[] ExtraDebugInfo => new (string, string[])[0];
+        public virtual (string Title, string[] Lines)[] ExtraDebugInfo => Array.Empty<(string, string[])>();
 
-        public AbstractScene(Color? backgroundColor = null) => BackgroundColor = backgroundColor ?? Colors.Background;
+        protected AbstractScene(Color? backgroundColor = null) => BackgroundColor = backgroundColor ?? Colors.Background;
 
         public virtual void HandleInput() {}
 

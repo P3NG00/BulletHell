@@ -11,7 +11,7 @@ namespace BulletHell.Game
 
         public int ObjectAmount => _objects.Length;
 
-        public ObjectManager(ref ObjectManager<T> instance)
+        protected ObjectManager(ref ObjectManager<T> instance)
         {
             this.SingletonCheck(ref instance);
             _objects = ImmutableArray.Create(ObjectArray);
