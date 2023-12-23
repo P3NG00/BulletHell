@@ -32,7 +32,7 @@ namespace BulletHell.Game.Entities.Enemies
         {
             EnemyDamage = enemyDamage;
             PointReward = pointReward;
-            UpdateVelocityTowardsPlayer(1f);
+            SetVelocityTowardsPlayer();
         }
 
         protected void UpdateVelocityTowardsPlayer(float lerpValue)
@@ -42,6 +42,8 @@ namespace BulletHell.Game.Entities.Enemies
                 playerDirection.Normalize();
             RawVelocity = Vector2.Lerp(RawVelocity, playerDirection, lerpValue);
         }
+
+        protected void SetVelocityTowardsPlayer() => RawVelocity = GameScene.Player.Position - Position;
 
         protected sealed override void OnDeath() => GameScene.Score += PointReward;
     }

@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Game.Entities.Enemies
 {
-    public sealed class TeleportEnemy : AbstractBasicEnemy
+    public sealed class TeleportEnemy : AbstractBasicFollowingEnemy
     {
         private static readonly DrawData EnemyDrawData = new(Textures.Circle, Colors.EnemyTeleport);
         private static readonly int TeleportIntervalTicks = GameManager.SecondsToTicks(6f);

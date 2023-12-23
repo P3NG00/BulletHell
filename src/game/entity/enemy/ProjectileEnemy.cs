@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Game.Entities.Enemies
 {
-    public sealed class ProjectileEnemy : AbstractBasicEnemy
+    public sealed class ProjectileEnemy : AbstractBasicFollowingEnemy
     {
         private static readonly DrawData EnemyDrawData = new(Textures.Circle, Colors.EnemyProjectile);
         private static readonly int ProjectileTicks = GameManager.SecondsToTicks(5f);

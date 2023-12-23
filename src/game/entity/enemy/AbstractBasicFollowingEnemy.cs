@@ -3,12 +3,11 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Game.Entities.Enemies
 {
-    public class AbstractBasicEnemy : AbstractEnemy
+    public class AbstractBasicFollowingEnemy : AbstractBasicEnemy
     {
-        private const float ENEMY_SPEED = 3f;
-        private const float ENEMY_RADIUS = 16f;
+        private const float ENEMY_LERP_VALUE = 0.085f;
 
-        public AbstractBasicEnemy(
+        public AbstractBasicFollowingEnemy(
             Vector2 position,
             float enemyLife,
             float enemyDamage,
@@ -19,8 +18,6 @@ namespace BulletHell.Game.Entities.Enemies
             float dashCooldownSeconds = 0f) :
         base(
             position: position,
-            radius: ENEMY_RADIUS,
-            moveSpeed: ENEMY_SPEED,
             enemyLife: enemyLife,
             enemyDamage: enemyDamage,
             pointReward: pointReward,
@@ -29,5 +26,12 @@ namespace BulletHell.Game.Entities.Enemies
             dashSeconds: dashSeconds,
             dashCooldownSeconds: dashCooldownSeconds)
         {}
+
+        public override void Tick()
+        {
+            if (Alive)
+                UpdateVelocityTowardsPlayer(ENEMY_LERP_VALUE);
+            base.Tick();
+        }
     }
 }

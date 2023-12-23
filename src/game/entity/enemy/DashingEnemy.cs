@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Game.Entities.Enemies
 {
-    public sealed class DashingEnemy : AbstractBasicEnemy
+    public sealed class DashingEnemy : AbstractBasicFollowingEnemy
     {
         private const float ENEMY_DASH_MULTPLIER = 3f;
         private const float ENEMY_DASH_SECONDS = 0.5f;

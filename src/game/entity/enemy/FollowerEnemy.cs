@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Game.Entities.Enemies
 {
-    public sealed class FollowerEnemy : AbstractBasicEnemy
+    public sealed class FollowerEnemy : AbstractBasicFollowingEnemy
     {
         private static readonly DrawData EnemyDrawData = new(Textures.Circle, Colors.EnemyFollower);
 

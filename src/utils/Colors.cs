@@ -20,6 +20,7 @@ namespace BulletHell.Utils
         // enemy
         public static Color EnemyDashing => new(0, 0, 128);
         public static Color EnemyFollower => new(255, 0, 0);
+        public static Color EnemyMover => new(0, 128, 255);
         public static Color EnemyProjectile => new(255, 128, 128);
         public static Color EnemyTeleport => new(255, 255, 0);
 
