@@ -43,7 +43,13 @@ namespace BulletHell.Game.Entities.Enemies
             RawVelocity = Vector2.Lerp(RawVelocity, playerDirection, lerpValue);
         }
 
-        protected void SetVelocityTowardsPlayer() => RawVelocity = GameScene.Player.Position - Position;
+        protected void SetVelocityTowardsPlayer()
+        {
+            var playerDirection = GameScene.Player.Position - Position;
+            if (playerDirection.Length() != 0f)
+                playerDirection.Normalize();
+            RawVelocity = playerDirection;
+        }
 
         protected sealed override void OnDeath() => GameScene.Score += PointReward;
     }
