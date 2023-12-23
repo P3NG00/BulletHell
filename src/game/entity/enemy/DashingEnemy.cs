@@ -5,6 +5,12 @@ namespace BulletHell.Game.Entities.Enemies
 {
     public sealed class DashingEnemy : AbstractBasicFollowingEnemy
     {
+        // If you find yourself having trouble with the Dashing Enemies
+        // moving too fast to even appear on screen, they're probably
+        // dashing at a high velocity on the first frame when its
+        // "RawVelocity" may not be normalized . Make sure to
+        // normalize the value before the enemy dashes.
+
         private const float ENEMY_DASH_MULTPLIER = 3f;
         private const float ENEMY_DASH_SECONDS = 0.5f;
         private const float ENEMY_DASH_COOLDOWN_SECONDS = 5f;
@@ -26,9 +32,9 @@ namespace BulletHell.Game.Entities.Enemies
 
         public sealed override void Tick()
         {
+            base.Tick();
             if (Alive)
                 Dash();
-            base.Tick();
         }
     }
 }

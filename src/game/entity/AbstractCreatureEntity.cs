@@ -12,7 +12,7 @@ namespace BulletHell.Game.Entities
         public bool IsDashing => DashTicks > 0;
 
         public int DashTicks { get; private set; } = 0;
-        public int DashCooldownTicks { get; private set; } = 0;
+        public int DashCooldownTicks { get; private set; }
 
         protected sealed override float MoveSpeed => IsDashing ? _dashSpeed : base.MoveSpeed;
 
@@ -47,6 +47,7 @@ namespace BulletHell.Game.Entities
             _dashSpeed = moveSpeed * dashMultiplier;
             _dashResetTicks = GameManager.SecondsToTicks(dashSeconds);
             _dashCooldownResetTicks = GameManager.SecondsToTicks(dashCooldownSeconds);
+            DashCooldownTicks = _dashCooldownResetTicks;
         }
 
         public override void Tick()
