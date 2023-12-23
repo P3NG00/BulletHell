@@ -24,7 +24,7 @@ namespace BulletHell.Game.Entities
         protected virtual DrawData DrawData => _drawData;
         protected virtual float MoveSpeed => _moveSpeed;
 
-        private Vector2 DrawSize => new Vector2(Radius * 2f);
+        private Vector2 DrawSize => new(Radius * 2f);
 
         public readonly float Radius;
         public Vector2 Position;
@@ -40,7 +40,7 @@ namespace BulletHell.Game.Entities
         private Vector2 _rawVelocity;
         private float _life;
 
-        public AbstractEntity(
+        protected AbstractEntity(
             Vector2 position,
             float radius,
             float moveSpeed,

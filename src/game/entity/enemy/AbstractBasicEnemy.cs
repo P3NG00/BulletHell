@@ -3,12 +3,12 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Game.Entities.Enemies
 {
-    public class AbstractBasicEnemy : AbstractEnemy
+    public abstract class AbstractBasicEnemy : AbstractEnemy
     {
         private const float ENEMY_SPEED = 3f;
         private const float ENEMY_RADIUS = 16f;
 
-        public AbstractBasicEnemy(
+        protected AbstractBasicEnemy(
             Vector2 position,
             float enemyLife,
             float enemyDamage,

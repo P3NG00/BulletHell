@@ -3,11 +3,11 @@ using Microsoft.Xna.Framework;
 
 namespace BulletHell.Game.Entities.Enemies
 {
-    public class AbstractBasicFollowingEnemy : AbstractBasicEnemy
+    public abstract class AbstractBasicFollowingEnemy : AbstractBasicEnemy
     {
         private const float ENEMY_LERP_VALUE = 0.085f;
 
-        public AbstractBasicFollowingEnemy(
+        protected AbstractBasicFollowingEnemy(
             Vector2 position,
             float enemyLife,
             float enemyDamage,
