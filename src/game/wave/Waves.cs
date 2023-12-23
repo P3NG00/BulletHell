@@ -12,32 +12,72 @@ namespace BulletHell.Game.Waves
         private static readonly Wave Wave0 = new(
             waveLengthSeconds: 45f,
             enemyInfos: new EnemyInfo[] {
-                new(typeof(FollowerEnemy), 2f, 0.5f, 1.25f)
+                new(
+                    enemyType: typeof(FollowerEnemy),
+                    enemyHealth: 2f,
+                    enemyDamage: 0.5f,
+                    spawnSeconds: 1.25f
+                ),
             },
             id: 0
         );
         private static readonly Wave Wave1 = new(
             waveLengthSeconds: 45f,
             enemyInfos: new EnemyInfo[] {
-                new(typeof(FollowerEnemy), 3f, 0.5f, 1f),
-                new(typeof(MoverEnemy), 3f, 0.75f, 1.5f)
+                new(
+                    enemyType: typeof(FollowerEnemy),
+                    enemyHealth: 3f,
+                    enemyDamage: 0.5f,
+                    spawnSeconds: 1f
+                ),
+                new(
+                    enemyType: typeof(MoverEnemy),
+                    enemyHealth: 3f,
+                    enemyDamage: 0.75f,
+                    spawnSeconds: 1.5f
+                ),
             },
             id: 1
         );
         private static readonly Wave Wave2 = new(
             waveLengthSeconds: 45f,
             enemyInfos: new EnemyInfo[] {
-                new(typeof(MoverEnemy), 4f, 0.75f, 1.25f),
-                new(typeof(DashingEnemy), 3f, 1f, 2f)
+                new(
+                    enemyType: typeof(MoverEnemy),
+                    enemyHealth: 4f,
+                    enemyDamage: 0.75f,
+                    spawnSeconds: 1.25f
+                ),
+                new(
+                    enemyType: typeof(DashingEnemy),
+                    enemyHealth: 3f,
+                    enemyDamage: 1f,
+                    spawnSeconds: 2f
+                ),
             },
             id: 2
         );
         private static readonly Wave Wave3 = new(
             waveLengthSeconds: 45f,
             enemyInfos: new EnemyInfo[] {
-                new(typeof(MoverEnemy), 3.5f, 1f, 1.5f),
-                new(typeof(DashingEnemy), 5f, 1.25f, 2f),
-                new(typeof(ProjectileEnemy), 4f, 1.5f, 4f)
+                new(
+                    enemyType: typeof(MoverEnemy),
+                    enemyHealth: 3.5f,
+                    enemyDamage: 1f,
+                    spawnSeconds: 1.5f
+                ),
+                new(
+                    enemyType: typeof(DashingEnemy),
+                    enemyHealth: 5f,
+                    enemyDamage: 1.25f,
+                    spawnSeconds: 2f
+                ),
+                new(
+                    enemyType: typeof(ProjectileEnemy),
+                    enemyHealth: 4f,
+                    enemyDamage: 1.5f,
+                    spawnSeconds: 4f
+                ),
             },
             id: 3
         );
