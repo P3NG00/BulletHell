@@ -32,7 +32,7 @@ namespace BulletHell.Game.Entities
         protected virtual Vector2 RawVelocity
         {
             get => _rawVelocity;
-            set => _rawVelocity = value.Length() != 0f ? Vector2.Normalize(value) : Vector2.Zero;
+            set => _rawVelocity = value.Length() > 1f ? Vector2.Normalize(value) : value;
         }
 
         private readonly DrawData _drawData;
