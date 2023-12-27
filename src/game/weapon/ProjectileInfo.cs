@@ -2,7 +2,7 @@ using BulletHell.Utils;
 
 namespace BulletHell.Game.Weapon
 {
-    public struct ProjectileInfo
+    public readonly struct ProjectileInfo
     {
         public readonly float Damage;
         public readonly float Speed;
