@@ -4,6 +4,6 @@ namespace BulletHell.Game
     {
         public readonly int ID;
 
-        public GameObject(int id) => ID = id;
+        protected GameObject(int id) => ID = id;
     }
 }
