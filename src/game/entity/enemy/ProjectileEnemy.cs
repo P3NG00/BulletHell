@@ -24,7 +24,6 @@ namespace BulletHell.Game.Entities.Enemies
             )
         {}
 
-        // TODO 2 types of directional shots: one in direction of player with random aspect to it, and one exactly where the player will be if they continue moving in the same direction
         public sealed override void Tick()
         {
             // tick projectile timer
@@ -32,7 +31,8 @@ namespace BulletHell.Game.Entities.Enemies
             {
                 _nextProjectileTicks = ProjectileTicks;
                 // spawn projectile
-                Projectile.FireFromEntity(ProjectileInfo, this, GameScene.Player.Position);
+                var shot_leading = Util.Random.Next(40 + 1) + 10;
+                Projectile.FireFromEntity(ProjectileInfo, this, GameScene.Player.Position + (GameScene.Player.Velocity * shot_leading));
             }
             base.Tick();
         }
