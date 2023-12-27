@@ -8,7 +8,7 @@ namespace BulletHell.Utils
     public static class GameManager
     {
         public const int FRAMES_PER_SECOND = 60;
-        public const int TICKS_PER_SECOND = 60;
+        public const int TICKS_PER_SECOND = 64;
         public const double TICK_STEP = 1f / TICKS_PER_SECOND;
 
         private const double TIME_SCALE_MIN = 0;
