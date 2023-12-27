@@ -9,6 +9,8 @@ namespace BulletHell.Game.Entities.Enemies
     {
         private static readonly DrawData EnemyDrawData = new(Textures.Circle, Colors.EnemyProjectile);
         private static readonly int ProjectileTicks = GameManager.SecondsToTicks(5f);
+        private static readonly float LeadDistanceMinimum = 10f;
+        private static readonly float LeadDistanceRandom = 40f;
 
         private ProjectileInfo ProjectileInfo => new(EnemyDamage, 6f, 8f, 1.25f);
 
@@ -31,8 +33,7 @@ namespace BulletHell.Game.Entities.Enemies
             {
                 _nextProjectileTicks = ProjectileTicks;
                 // spawn projectile
-                var shot_leading = Util.Random.Next(40 + 1) + 10;
-                Projectile.FireFromEntity(ProjectileInfo, this, GameScene.Player.Position + (GameScene.Player.Velocity * shot_leading));
+                Projectile.FireFromEntity(ProjectileInfo, this, GameScene.Player.LeadInCurrentDirection(LeadDistanceMinimum, LeadDistanceRandom));
             }
             base.Tick();
         }

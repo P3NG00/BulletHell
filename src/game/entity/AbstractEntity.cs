@@ -86,6 +86,8 @@ namespace BulletHell.Game.Entities
             return distance <= radiusSum;
         }
 
+        public Vector2 LeadInCurrentDirection(float distance_minimum, float distance_random) => Position + (Velocity * Util.Random.NextFloat(distance_minimum, distance_minimum + distance_random));
+
         public void Kill() => Life = 0f;
     }
 }
