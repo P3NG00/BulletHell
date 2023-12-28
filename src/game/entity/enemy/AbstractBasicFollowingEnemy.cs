@@ -5,7 +5,7 @@ namespace BulletHell.Game.Entities.Enemies
 {
     public abstract class AbstractBasicFollowingEnemy : AbstractBasicEnemy
     {
-        private const float ENEMY_LERP_VALUE = 0.085f;
+        private const float ENEMY_LERP_VALUE = 0.075f;
 
         protected AbstractBasicFollowingEnemy(
             Vector2 position,

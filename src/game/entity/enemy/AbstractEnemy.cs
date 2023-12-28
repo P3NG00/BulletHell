@@ -38,9 +38,13 @@ namespace BulletHell.Game.Entities.Enemies
         protected void UpdateVelocityTowardsPlayer(float lerpValue)
         {
             var playerDirection = GameScene.Player.Position - Position;
+            // normalize because lerping
+            if (playerDirection.Length() > 1f)
+                playerDirection.Normalize();
             RawVelocity = Vector2.Lerp(RawVelocity, playerDirection, lerpValue);
         }
 
+        // no need to normalize because RawVelocity will be normalized
         protected void SetVelocityTowardsPlayer() => RawVelocity = GameScene.Player.Position - Position;
 
         protected sealed override void OnDeath() => GameScene.Score += PointReward;
