@@ -57,21 +57,17 @@ namespace BulletHell.Utils
             return (decimal)Random.NextDouble() < chance;
         }
 
-        public static double Average(this IEnumerable<ulong> source)
+        public static double Average(this FixedSizeLinkedList<ulong> source)
         {
             ulong sum = 0;
-            ulong count = 0;
-            foreach (ulong i in source)
-            {
-                sum += i;
-                count++;
-            }
-            return (double)sum / (double)count;
+            foreach (ulong value in source)
+                sum += value;
+            return (double)sum / source.Count;
         }
 
-        public static bool NextBool(this Random random) => (0.5f).TestChance();
+        public static bool NextBool(this Random random) => 0.5f.TestChance();
 
-        public static Point NextPoint(this Random random, Point max) => new Point(random.Next(max.X), random.Next(max.Y));
+        public static Point NextPoint(this Random random, Point max) => new(random.Next(max.X), random.Next(max.Y));
 
         public static Vector2 NextUnitVector(this Random random)
         {
