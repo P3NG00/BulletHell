@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using BulletHell.Input;
 using BulletHell.Scenes;
 
@@ -21,8 +20,8 @@ namespace BulletHell.Utils
         public static double AverageTicksPerFrame => s_lastTickDifferences.Average();
 
         private static readonly FixedSizeLinkedList<ulong> s_lastTickDifferences = new(TICKS_PER_SECOND);
+        private static readonly FixedSizeLinkedList<double> s_lastFps = new(FRAMES_PER_SECOND);
         private static readonly ulong[] s_ticks = new ulong[] {0, 0};
-        private static readonly double[] s_lastFps = new double[FRAMES_PER_SECOND];
         private static double s_tickDelta = 0f;
         private static double s_timeScale = 1f;
 
@@ -39,11 +38,7 @@ namespace BulletHell.Utils
 
         public static void UpdateFramesPerSecond(double timeThisFrame)
         {
-            // move values down
-            for (int i = s_lastFps.Length - 2; i >= 0; i--)
-                s_lastFps[i + 1] = s_lastFps[i];
-            // store fps value
-            s_lastFps[0] = 1000f / timeThisFrame;
+            s_lastFps.Add(1000f / timeThisFrame);
             // add tick difference
             s_lastTickDifferences.Add(s_ticks[0] - s_ticks[1]);
             // update last tick count

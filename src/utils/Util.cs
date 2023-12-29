@@ -62,7 +62,15 @@ namespace BulletHell.Utils
             ulong sum = 0;
             foreach (ulong value in source)
                 sum += value;
-            return (double)sum / source.Count;
+            return (double)sum / (double)source.Count;
+        }
+
+        public static double Average(this FixedSizeLinkedList<double> source)
+        {
+            double sum = 0;
+            foreach (double value in source)
+                sum += value;
+            return sum / (double)source.Count;
         }
 
         public static bool NextBool(this Random random) => 0.5f.TestChance();
