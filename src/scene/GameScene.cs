@@ -12,7 +12,7 @@ namespace BulletHell.Scenes
     public sealed class GameScene : AbstractScene
     {
         private const float MAX_MOUSE_OFFSET = 50f;
-        private const int TILE_SIZE = 64;
+        private const int TILE_SIZE = 128;
 
         private static readonly int CleanupInterval = GameManager.SecondsToTicks(5f);
         private static GameScene _instance;
@@ -24,6 +24,8 @@ namespace BulletHell.Scenes
         private readonly Button _buttonResume = CreateMainButton("resume", Colors.ThemeDefault, ResumeGame);
         private readonly Button _buttonRestart = CreateMainButton("restart", Colors.ThemeGreen, NewGame);
         private readonly Button _buttonMainMenu = CreateExitButton(BackToMainMenu);
+        private readonly DrawData _drawData = new(Textures.Tile);
+        private readonly Vector2 _drawSize = new(TILE_SIZE);
         private readonly List<Projectile> _projectiles = new();
         private readonly List<AbstractEnemy> _enemies = new();
 
@@ -191,14 +193,12 @@ namespace BulletHell.Scenes
             var endX = Display.WindowSize.X + TILE_SIZE;
             var endY = Display.WindowSize.Y + TILE_SIZE;
             var drawPos = new Vector2(startX, startY);
-            var drawSize = new Vector2(TILE_SIZE);
-            var drawData = new DrawData(Textures.SquareShaded, Colors.Background);
             _lastTilesDrawn = 0;
             for (float y = startX; y < endY; y += TILE_SIZE)
             {
                 for (float x = startY; x < endX; x += TILE_SIZE)
                 {
-                    Display.Draw(drawPos, drawSize, drawData);
+                    Display.Draw(drawPos, _drawSize, _drawData);
                     _lastTilesDrawn++;
                     drawPos.X += TILE_SIZE;
                 }

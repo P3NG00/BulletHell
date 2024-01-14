@@ -17,7 +17,7 @@ namespace BulletHell.Utils
 
         public static void LoadContent(GraphicsDevice graphicsDevice) => SpriteBatch = new SpriteBatch(graphicsDevice);
 
-        public static void Initialize() => SetSize(1280, 720, false);
+        public static void Initialize() => SetSize(1280, 800, false);
 
         // Focuses camera around given position
         public static void UpdateCameraOffset(Vector2 position)
